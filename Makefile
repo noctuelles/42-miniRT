@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/06/13 16:30:18 by bsavinel         ###   ########.fr        #
+#    Updated: 2022/06/13 16:41:14 by bsavinel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,14 +31,16 @@ SRCS_PATH 	=	srcs/
 
 INCS =	includes			\
 		libft/includes		\
-
+		minilibx			\
+		
 SRCS =	
 
 ################################################################################
 ########							Libraries							########
 ################################################################################
 
-LIBS = libft/libft.a minilibx/libmlx_Linux.a
+LIBS =	libft/libft.a			\
+		minilibx/libmlx_Linux.a	\
 
 ################################################################################
 ########						Objects/Dependences						########
@@ -87,7 +89,7 @@ header:
 		@echo "                                                  by The ULTIMATE TEAM"
 		@echo "${NO_COLOR}"
 
-$(NAME) : header $(OBJS) $(LIBS)
+$(NAME) : $(OBJS) $(LIBS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME) $(INCS)
 	echo "$(BLUE)$(NAME): $(GREEN)Success $(NO_COLOR)"
 
@@ -106,7 +108,7 @@ fclean : clean
 
 re : fclean 
 	make -C minilibx re
-	 make all
+	make all
 
 ################################################################################
 #######							Rules for libs							########
@@ -116,10 +118,10 @@ libft/libft.a :
 	$(MAKE) -C libft all && echo "$(BLUE)Compiation of libft: $(GREEN)Success $(NO_COLOR)" || echo "$(BLUE)Compiation of libft: $(RED)Fail $(NO_COLOR)"
 
 minilibx/libmlx_Linux.a:
-	make -C minilibx
+	make -C minilibx all && echo "$(BLUE)Compiation of minilibx: $(GREEN)Success $(NO_COLOR)" || echo "$(BLUE)Compiation of libft: $(RED)Fail $(NO_COLOR)"
 
 -include $(DEPS)
 
 .PHONY: all clean fclean re bonus
 
-#.SILENT:
+.SILENT:
