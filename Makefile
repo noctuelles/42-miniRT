@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/06/13 16:41:14 by bsavinel         ###   ########.fr        #
+#    Updated: 2022/06/14 14:26:11 by bsavinel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,15 @@ ARGUMENT_RUN_TEST =
 
 SRCS_PATH 	=	srcs/
 
-INCS =	includes			\
+INCS =	$(addprefix -I ,	\
+		includes			\
 		libft/includes		\
-		minilibx			\
+		minilibx			)
 		
-SRCS =	
+SRCS =	end/good_exit.c					\
+		mlx_utils/mlx_struct_manage.c	\
+		mlx_utils/launch_loop.c			\
+		main.c							\
 
 ################################################################################
 ########							Libraries							########
@@ -90,7 +94,7 @@ header:
 		@echo "${NO_COLOR}"
 
 $(NAME) : $(OBJS) $(LIBS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME) $(INCS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -lm -lbsd -lX11 -lXext -o $(NAME) $(INCS)
 	echo "$(BLUE)$(NAME): $(GREEN)Success $(NO_COLOR)"
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
@@ -123,5 +127,3 @@ minilibx/libmlx_Linux.a:
 -include $(DEPS)
 
 .PHONY: all clean fclean re bonus
-
-.SILENT:
