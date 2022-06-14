@@ -6,16 +6,13 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/14 14:43:31 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/14 16:12:44 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
-#include "mlx.h"
-#include "define.h"
 #include "mlx_utils.h"
-#include "libft.h"
 #include "end.h"
+#include "renderer.h"
 
 int	main(int ac, char **av)
 {
@@ -30,6 +27,7 @@ int	main(int ac, char **av)
 	}*/
 	if (!init_mlx_struct(&minirt.mlx))
 		return (1);
+	render_img(&minirt);
 	launch_loop(&minirt);
 	/*mlx_hook(minirt.mlx.win, 17, 0, good_exit, &minirt.mlx);
 	mlx_key_hook(minirt.mlx.win, select_hook, &minirt);

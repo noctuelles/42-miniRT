@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/06/14 14:26:11 by bsavinel         ###   ########.fr        #
+#    Updated: 2022/06/14 16:14:28 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,9 @@ INCS =	$(addprefix -I ,	\
 SRCS =	end/good_exit.c					\
 		mlx_utils/mlx_struct_manage.c	\
 		mlx_utils/launch_loop.c			\
+		mlx_utils/mlx_utils.c			\
+		renderer/render.c				\
+		math/vector.c					\
 		main.c							\
 
 ################################################################################

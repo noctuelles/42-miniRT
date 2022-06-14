@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 13:11:59 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/14 14:27:46 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/14 16:12:40 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,21 @@
  *	mlx_struct_manage.c
  */
 
-int		init_mlx_struct(t_mlx *mlx);
-int		destruct_mlx(t_mlx *mlx);
+int				init_mlx_struct(t_mlx *mlx);
+int				destruct_mlx(t_mlx *mlx);
 
 /*
  * launch_loop.c
  */
 
-int		select_hook(int hook, t_minirt *backpack);
-void	launch_loop(t_minirt *backpack);
+void			launch_loop(t_minirt *backpack);
+
+
+/*
+ *	mlx_utils.c
+ */
+
+unsigned int	set_color(unsigned char r, unsigned char g, unsigned char b);
+void			mlx_pixel_img_put(t_minirt *minirt, int x, int y, int color);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/14 14:28:10 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/14 16:12:36 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct e_vec
 	double	z;
 }				t_vec;
 
+typedef t_vec	t_vec3d;
 typedef t_vec	t_3dpoint;
 typedef t_vec	t_2dpoint;
 
@@ -43,5 +44,11 @@ typedef struct s_minirt
 {
 	t_mlx	mlx;
 }	t_minirt;
+
+typedef struct e_ray
+{
+	t_3dpoint	org;
+	t_vec3d		dir;
+}			t_ray;
 
 #endif

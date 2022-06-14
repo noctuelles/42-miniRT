@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:16:24 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/14 14:34:46 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/14 14:52:37 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "define.h"
 #include "mlx.h"
 
-int	select_hook(int hook, t_minirt *backpack)
+static int	select_hook(int hook, t_minirt *backpack)
 {
 	if (hook == D_ESCAPE)
 		good_exit(backpack);
