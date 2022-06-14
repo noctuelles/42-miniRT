@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/14 14:33:50 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/14 14:43:31 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	main(int ac, char **av)
 		ft_putstr_fd(BAD_NB_ARG, 2);
 		return (0);
 	}*/
-	init_mlx_struct(&minirt.mlx);
+	if (!init_mlx_struct(&minirt.mlx))
+		return (1);
 	launch_loop(&minirt);
 	/*mlx_hook(minirt.mlx.win, 17, 0, good_exit, &minirt.mlx);
 	mlx_key_hook(minirt.mlx.win, select_hook, &minirt);
