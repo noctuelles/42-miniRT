@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:29:36 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/14 14:29:27 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/14 14:41:21 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	init_mlx_struct(t_mlx *mlx)
 		return (0);
 	mlx->win = mlx_new_window(mlx->ptr, WIDTH, HEIGHT, "MiniRT");
 	mlx->img.img = mlx_new_image(mlx->ptr, WIDTH, HEIGHT);
-	if (!mlx->win || mlx->img.img)
+	if (!mlx->win || !mlx->img.img)
 		return (destruct_mlx(mlx));
 	mlx->img.addr = mlx_get_data_addr(mlx->img.img,
 			&mlx->img.bits_per_pixel,
