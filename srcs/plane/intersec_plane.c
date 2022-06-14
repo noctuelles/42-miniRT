@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 17:17:47 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/14 18:10:07 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:12:15 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ t_3dpoint	point_intersection(double t, t_3dpoint eye, t_vec3d ray)
 	return (vec_add(eye, vec_mul_scalar(ray, t)));
 }
 
-double plane_intersection(t_3dpoint point, t_vec3d normal, t_3dpoint eye, t_vec3d ray)
+int plane_intersection(t_3dpoint point, t_vec3d normal, t_3dpoint eye, t_vec3d ray)
 {
 	double t;
 
 	t = vec_dot(normal, vec_sub(point, eye)) / vec_dot(normal, ray);
 	if (ray_intersec_plane_front(t, normal, ray))
-		return (t);
+		return (1);
+	return (0);
 }
