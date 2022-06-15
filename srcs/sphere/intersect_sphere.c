@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersec_sphere.c                                  :+:      :+:    :+:   */
+/*   intersect_sphere.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 17:59:43 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/15 18:26:07 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/15 19:33:17 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	intersect_sphere(t_object *obj, t_ray *ray, t_rayhit *rayhit)
 		rayhit->intersect_p = vec_add(ray->org, vec_mul_scalar(ray->dir,
 					solution[0]));
 		rayhit->normal = vec_normalize(vec_sub(rayhit->intersect_p,
-					obj->p.sphere.center)); 
+					obj->p.sphere.center));
 		return (true);
 	}
 	else
