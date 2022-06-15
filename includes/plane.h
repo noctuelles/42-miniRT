@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 10:25:45 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/15 14:39:32 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/15 19:21:09 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "minirt_struct.h"
 
 /*
- *	intersec_plane.c
+ *	intersect_plane.c
  */
 
 t_rayhit	plane_intersection(t_3dpoint point, t_vec3d normal, t_ray ray);
