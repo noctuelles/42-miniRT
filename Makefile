@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/06/14 16:14:28 by plouvel          ###   ########.fr        #
+#    Updated: 2022/06/15 11:00:32 by bsavinel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS =	end/good_exit.c					\
 		renderer/render.c				\
 		math/vector.c					\
 		main.c							\
+		plane/intersec_plane.c			\
 
 ################################################################################
 ########							Libraries							########
@@ -86,7 +87,7 @@ bonus: header all
 header:
 		@echo "${BLUE}"                                                       
 		@echo "88b           d88  88               88  88888888ba  888888888888"
-		@echo "888b         d888  \"\"               \"\"\" 88      \"8b      88     "
+		@echo "888b         d888  \"\"               \"\"  88      \"8b      88     "
 		@echo "88\`8b       d8'88                       88      ,8P      88     "
 		@echo "88 \`8b     d8' 88  88  8b,dPPYba,   88  88aaaaaa8P'      88     "
 		@echo "88  \`8b   d8'  88  88  88P'   \`\"8a  88  88\"\"\"\"88'        88     "

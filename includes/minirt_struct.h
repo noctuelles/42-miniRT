@@ -6,12 +6,14 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/14 16:12:36 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/15 14:40:05 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_STRUCT_H
 # define MINIRT_STRUCT_H
+
+# include <stdbool.h>
 
 typedef struct e_vec
 {
@@ -50,5 +52,11 @@ typedef struct e_ray
 	t_3dpoint	org;
 	t_vec3d		dir;
 }			t_ray;
+
+typedef struct s_rayhit
+{
+	double	t;
+	t_vec	normal;
+}	t_rayhit;
 
 #endif

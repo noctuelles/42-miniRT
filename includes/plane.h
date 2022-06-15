@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_utils.h                                        :+:      :+:    :+:   */
+/*   plane.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/14 13:11:59 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/15 14:39:20 by bsavinel         ###   ########.fr       */
+/*   Created: 2022/06/15 10:25:45 by bsavinel          #+#    #+#             */
+/*   Updated: 2022/06/15 14:39:32 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX_UTILS_H
-# define MLX_UTILS_H
+#ifndef PLANE_H
+# define PLANE_H
 
 # include "minirt_struct.h"
 
 /*
- *	mlx_struct_manage.c
+ *	intersec_plane.c
  */
 
-int				init_mlx_struct(t_mlx *mlx);
-int				destruct_mlx(t_mlx *mlx);
-
-/*
- * launch_loop.c
- */
-
-void			launch_loop(t_minirt *backpack);
-
-/*
- *	mlx_utils.c
- */
-
-unsigned int	set_color(unsigned char r, unsigned char g, unsigned char b);
-void			mlx_pixel_img_put(t_minirt *minirt, int x, int y, int color);
+t_rayhit	plane_intersection(t_3dpoint point, t_vec3d normal, t_ray ray);
 
 #endif
