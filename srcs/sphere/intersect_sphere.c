@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersec_sphere.c                                  :+:      :+:    :+:   */
+/*   intersect_sphere.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 17:59:43 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/15 18:26:07 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/15 19:40:00 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "vector.h"
 #include <math.h>
 
-bool	intersect_sphere(t_object *obj, t_ray *ray, t_rayhit *rayhit)
+bool	intersect_sphere(t_object *obj, t_ray *ray)
 {
 	t_3dpoint	p;
 	double		solution[2];
@@ -30,9 +30,10 @@ bool	intersect_sphere(t_object *obj, t_ray *ray, t_rayhit *rayhit)
 	{
 		solution[0] = t - eq_xy[0];
 		solution[1] = t + eq_xy[1];
-		rayhit->intersect_p = vec_add(ray->org, vec_mul_scalar(ray->dir,
+		obj->rayhit.t = solution[0];
+		obj->rayhit.intersect_p = vec_add(ray->org, vec_mul_scalar(ray->dir,
 					solution[0]));
-		rayhit->normal = vec_normalize(vec_sub(rayhit->intersect_p,
+		obj->rayhit.normal = vec_normalize(vec_sub(obj->rayhit.intersect_p,
 					obj->p.sphere.center)); 
 		return (true);
 	}

@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_intersection.h                                 :+:      :+:    :+:   */
+/*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/15 17:23:08 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/15 19:36:55 by plouvel          ###   ########.fr       */
+/*   Created: 2022/06/15 18:32:57 by plouvel           #+#    #+#             */
+/*   Updated: 2022/06/15 18:48:59 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_INTERSECTION_H
-# define RAY_INTERSECTION_H
+#include "minirt_struct.h"
 
-# include "minirt_struct.h"
+t_list	*add_obj_to_scene(t_scene *scene, t_object *obj)
+{
+	t_list	*elem;
 
-bool	intersect_sphere(t_object *obj, t_ray *ray);
-
-#endif
+	elem = ft_lstnew(obj);
+	if (!elem)
+		return (NULL);
+	ft_lstadd_back(&scene->objs, elem);
+	return (elem);
+}

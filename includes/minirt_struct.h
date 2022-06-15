@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/15 18:26:11 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/15 19:37:28 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 
 /* Enum */
 
+typedef enum e_object_type
+{
+	T_SPHERE,
+	T_PLAN
+}			t_object_type;
 
 /* Math related structure */
 
@@ -50,9 +55,15 @@ typedef struct s_mlx
 	void		*win;
 }	t_mlx;
 
+typedef struct e_scene
+{
+	t_list	*objs;
+}				t_scene;
+
 typedef struct s_minirt
 {
 	t_mlx	mlx;
+	t_scene	scene;
 }	t_minirt;
 
 /* Related ray structure */
@@ -86,7 +97,7 @@ typedef struct e_plan
 
 typedef struct e_object	t_object;
 
-typedef bool (*t_intersect_fnct)(t_object *, t_ray *, t_rayhit *);
+typedef bool (*t_intersect_fnct)(t_object *, t_ray *);
 
 struct e_object
 {
@@ -95,12 +106,12 @@ struct e_object
 		t_sphere	sphere;
 		t_plan		plan;
 	} p;
+	uint32_t			color;
+	t_rayhit			rayhit;
+	t_object_type		type;
 	t_intersect_fnct	fnct;
 };
 
-typedef struct e_scene
-{
-	t_list	*objs;
-}				t_scene;
+
 
 #endif
