@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:45:30 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/14 16:12:39 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/15 18:17:53 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ double	vec_length(t_vec a)
 	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
 }
 
-void	vec_normalize(t_vec *a)
+void	vec_normalize_p(t_vec *a)
 {
 	double	lenght;
 
@@ -56,4 +56,12 @@ void	vec_normalize(t_vec *a)
 	a->x *= lenght;
 	a->y *= lenght;
 	a->z *= lenght;
+}
+
+t_vec	vec_normalize(t_vec a)
+{
+	double	lenght;
+
+	lenght = 1 / vec_length(a);
+	return (vec(a.x * lenght, a.y * lenght, a.z * lenght));
 }

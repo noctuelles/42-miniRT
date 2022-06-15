@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/06/15 11:00:32 by bsavinel         ###   ########.fr        #
+#    Updated: 2022/06/15 18:28:00 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS =	end/good_exit.c					\
 		math/vector.c					\
 		main.c							\
 		plane/intersec_plane.c			\
+		sphere/intersect_sphere.c		\
 
 ################################################################################
 ########							Libraries							########
