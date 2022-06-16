@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_intersection.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 17:23:08 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/15 19:36:55 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/16 16:58:40 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 
 # include "minirt_struct.h"
 
+/*
+ *	intersect_sphere.c
+ */
+
 bool	intersect_sphere(t_object *obj, t_ray *ray);
+
+/*
+ *	intersect_plane.c
+ */
+
+bool	plane_intersection(t_object *object, t_ray *ray);
 
 #endif
