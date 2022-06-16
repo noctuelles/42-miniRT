@@ -6,12 +6,18 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:45:30 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/15 18:17:53 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/16 16:40:00 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_struct.h"
 #include <math.h>
+#include <stdio.h>
+
+void	vec_print(t_vec a)
+{
+	printf("(%.2f, %.2f, %.2f)\n", a.x, a.y, a.z);
+}
 
 t_vec	vec(double x, double y, double z)
 {
@@ -64,4 +70,9 @@ t_vec	vec_normalize(t_vec a)
 
 	lenght = 1 / vec_length(a);
 	return (vec(a.x * lenght, a.y * lenght, a.z * lenght));
+}
+
+double	vec_lenght_p(t_vec a)
+{
+	return (a.x * a.x + a.y * a.y + a.z * a.z);
 }

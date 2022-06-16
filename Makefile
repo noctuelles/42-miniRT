@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/06/15 19:36:17 by plouvel          ###   ########.fr        #
+#    Updated: 2022/06/16 16:15:16 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 NAME = miniRT
 
 CC = cc 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -O2
 
 
 ARGUMENT_RUN = 
@@ -40,6 +40,7 @@ SRCS =	end/good_exit.c					\
 		mlx_utils/mlx_utils.c			\
 		renderer/render.c				\
 		math/vector.c					\
+		math/math_utils.c				\
 		main.c							\
 		plane/intersec_plane.c			\
 		sphere/intersect_sphere.c		\

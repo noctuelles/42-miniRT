@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/15 19:37:28 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/16 15:42:37 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct e_vec
 typedef t_vec	t_vec3d;
 typedef t_vec	t_3dpoint;
 typedef t_vec	t_2dpoint;
+typedef t_vec	t_albedo;
+typedef t_vec	t_color;
 
 /* minilibx and program structure */
 
@@ -55,9 +57,17 @@ typedef struct s_mlx
 	void		*win;
 }	t_mlx;
 
+typedef struct e_light
+{
+	t_3dpoint	point;
+	double		ratio;
+}	t_light;
+
+
 typedef struct e_scene
 {
 	t_list	*objs;
+	t_light	light;
 }				t_scene;
 
 typedef struct s_minirt
@@ -79,6 +89,7 @@ typedef struct s_rayhit
 	double		t;
 	t_3dpoint	intersect_p;
 	t_vec3d		normal;
+	uint32_t	pixel_color;
 }	t_rayhit;
 
 /* Primitive geometry structure */
@@ -106,12 +117,10 @@ struct e_object
 		t_sphere	sphere;
 		t_plan		plan;
 	} p;
-	uint32_t			color;
+	t_albedo			albedo;
 	t_rayhit			rayhit;
 	t_object_type		type;
 	t_intersect_fnct	fnct;
 };
-
-
 
 #endif

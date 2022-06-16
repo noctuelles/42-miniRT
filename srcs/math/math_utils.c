@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/15 18:32:57 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/16 16:01:33 by plouvel          ###   ########.fr       */
+/*   Created: 2022/06/16 15:43:25 by plouvel           #+#    #+#             */
+/*   Updated: 2022/06/16 15:45:26 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
-
-t_list	*add_obj_to_scene(t_scene *scene, t_object *obj)
+double	min(double a, double b)
 {
-	t_list	*elem;
-
-	elem = ft_lstnew(obj);
-	if (!elem)
-		return (NULL);
-	ft_lstadd_back(&scene->objs, elem);
-	return (elem);
+	if (a < b)
+		return (a);
+	else
+		return (b);
 }
 
-void	set_scene_light(t_scene *scene, t_3dpoint point, double ratio)
+double	max(double a, double b)
 {
-	scene->light.point = point;
-	scene->light.ratio = ratio;
+	if (a > b)
+		return (a);
+	else
+		return (b);
 }

@@ -6,13 +6,14 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/15 18:51:02 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/15 23:28:30 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_utils.h"
 #include "end.h"
 #include "renderer.h"
+#include <pthread.h>
 #include <string.h>
 
 int	main(int ac, char **av)
@@ -20,7 +21,7 @@ int	main(int ac, char **av)
 	t_minirt	minirt;
 	memset(&minirt, 0, sizeof(t_minirt));
 
-	(void)ac;
+	(void) ac;
 	(void)av;
 	/*if (ac != 2)
 	{

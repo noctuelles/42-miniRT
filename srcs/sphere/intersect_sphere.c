@@ -6,13 +6,14 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 17:59:43 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/15 19:40:00 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/16 16:38:45 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_struct.h"
 #include "vector.h"
 #include <math.h>
+#include <stdio.h>
 
 bool	intersect_sphere(t_object *obj, t_ray *ray)
 {
