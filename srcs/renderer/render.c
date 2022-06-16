@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/16 16:54:24 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/16 17:38:03 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ t_color	compute_light(t_object *obj, t_light *light)
 	t_vec3d	normal_to_light;
 
 	normal_to_light = vec_sub(light->point, obj->rayhit.intersect_p);
-	dot_normal_light = max(0, vec_dot(vec_normalize(normal_to_light),
+	dot_normal_light = max(0.2, vec_dot(vec_normalize(normal_to_light),
 			obj->rayhit.normal));
 	color = vec_mul_scalar(obj->albedo,
-			1e6 * dot_normal_light / vec_lenght_p(normal_to_light));
+			1e6 * light->ratio * dot_normal_light / vec_lenght_p(normal_to_light));
 	return (color);
 }
 
@@ -63,14 +63,21 @@ void	render_img(t_minirt *minirt)
 
 	add_obj_to_scene(&minirt->scene, new_sphere(
 				vec(0, 0, -55),
-				20.0,
+				8.0,
 				0xff0000));
+
+	// le sol
+
+	add_obj_to_scene(&minirt->scene, new_plan(
+				vec(0, -1, 0),
+				vec(0, 1, -0.3),
+				0xbfbfe0));
 
 	/* Pour l'instant, l'unique lumiere */
 
 	set_scene_light(&minirt->scene,
-				vec(0, 40, -35),
-				0.8);
+				vec(0, 57, -70),
+				1);
 
 
 	viewport_point.z = - (WIDTH / (2 * tan(FOV / 2)));
@@ -93,7 +100,7 @@ void	render_img(t_minirt *minirt)
 				{
 					if (!closest_obj)
 						closest_obj = obj;
-					else if (obj->rayhit.t > closest_obj->rayhit.t)
+					else if (obj->rayhit.t < closest_obj->rayhit.t)
 						closest_obj = obj;
 				}
 			}
