@@ -6,13 +6,13 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:00:49 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/24 17:06:37 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/24 18:02:03 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_struct.h"
 
-static inline t_tuple	tuple(double x, double y, double z, double w)
+t_tuple	tuple(double x, double y, double z, double w)
 {
 	t_tuple	tuple;
 

@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 17:23:08 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/16 17:03:22 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/24 18:03:21 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
  *	intersect_sphere.c
  */
 
-bool	intersect_sphere(t_object *obj, t_ray *ray);
+bool	intersect_sphere(t_object *obj, t_ray *ray, t_rayhit *rayhit);
 
 /*
  *	intersect_plane.c
  */
 
-bool	plane_intersection(t_object *object, t_ray *ray);
+bool	plane_intersection(t_object *object, t_ray *ray, t_rayhit *rayhit);
 
 #endif

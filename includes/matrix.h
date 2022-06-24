@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:54 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/24 16:56:31 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/24 18:22:58 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_matrix4	matrix4_mul(t_matrix4 const A, t_matrix4 const B);
 t_tuple		matrix4_tmul(t_matrix4 const A, t_tuple B);
 t_matrix4	matrix4_mul_id(t_matrix4 const A);
 t_matrix4	matrix4_trans(t_matrix4 const A);
-/* void		print_matrix4(t_matrix4 const M);*/
+void		print_matrix4(t_matrix4 const M);
 
 /* matrix_transform.c */
 

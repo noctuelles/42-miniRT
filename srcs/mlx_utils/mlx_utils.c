@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 15:10:50 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/16 12:06:21 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/24 17:47:47 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 unsigned int	set_color(unsigned char r, unsigned char g, unsigned char b)
 {
 	return (r << 16 | g << 8 | b);
+}
+
+t_color	get_norm_color(uint32_t color)
+{
+	t_color	tcolor;
+
+	tcolor.x = (int) (color >> 16) / 255.;
+	tcolor.y = (int) (0xFF & color >> 8) / 255.;
+	tcolor.z = (int) (0xFF & color) / 255.;
+	tcolor.w = 0;
+	return (tcolor);
 }
 
 void	mlx_pixel_img_put(t_minirt *minirt, int x, int y, int color)

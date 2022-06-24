@@ -6,24 +6,24 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 17:17:47 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/16 17:38:03 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/24 18:03:29 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_struct.h"
-#include "vector.h"
+#include "math_utils.h"
+#include "tuple.h"
 
-bool	plane_intersection(t_object *object, t_ray *ray)
+bool	plane_intersection(t_object *object, t_ray *ray, t_rayhit *rayhit)
 {
 	if (vec_dot(object->p.plan.normal, ray->dir) == 0)
 		return (false);
-	object->rayhit.normal = object->p.plan.normal;
-	object->rayhit.t = vec_dot(object->p.plan.normal,
-			vec_sub(object->p.plan.point, ray->org))
+	rayhit->normal = object->p.plan.normal;
+	rayhit->t = vec_dot(object->p.plan.normal,
+			tsub(object->p.plan.pos, ray->org))
 		/ vec_dot(object->p.plan.normal, ray->dir);
-	object->rayhit.intersect_p = vec_add(ray->org, vec_mul_scalar(ray->dir,
-				object->rayhit.t));
-	if (object->rayhit.t > 0)
+	rayhit->intersect_p = get_ray_point(*ray, rayhit->t);
+	if (rayhit->t > 0)
 		return (true);
 	else
 		return (false);

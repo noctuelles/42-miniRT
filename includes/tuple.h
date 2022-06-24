@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:45:46 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/24 17:09:34 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/24 18:02:11 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 # include "minirt_struct.h"
 
+t_tuple		tuple(double x, double y, double z, double w);
 t_vec3		vector(double x, double y, double z);
 t_point3	point(double x, double y, double z);
 
+t_tuple		tmul_scalar(t_tuple a, double s);
 t_tuple		tadd(t_tuple a, t_tuple b);
 t_tuple		tsub(t_tuple a, t_tuple b);
 t_tuple		tnegate(t_tuple a);

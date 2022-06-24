@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/06/24 17:09:57 by plouvel          ###   ########.fr        #
+#    Updated: 2022/06/24 18:23:52 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 NAME = miniRT
 
 CC = cc 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -O2
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -O3
 
 
 ARGUMENT_RUN = 
@@ -44,6 +44,7 @@ SRCS =	end/good_exit.c					\
 		math/tuple2.c					\
 		math/math_utils.c				\
 		matrix/matrix.c					\
+		matrix/matrix_utils.c			\
 		matrix/matrix_invert.c			\
 		matrix/matrix_invert_utils.c	\
 		matrix/matrix_transform.c		\
@@ -111,7 +112,7 @@ $(NAME) : $(OBJS) $(LIBS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -lm -lbsd -lX11 -lXext -o $(NAME) $(INCS)
 	echo "$(BLUE)$(NAME): $(GREEN)Success $(NO_COLOR)"
 
-$(OBJS_PATH)%.o: $(SRCS_PATH)%.c
+$(OBJS_PATH)%.o: $(SRCS_PATH)%.c Makefile
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -MMD -c $< -o $@ $(INCS)
 

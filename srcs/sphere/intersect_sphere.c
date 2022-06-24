@@ -6,38 +6,41 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 17:59:43 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/16 16:56:44 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/24 18:32:06 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_struct.h"
-#include "vector.h"
+#include "math_utils.h"
+#include "tuple.h"
 #include <math.h>
 #include <stdio.h>
 
-bool	intersect_sphere(t_object *obj, t_ray *ray)
-{
-	t_3dpoint	p;
-	double		solution[2];
-	double		eq_xy[2];
-	double		t;
+/* Edge cases :
+ *
+ *     - If the ray hits in negative t values (if the second intersection is 
+ *     negative then the sphere is begind the sphere origin.)
+*/
 
-	t = vec_dot(vec_sub(obj->p.sphere.center, ray->org), ray->dir);
-	p = vec_add(ray->org, vec_mul_scalar(ray->dir, t));
-	eq_xy[1] = vec_length(vec_sub(obj->p.sphere.center, p));
-	eq_xy[0] = sqrt(obj->p.sphere.radius * obj->p.sphere.radius
-			- eq_xy[1] * eq_xy[1]);
-	if (eq_xy[1] < obj->p.sphere.radius)
+bool	intersect_sphere(t_object *obj, t_ray *ray, t_rayhit *rayhit)
+{
+	t_vec3	sphere_to_ray;
+	t_ray	new_ray;
+	double	t[2];
+
+	new_ray = ray_transform(*ray, obj->M_inv);
+	sphere_to_ray = tsub(new_ray.org, point(0., 0., 0.));
+	if (solve_quadratic(
+				vec_dot(new_ray.dir, new_ray.dir),
+				2 * vec_dot(new_ray.dir, sphere_to_ray),
+				vec_dot(sphere_to_ray, sphere_to_ray) - 1,
+				t))
 	{
-		solution[0] = t - eq_xy[0];
-		solution[1] = t + eq_xy[1];
-		obj->rayhit.t = solution[0];
-		obj->rayhit.intersect_p = vec_add(ray->org, vec_mul_scalar(ray->dir,
-					solution[0]));
-		obj->rayhit.normal = vec_normalize(vec_sub(obj->rayhit.intersect_p,
-					obj->p.sphere.center)); 
+		if (t[1] < 0)
+			return (false);
+		t[0] = min(t[0], t[1]);
+		rayhit->t = t[0];
 		return (true);
 	}
-	else
-		return (false);
+	return (false);
 }

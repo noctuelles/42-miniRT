@@ -6,12 +6,13 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:45:30 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/24 17:06:52 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/24 18:15:57 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_struct.h"
 #include "tuple.h"
+#include <math.h>
 
 double	vec_dot(t_vec3 a, t_vec3 b)
 {
