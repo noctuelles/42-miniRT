@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/16 17:38:00 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/24 16:57:36 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft.h"
 # include <stdbool.h>
 
-/* Enum */
+/* ############################## Enumerations ############################## */
 
 typedef enum e_object_type
 {
@@ -24,22 +24,65 @@ typedef enum e_object_type
 	T_PLAN
 }			t_object_type;
 
-/* Math related structure */
+/* ################################# Tuple ################################## */
 
-typedef struct e_vec
+typedef struct s_tuple
 {
 	double	x;
 	double	y;
 	double	z;
-}				t_vec;
+	double	w;
+}				t_tuple;
 
-typedef t_vec	t_vec3d;
-typedef t_vec	t_3dpoint;
-typedef t_vec	t_2dpoint;
-typedef t_vec	t_albedo;
-typedef t_vec	t_color;
+typedef t_tuple	t_vec3;
+typedef t_tuple	t_point3;
+typedef t_tuple	t_color;
+typedef t_tuple	t_albedo;
 
-/* minilibx and program structure */
+/* ################################# Matrix ################################# */
+
+typedef struct	s_matrix4
+{
+	double	m[4][4];
+}				t_matrix4;
+
+typedef struct	s_matrix3
+{
+	double	m[3][3];
+}				t_matrix3;
+
+typedef struct	s_matrix2
+{
+	double	m[2][2];
+}				t_matrix2;
+
+/* ############################# Object & Scene ############################# */
+
+typedef struct s_sphere
+{
+	t_point3	pos;
+	double		radius;
+}				t_sphere;
+
+typedef struct s_plan
+{
+	t_point3	pos;
+	t_vec3		normal;
+}				t_plan;
+
+typedef struct s_light
+{
+	t_point3	pos;
+	double		intensity;
+}				t_light;
+
+typedef struct s_scene
+{
+	t_list	*objs;
+	t_light	light;
+}				t_scene;
+
+/* ################################ Minilibx ################################ */
 
 typedef struct s_image
 {
@@ -55,20 +98,9 @@ typedef struct s_mlx
 	t_image		img;
 	void		*ptr;
 	void		*win;
-}	t_mlx;
+}				t_mlx;
 
-typedef struct e_light
-{
-	t_3dpoint	point;
-	double		ratio;
-}	t_light;
-
-
-typedef struct e_scene
-{
-	t_list	*objs;
-	t_light	light;
-}				t_scene;
+/* ################################ Program ################################# */
 
 typedef struct s_minirt
 {
@@ -76,41 +108,27 @@ typedef struct s_minirt
 	t_scene	scene;
 }	t_minirt;
 
-/* Related ray structure */
+/* ################################## Ray ################################### */
 
-typedef struct e_ray
+typedef struct s_ray
 {
-	t_3dpoint	org;
-	t_vec3d		dir;
+	t_point3	org;
+	t_vec3		dir;
 }			t_ray;
 
 typedef struct s_rayhit
 {
 	double		t;
-	t_3dpoint	intersect_p;
-	t_vec3d		normal;
+	t_point3	intersect_p;
+	t_vec3		normal;
 	uint32_t	pixel_color;
 }	t_rayhit;
 
-/* Primitive geometry structure */
-
-typedef struct e_sphere
-{
-	t_3dpoint	center;
-	double		radius;
-}				t_sphere;
-
-typedef struct e_plan
-{
-	t_3dpoint	point;
-	t_vec3d		normal;
-}				t_plan;
-
-typedef struct e_object	t_object;
+typedef struct s_object	t_object;
 
 typedef bool (*t_intersect_fnct)(t_object *, t_ray *);
 
-struct e_object
+struct s_object
 {
 	union
 	{

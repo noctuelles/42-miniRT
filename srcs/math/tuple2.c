@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.c                                           :+:      :+:    :+:   */
+/*   tuple2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/13 15:45:30 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/24 17:06:52 by plouvel          ###   ########.fr       */
+/*   Created: 2022/06/24 17:02:40 by plouvel           #+#    #+#             */
+/*   Updated: 2022/06/24 17:06:28 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_struct.h"
-#include "tuple.h"
+#include <stdio.h>
 
-double	vec_dot(t_vec3 a, t_vec3 b)
+t_tuple	tnegate(t_tuple a)
 {
-	return (a.x * b.x +a.y * b.y +  a.z * b.z);
+	t_tuple t;
+
+	t.x = -a.x;
+	t.y = -a.y;
+	t.z = -a.z;
+	t.w = -a.w;
+	return (t);
 }
 
-double	vec_mag(t_vec3 a)
+void	tprint(t_tuple a)
 {
-	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
-}
-
-t_vec3	vec_norm(t_vec3 a)
-{
-	double	inv_mag;
-
-	inv_mag = 1. / vec_mag(a);
-	return (vector(a.x * inv_mag, a.y * inv_mag, a.z * inv_mag));
+	printf("{%5.2f, %5.2f, %5.2f, %5.2f}\n", a.x, a.y, a.z, a.w);
 }

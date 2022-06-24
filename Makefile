@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/06/16 16:58:58 by plouvel          ###   ########.fr        #
+#    Updated: 2022/06/24 17:09:57 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,13 @@ SRCS =	end/good_exit.c					\
 		mlx_utils/mlx_utils.c			\
 		renderer/render.c				\
 		math/vector.c					\
+		math/tuple.c					\
+		math/tuple2.c					\
 		math/math_utils.c				\
+		matrix/matrix.c					\
+		matrix/matrix_invert.c			\
+		matrix/matrix_invert_utils.c	\
+		matrix/matrix_transform.c		\
 		main.c							\
 		plane/intersect_plane.c			\
 		sphere/intersect_sphere.c		\
