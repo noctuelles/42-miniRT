@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/24 19:17:31 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/25 14:39:55 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@
 #include <stdio.h>
 #include <stdint.h>
 
-static void	generate_ray(t_ray *ray, t_point3 viewport_point)
+static inline void	generate_ray(t_ray *ray, t_point3 viewport_point)
 {
-	ray->org = point(0.0, 0.0, -1);
+	ray->org = point(0.0, 2., 0);
 	ray->dir = vec_norm(viewport_point);
+	ray->dir.w = 0;
 }
 
 /*
@@ -55,6 +56,18 @@ uint32_t	get_color(t_color color)
 	return (r << 16 | g << 8 | b);
 }
 
+t_color	get_light(t_object *obj, t_rayhit *rayhit, t_light light)
+{
+	t_vec3	lightv;
+	double	dot;
+
+	lightv = vec_norm(tsub(light.pos, rayhit->intersect_p));
+	dot = vec_dot(rayhit->normal, lightv);
+	if (dot < 0)
+		dot = 0;
+	return (tmul_scalar(obj->albedo, dot));
+}
+
 void	render_img(t_minirt *minirt)
 {
 	t_point3	viewport_point;
@@ -63,10 +76,10 @@ void	render_img(t_minirt *minirt)
 	size_t		i;
 	size_t		j;
 
-	add_obj_to_scene(&minirt->scene, new_sphere(point(0, 0, 20), 4, 0xFF0000));
-	add_obj_to_scene(&minirt->scene, new_sphere(point(3, 0, 18), 2, 0x00FF00));
-	add_obj_to_scene(&minirt->scene, new_sphere(point(-3, 0, 18), 1, 0x0000FF));
-	add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0, 1, 0), 0x0000FF));
+	add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 20), 2, 0xFF0000));
+	add_obj_to_scene(&minirt->scene, new_sphere(point(-3, 1, 10), 2, 0x00FF00));
+	add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0, 1, 0), 0xeeeeee));
+	set_scene_light(&minirt->scene, point(0, 10, 5), 1.0); 
 
 	viewport_point.z = WIDTH / (2 * tan(FOV / 2));
 	i = 0;
@@ -83,7 +96,7 @@ void	render_img(t_minirt *minirt)
 			obj = ray_intersect_scene_objs(&minirt->scene, &ray, &rayhit);
 			if (obj)
 			{
-				mlx_pixel_img_put(minirt, j, i, get_color(obj->albedo));
+				mlx_pixel_img_put(minirt, j, i, get_color(get_light(obj, &rayhit, minirt->scene.light)));
 			}
 			j++;
 		}

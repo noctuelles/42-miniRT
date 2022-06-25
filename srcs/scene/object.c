@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:43:00 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/24 18:45:47 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 04:10:17 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_object	*new_sphere(t_point3 pos, double radius, uint32_t color)
 	obj->M = matrix4_mul(matrix4_translate(pos.x, pos.y, pos.z),
 			matrix4_scale(radius, radius, radius));
 	obj->M_inv = matrix4_inv(obj->M);
+	obj->M_inv_trans = matrix4_trans(obj->M_inv);
 	return (obj);
 }
 

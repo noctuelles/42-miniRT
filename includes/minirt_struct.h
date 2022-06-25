@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 12:39:27 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/25 14:39:53 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ struct s_object
 	t_rayhit			rayhit;
 	t_matrix4			M;
 	t_matrix4			M_inv;
+	t_matrix4			M_inv_trans;
 	t_albedo			albedo;
 	t_object_type		type;
 	t_intersect_fnct	fnct;

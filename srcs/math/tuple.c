@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:00:49 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/24 18:02:03 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 03:48:32 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_point3	point(double x, double y, double z)
 
 t_tuple	tadd(t_tuple a, t_tuple b)
 {
-	return (tuple(a.x + a.x, a.y + b.y, a.z + b.z, a.w + b.w));
+	return (tuple(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w));
 }
 
 t_tuple	tsub(t_tuple a, t_tuple b)
