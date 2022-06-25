@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:43:25 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/24 18:26:11 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 03:56:23 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,15 @@ t_ray	ray_transform(t_ray old_ray, t_matrix4 const M)
 t_point3	get_ray_point(t_ray ray, double t)
 {
 	return (tadd(ray.org, tmul_scalar(ray.dir, t)));
+}
+
+
+t_vec3		get_normal(t_object *obj, t_point3 p)
+{
+	t_vec3	obj_normal;
+	t_vec3	world_normal;
+
+	obj_normal = matrix4_tmul(obj->M_inv, p);
+	world_normal = matrix4_tmul(obj->M_inv_trans, obj_normal);
+	return (vec_norm(world_normal));
 }
