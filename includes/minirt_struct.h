@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/24 18:02:11 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 12:39:27 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,29 @@ typedef struct s_plan
 	t_vec3		normal;
 }				t_plan;
 
+typedef struct e_disk
+{
+	t_point3	center;
+	double		rayon;
+	t_vec3		normal;
+}				t_disk;
+
+typedef struct e_cylindre
+{
+	t_point3	center;
+	t_vec3		orientation;
+	double		rayon;  //* le parsing donne le diametre mais il me faut le rayon
+	double		hauteur;
+}				t_cylindre;
+
+typedef struct e_cone
+{
+	t_point3	top;
+	double		hauteur;
+	t_vec3		direction;
+	double		angle;
+}				t_cone;
+
 typedef struct s_light
 {
 	t_point3	pos;
@@ -108,6 +131,18 @@ typedef struct s_minirt
 	t_scene	scene;
 }	t_minirt;
 
+typedef struct s_cyl_utils
+{
+	bool		first_paille;
+	bool		second_paille;
+	bool		up_disk;
+	bool		down_disk;
+	t_rayhit	rayhit_first_paille;
+	t_rayhit	rayhit_second_paille;
+	t_rayhit	rayhit_up_disk;
+	t_rayhit	rayhit_down_disk;
+}	t_cyl_utils;
+
 /* ################################## Ray ################################### */
 
 typedef struct s_ray
@@ -134,7 +169,11 @@ struct s_object
 	{
 		t_sphere	sphere;
 		t_plan		plan;
+		t_cone		cone;
+		t_cylindre	cylindre;
+		t_disk		disk;
 	} p;
+	t_rayhit			rayhit;
 	t_matrix4			M;
 	t_matrix4			M_inv;
 	t_albedo			albedo;
