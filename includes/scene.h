@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:47:41 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/24 18:29:19 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 20:28:26 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@ t_object	*ray_intersect_scene_objs(t_scene *scene, t_ray *ray,
 /* scene.c */
 
 t_list		*add_obj_to_scene(t_scene *scene, t_object *obj);
-void		set_scene_light(t_scene *scene, t_point3 point, double ratio);
-void	apply_obj_transform(t_object *obj, t_matrix4 const M);
+t_list		*add_light_to_scene(t_scene *scene, t_point3 pos, uint32_t color,
+		double intensity);
+void		set_ambiant_light(t_scene *scene, uint32_t color, double intensity);
+
+/* shading.c */
+
+t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit);
 
 #endif

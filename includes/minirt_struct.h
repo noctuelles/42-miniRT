@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 03:57:34 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 20:06:06 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,15 @@ typedef struct s_plan
 typedef struct s_light
 {
 	t_point3	pos;
+	t_color		color;
 	double		intensity;
 }				t_light;
 
 typedef struct s_scene
 {
 	t_list	*objs;
-	t_light	light;
+	t_list	*light;
+	t_light	amb_light;
 }				t_scene;
 
 /* ################################ Minilibx ################################ */

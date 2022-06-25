@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:02:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/24 18:02:04 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 20:13:16 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ t_tuple	tnegate(t_tuple a)
 	t.z = -a.z;
 	t.w = -a.w;
 	return (t);
+}
+
+t_tuple	tmul(t_tuple a, t_tuple b)
+{
+	return (tuple(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w));
 }
 
 t_tuple	tmul_scalar(t_tuple a, double s)

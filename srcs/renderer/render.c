@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 04:32:04 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 20:38:18 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_color	compute_light(t_object *obj, t_light *light)
 
 uint32_t	get_color(t_color color)
 {
-	unsigned char r, g, b;
+		unsigned char r, g, b;
 
 	r = min(255., color.x * 255.);
 	g = min(255., color.y * 255.);
@@ -56,17 +56,14 @@ uint32_t	get_color(t_color color)
 	return (r << 16 | g << 8 | b);
 }
 
-t_color	get_light(t_object *obj, t_rayhit *rayhit, t_light light)
+/*double	get_lambertian_factor(t_object *obj, t_light *light,
+		t_vec3 lightv, t_vec3 normal)
 {
-	t_vec3	lightv;
 	double	dot;
 
-	lightv = vec_norm(tsub(light.pos, rayhit->intersect_p));
-	dot = vec_dot(rayhit->normal, lightv);
-	if (dot < 0)
-		dot = 0;
-	return (tmul_scalar(obj->albedo, dot));
-}
+	dot = max(0, vec_dot(normal, lightv));
+	return (dot);
+}*/
 
 void	render_img(t_minirt *minirt)
 {
@@ -77,9 +74,9 @@ void	render_img(t_minirt *minirt)
 	size_t		j;
 
 	add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 20), 2, 0xFF0000));
-	add_obj_to_scene(&minirt->scene, new_sphere(point(-3, 1, 10), 2, 0x00FF00));
 	add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0, 1, 0), 0xeeeeee));
-	set_scene_light(&minirt->scene, point(0, 10, 5), 1.0); 
+	add_light_to_scene(&minirt->scene, point(0, 30, 10), 0xFFFFFF, 0.4);
+	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.2);
 
 	viewport_point.z = WIDTH / (2 * tan(FOV / 2));
 	i = 0;
@@ -96,7 +93,8 @@ void	render_img(t_minirt *minirt)
 			obj = ray_intersect_scene_objs(&minirt->scene, &ray, &rayhit);
 			if (obj)
 			{
-				mlx_pixel_img_put(minirt, j, i, get_color(get_light(obj, &rayhit, minirt->scene.light)));
+				mlx_pixel_img_put(minirt, j, i, get_color(
+							get_shade(&minirt->scene, obj, &rayhit)));
 			}
 			j++;
 		}
