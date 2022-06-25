@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 20:06:06 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 22:18:02 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,14 @@
 typedef enum e_object_type
 {
 	T_SPHERE,
-	T_PLAN
+	T_PLAN,
 }			t_object_type;
+
+typedef enum e_texture_type
+{
+	TX_CHECKERED,
+	TX_IMAGE
+}			t_texture_type;
 
 /* ################################# Tuple ################################## */
 
@@ -33,6 +39,12 @@ typedef struct s_tuple
 	double	z;
 	double	w;
 }				t_tuple;
+
+typedef struct	s_uv
+{
+	double	u;
+	double	v;
+}				t_uv;
 
 typedef t_tuple	t_vec3;
 typedef t_tuple	t_point3;
@@ -129,6 +141,12 @@ typedef struct s_rayhit
 typedef struct s_object	t_object;
 
 typedef bool (*t_intersect_fnct)(t_object *, t_ray *, t_rayhit *);
+typedef t_uv (*t_uvmap_fnct)(t_point3);
+
+typedef struct s_texture
+{
+	bool	is_checkered;
+}				t_texture;
 
 struct s_object
 {
@@ -141,8 +159,10 @@ struct s_object
 	t_matrix4			M_inv;
 	t_matrix4			M_inv_trans;
 	t_albedo			albedo;
+	t_texture			texture;
 	t_object_type		type;
 	t_intersect_fnct	fnct;
+	t_uvmap_fnct		uvmap_fnct;
 };
 
 #endif
