@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:09:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/25 18:20:28 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/25 18:28:45 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_vec3 find_normal_cone(t_object *obj, t_rayhit rayhit, t_ray *ray)
 
 	distance = vec_mag(tsub(obj->p.cone.top, rayhit.intersect_p));
 	point = tadd(obj->p.cone.top, tmul_scalar(obj->p.cone.direction, distance));
-	return (vec_norm(tsub(rayhit.intersect_p, point)));
+	return (vec_norm(tsub(point, rayhit.intersect_p)));
 }
 
 void	intersect_cone_inf(t_cone_utils *all_inter, t_object *obj, t_ray *ray)
