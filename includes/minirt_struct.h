@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 23:28:17 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/26 00:07:52 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef enum e_texture_type
 {
 	TX_NONE,
 	TX_CHECKER,
-	TX_IMAGE
+	TX_IMAGE,
+	TX_FAILED
 }			t_texture_type;
 
 /* ################################# Tuple ################################## */
@@ -146,6 +147,7 @@ typedef t_uv (*t_uvmap_fnct)(t_point3);
 
 typedef struct s_texture
 {
+	t_image			img;
 	t_texture_type	texture_type;
 	t_color			checker_color[2];
 	int				width;
