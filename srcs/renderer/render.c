@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 14:39:55 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/25 15:28:58 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ void	render_img(t_minirt *minirt)
 	size_t		i;
 	size_t		j;
 
-	add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 20), 2, 0xFF0000));
-	add_obj_to_scene(&minirt->scene, new_sphere(point(-3, 1, 10), 2, 0x00FF00));
+	//add_obj_to_scene(&minirt->scene, new_sphere(point(0, 2, 20), 2, 0xFF0000));
+	//add_obj_to_scene(&minirt->scene, new_sphere(point(-3, 1, 10), 2, 0x00FF00));
 	add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0, 1, 0), 0xeeeeee));
 	set_scene_light(&minirt->scene, point(0, 10, 5), 1.0); 
-
+	add_obj_to_scene(&minirt->scene, new_cylindre(point(0, 2, 20), vector(1.0, 1.0, 1.0), 2.0, 10.0, 0xFF0000));
 	viewport_point.z = WIDTH / (2 * tan(FOV / 2));
 	i = 0;
 	while (i < HEIGHT)

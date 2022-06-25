@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:25:34 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/25 12:40:31 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/25 15:08:38 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	intersect_disk(t_object *obj, t_ray *ray)
 		/ vec_dot(obj->p.disk.normal, ray->dir);
 	obj->rayhit.intersect_p = tadd(ray->org,
 			tmul_scalar(ray->dir, obj->rayhit.t));
-	if (obj->rayhit.t > 0 && vec_length(tsub(obj->p.disk.center,
+	if (obj->rayhit.t > 0 && vec_mag(tsub(obj->p.disk.center,
 				obj->rayhit.intersect_p)) <= obj->p.disk.rayon)
 		return (true);
 	return (false);

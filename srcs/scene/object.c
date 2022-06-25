@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:43:00 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 04:10:17 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 15:01:39 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,29 @@ t_object	*new_plan(t_point3 pos, t_vec3 normal, uint32_t color)
 	obj->p.plan.normal = normal;
 	obj->fnct = &plane_intersection;
 	obj->type = T_PLAN;
+	obj->albedo = get_norm_color(color);
+	return (obj);
+}
+
+t_object	*new_cylindre(t_point3 center, t_vec3 orientation, double rayon, double hauteur, uint32_t color)
+{
+	t_object	*obj;
+	uint8_t	r, g, b;
+
+	obj = malloc(sizeof(t_object));
+	if (!obj)
+		return (NULL);
+	obj->p.cylindre.orientation = orientation;
+	obj->p.cylindre.center = center;
+	obj->p.cylindre.hauteur = hauteur;
+	obj->p.cylindre.rayon = rayon;
+	obj->fnct = &intersect_cylindre;
+	obj->type = T_CYLINDRE;
+	r = color >> 16;
+	g = color >> 8;
+	b = 0xFF & color;
+	obj->M = matrix4_translate(center.x, center.y, center.z);
+	obj->M_inv = matrix4_inv(obj->M);
 	obj->albedo = get_norm_color(color);
 	return (obj);
 }

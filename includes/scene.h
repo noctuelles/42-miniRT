@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:47:41 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/24 18:29:19 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 15:01:53 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 t_object	*new_sphere(t_point3 center, double radius, uint32_t color);
 t_object	*new_plan(t_point3 point, t_vec3 normal, uint32_t color);
+t_object	*new_cylindre(t_point3 center, t_vec3 orientation, double rayon, double hauteur, uint32_t color);
 t_object	*ray_intersect_scene_objs(t_scene *scene, t_ray *ray,
 		t_rayhit *rayhit);
 
