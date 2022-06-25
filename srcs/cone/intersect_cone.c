@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:09:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/25 12:40:53 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/25 18:20:28 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 //? https://lousodrome.net/blog/light/2017/01/03/intersection-of-a-ray-and-a-cone/
 
-bool	give_intersec_cone(t_object *obj, t_ray *ray, double distance[2])
+bool	give_intersect_cone(t_object *obj, t_ray *ray, double distance[2])
 {
 	double	a;
 	double	b;
@@ -34,4 +34,69 @@ bool	give_intersec_cone(t_object *obj, t_ray *ray, double distance[2])
 	b = 2 * (vec_dot(ray->dir, obj->p.cone.direction) * vec_dot(top_org , obj->p.cone.direction) - vec_dot(ray->dir, tmul_scalar(top_org, cos_square)));
 	c = pow(vec_dot(top_org, obj->p.cone.direction), 2) - vec_dot(top_org, tmul_scalar(top_org, cos_square));
 	return(solve_quadratic(a, b, c, distance));
+}
+
+t_vec3 find_normal_cone(t_object *obj, t_rayhit rayhit, t_ray *ray)
+{
+	double distance;
+	t_point3 point;
+
+	distance = vec_mag(tsub(obj->p.cone.top, rayhit.intersect_p));
+	point = tadd(obj->p.cone.top, tmul_scalar(obj->p.cone.direction, distance));
+	return (vec_norm(tsub(rayhit.intersect_p, point)));
+}
+
+void	intersect_cone_inf(t_cone_utils *all_inter, t_object *obj, t_ray *ray)
+{
+	double		distance[2];
+	
+	if (give_intersect_cone(obj, ray, distance))
+	{
+		//* First
+		all_inter->first_inter = true;
+		all_inter->rayhit_first_inter.t = distance[0];
+		all_inter->rayhit_first_inter.intersect_p = get_ray_point(*ray, distance[0]);
+		all_inter->rayhit_first_inter.normal = find_normal_cone(obj, all_inter->rayhit_first_inter, ray);
+		//* Second
+		all_inter->second_inter = true;
+		all_inter->rayhit_second_inter.t = distance[1];
+		all_inter->rayhit_second_inter.intersect_p = get_ray_point(*ray, distance[0]);
+		all_inter->rayhit_second_inter.normal = find_normal_cone(obj, all_inter->rayhit_second_inter, ray);
+	}
+}
+
+bool	select_first_intersect_cone(t_cone_utils *all_inter, t_object *obj, t_rayhit *rayhit)
+{
+	bool		retour;
+
+	retour = false;
+	if (all_inter->first_inter)
+	{
+		retour = true;
+		*rayhit = all_inter->rayhit_first_inter;
+	}
+	if (all_inter->second_inter && (retour == false || rayhit->t > all_inter->rayhit_second_inter.t))
+	{
+		retour = true;
+		*rayhit = all_inter->rayhit_second_inter;
+	}
+	if (all_inter->close_disk && (retour == false || rayhit->t > all_inter->rayhit_close_disk.t))
+	{
+		retour = true;
+		*rayhit = all_inter->rayhit_close_disk;
+	}
+	return (retour);
+}
+
+bool	intersect_cone(t_object *obj, t_ray *ray, t_rayhit *rayhit)
+{
+	t_ray			new_ray;
+	t_cone_utils	all_inter;
+
+	all_inter.close_disk = false;
+	all_inter.first_inter = false;
+	all_inter.second_inter = false;
+	//cone_close(&all_inter, obj, ray);
+	intersect_cone_inf(&all_inter, obj, ray);
+	return (select_first_intersect(&all_inter, obj, rayhit));
 }

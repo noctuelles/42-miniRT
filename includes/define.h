@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:10:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/25 04:30:12 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 18:18:52 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@
 
 # define FOV_ANGLE 70.0
 # define FOV       (FOV_ANGLE * M_PI) / 180
+
+/*
+ *	Macros
+ */
+
+# define DG_RAD(a) ((a * M_PI) / 180)
 
 /*
  *	Define hook

@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 15:06:02 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/25 18:09:38 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ typedef enum e_object_type
 {
 	T_SPHERE,
 	T_PLAN,
-	T_CYLINDRE
+	T_CYLINDRE,
+	T_CONE
 }			t_object_type;
 
 /* ################################# Tuple ################################## */
@@ -132,8 +133,6 @@ typedef struct s_minirt
 	t_scene	scene;
 }	t_minirt;
 
-
-
 /* ################################## Ray ################################### */
 
 typedef struct s_ray
@@ -186,4 +185,15 @@ typedef struct s_cyl_utils
 	t_rayhit	rayhit_up_disk;
 	t_rayhit	rayhit_down_disk;
 }	t_cyl_utils;
+
+typedef struct s_cone_utils
+{
+	bool		first_inter;
+	bool		second_inter;
+	bool		close_disk;
+	t_rayhit	rayhit_first_inter;
+	t_rayhit	rayhit_second_inter;
+	t_rayhit	rayhit_close_disk;
+}	t_cone_utils;
+
 #endif

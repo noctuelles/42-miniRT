@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:43:00 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 15:01:39 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/25 18:12:22 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,27 @@ t_object	*new_cylindre(t_point3 center, t_vec3 orientation, double rayon, double
 	b = 0xFF & color;
 	obj->M = matrix4_translate(center.x, center.y, center.z);
 	obj->M_inv = matrix4_inv(obj->M);
+	obj->albedo = get_norm_color(color);
+	return (obj);
+}
+
+t_object	*new_cone(t_point3 top, t_vec3 direction, double angle, double hauteur, uint32_t color)
+{
+	t_object	*obj;
+	uint8_t	r, g, b;
+
+	obj = malloc(sizeof(t_object));
+	if (!obj)
+		return (NULL);
+	obj->p.cone.top = top;
+	obj->p.cone.direction = direction;
+	obj->p.cone.angle = angle;
+	obj->p.cone.hauteur = hauteur;
+	obj->fnct = &intersect_cone;
+	obj->type = T_CYLINDRE;
+	r = color >> 16;
+	g = color >> 8;
+	b = 0xFF & color;
 	obj->albedo = get_norm_color(color);
 	return (obj);
 }
