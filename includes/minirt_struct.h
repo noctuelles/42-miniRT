@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 22:18:02 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 23:28:17 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ typedef enum e_object_type
 
 typedef enum e_texture_type
 {
-	TX_CHECKERED,
+	TX_NONE,
+	TX_CHECKER,
 	TX_IMAGE
 }			t_texture_type;
 
@@ -145,7 +146,10 @@ typedef t_uv (*t_uvmap_fnct)(t_point3);
 
 typedef struct s_texture
 {
-	bool	is_checkered;
+	t_texture_type	texture_type;
+	t_color			checker_color[2];
+	int				width;
+	int				height;
 }				t_texture;
 
 struct s_object

@@ -6,12 +6,13 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 20:16:01 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 22:05:17 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 23:34:54 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_struct.h"
 #include "tuple.h"
+#include "texture.h"
 #include "scene.h"
 #include "math_utils.h"
 
@@ -48,6 +49,14 @@ static bool	is_a_shadow(t_scene *scene, t_rayhit const *f_rayhit,
 	return (false);
 }
 
+static t_color	get_color_from_obj(t_object *obj, t_point3 intersect_p)
+{
+	if (obj->texture.texture_type == TX_CHECKER)
+		return (get_checker_color(obj->texture, obj->uvmap_fnct(intersect_p)));
+	else
+		return (obj->albedo);
+}
+
 t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit)
 {
 	t_list	*elem;
@@ -67,6 +76,6 @@ t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit)
 		}
 		elem = elem->next;
 	}
-	pix_color = tmul(pix_color, obj->albedo);
+	pix_color = tmul(pix_color, get_color_from_obj(obj, rayhit->intersect_p));
 	return (pix_color);
 }

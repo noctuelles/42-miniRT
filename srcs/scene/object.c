@@ -6,13 +6,14 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:43:00 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 04:10:17 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 23:55:30 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_struct.h"
 #include "ray_intersection.h"
 #include "mlx_utils.h"
+#include "texture.h"
 #include "matrix.h"
 #include "tuple.h"
 #include <stdlib.h>
@@ -47,6 +48,7 @@ t_object	*new_plan(t_point3 pos, t_vec3 normal, uint32_t color)
 	obj->p.plan.pos = pos;
 	obj->p.plan.normal = normal;
 	obj->fnct = &plane_intersection;
+	obj->uvmap_fnct = &get_planar_map;
 	obj->type = T_PLAN;
 	obj->albedo = get_norm_color(color);
 	return (obj);
