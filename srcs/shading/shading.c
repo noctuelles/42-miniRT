@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 20:16:01 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 20:39:12 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 20:58:56 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 #include "tuple.h"
 #include "math_utils.h"
 
-# define L_POWER 1e3
+# define L_POWER 3e2
 
 static inline void apply_diffuse_coeff(t_light *light, t_vec3 lightv,
 		t_vec3 normal, t_color *color)
 {
+	double	dot;
 	double	coeff;
 
-	coeff = max(0, L_POWER * vec_dot(vec_norm(lightv), normal)
-			/ vec_norm_sqr(lightv) * light->intensity);
+	dot = max(0, vec_dot(vec_norm(lightv), normal));
+	coeff = L_POWER * light->intensity * dot / vec_norm_sqr(lightv);
 	*color = tadd(*color, tmul_scalar(light->color, coeff));
 }
 
