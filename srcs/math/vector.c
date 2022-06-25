@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:45:30 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 20:20:47 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 22:00:09 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_vec3	vec_norm(t_vec3 a)
 	return (vector(a.x * inv_mag, a.y * inv_mag, a.z * inv_mag));
 }
 
-double	vec_norm_sqr(t_vec3 a)
+double	vec_mag_sqr(t_vec3 a)
 {
 	return (vec_dot(a, a));
 }

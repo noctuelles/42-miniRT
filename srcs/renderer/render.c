@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 21:09:44 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 22:04:00 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,11 @@ void	render_img(t_minirt *minirt)
 	size_t		i;
 	size_t		j;
 
-	add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 15), 6, 0xFFFFFF));
+	add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 15), 2, 0xFF0000));
 	//add_obj_to_scene(&minirt->scene, new_sphere(point(20, 1, 50), 2, 0x00FF00));
 	add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0, 1, 0), 0xeeeeee));
 
-	add_light_to_scene(&minirt->scene, point(-5, 10, 10), 0xFF0000, 0.5);
-	add_light_to_scene(&minirt->scene, point(5, 10, 10), 0x0000FF, 1);
+	add_light_to_scene(&minirt->scene, point(-5, 10, 10), 0xFFFFFF, 0.5);
 	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.1);
 
 	viewport_point.z = WIDTH / (2 * tan(FOV / 2));

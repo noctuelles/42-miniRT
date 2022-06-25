@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:45:46 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 20:21:16 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/25 22:00:00 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void		tprint(t_tuple a);
 double		vec_dot(t_vec3 a, t_vec3 b);
 double		vec_mag(t_vec3 a);
 t_vec3		vec_norm(t_vec3 a);
-double		vec_norm_sqr(t_vec3 a);
+double		vec_mag_sqr(t_vec3 a);
 
 #endif
