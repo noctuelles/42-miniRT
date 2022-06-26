@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 18:09:38 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/26 13:56:20 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,11 @@ typedef struct e_cylindre
 typedef struct e_cone
 {
 	t_point3	top;
-	double		hauteur;
 	t_vec3		direction;
-	double		angle;
+	double		hauteur;
+	double		angle; //* Demi angle du sommet, il doit etre caper a 90 degres non compris
+	double		len_pente; //* fonction expres
+	double		rayon_base; //* fonction expres
 }				t_cone;
 
 typedef struct s_light

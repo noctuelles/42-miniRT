@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:43:00 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 18:12:22 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/26 14:15:30 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "mlx_utils.h"
 #include "matrix.h"
 #include "tuple.h"
+#include "define.h"
+#include "math.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -60,7 +62,7 @@ t_object	*new_cylindre(t_point3 center, t_vec3 orientation, double rayon, double
 	obj = malloc(sizeof(t_object));
 	if (!obj)
 		return (NULL);
-	obj->p.cylindre.orientation = orientation;
+	obj->p.cylindre.orientation = vec_norm(orientation);
 	obj->p.cylindre.center = center;
 	obj->p.cylindre.hauteur = hauteur;
 	obj->p.cylindre.rayon = rayon;
@@ -73,6 +75,15 @@ t_object	*new_cylindre(t_point3 center, t_vec3 orientation, double rayon, double
 	obj->M_inv = matrix4_inv(obj->M);
 	obj->albedo = get_norm_color(color);
 	return (obj);
+}
+
+void	len_and_rayon_cone(t_object *obj)
+{
+	double	radian_angle;
+	
+	radian_angle = DG_RAD(obj->p.cone.angle);
+	obj->p.cone.len_pente = obj->p.cone.hauteur / cos(radian_angle);
+	obj->p.cone.rayon_base = obj->p.cone.hauteur * tan(radian_angle);
 }
 
 t_object	*new_cone(t_point3 top, t_vec3 direction, double angle, double hauteur, uint32_t color)
@@ -93,6 +104,7 @@ t_object	*new_cone(t_point3 top, t_vec3 direction, double angle, double hauteur,
 	g = color >> 8;
 	b = 0xFF & color;
 	obj->albedo = get_norm_color(color);
+	len_and_rayon_cone(obj);
 	return (obj);
 }
 
