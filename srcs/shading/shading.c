@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 20:16:01 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/26 11:27:42 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/26 12:56:33 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,14 @@
 #include "texture.h"
 #include "scene.h"
 #include "math_utils.h"
+#include <math.h>
 
-# define L_POWER 2.5e2
+# define L_POWER 3e2
+
+/* Using lambertian shading.
+ * Note that i'm dividing by the distance square to get a more realistic
+ * lightning.
+ * I'm also dividing the light power by Pi to get a more rounded light. */
 
 static inline void apply_diffuse_coeff(t_light *light, t_vec3 lightv,
 		t_vec3 normal, t_color *color)
@@ -26,8 +32,14 @@ static inline void apply_diffuse_coeff(t_light *light, t_vec3 lightv,
 	double	coeff;
 
 	dot = max(0, vec_dot(vec_norm(lightv), normal));
-	coeff = L_POWER * light->intensity * dot / vec_mag_sqr(lightv);
+	coeff = (L_POWER /  M_PI) * light->intensity * dot / vec_mag_sqr(lightv);
 	*color = tadd(*color, tmul_scalar(light->color, coeff));
+}
+
+static inline void	apply_specular_coeff(t_light *light, t_vec3 lightv,
+		t_vec3 normal, t_color *color)
+{
+
 }
 
 static bool	is_a_shadow(t_scene *scene, t_rayhit const *f_rayhit,
@@ -55,12 +67,13 @@ static t_color	get_color_from_obj(t_object *obj, t_point3 intersect_p)
 	if (obj->texture.texture_type == TX_CHECKER)
 		return (get_checker_color(obj->texture, obj->uvmap_fnct(intersect_p)));
 	else if (obj->texture.texture_type == TX_IMAGE)
-	{
 		return (get_image_color(obj->texture, obj->uvmap_fnct(intersect_p)));
-	}
 	else
 		return (obj->albedo);
 }
+
+/* Loop through every light in the scene.
+ * The diffuse coeffecient is applied before the loop. */
 
 t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit)
 {
@@ -78,9 +91,11 @@ t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit)
 		if (!is_a_shadow(scene, rayhit, lightv))
 		{
 			apply_diffuse_coeff(light, lightv, rayhit->normal, &pix_color);
+			apply_specular_coeff(light, lightv, rayhit->normal, &pix_color);
 		}
 		elem = elem->next;
 	}
-	pix_color = tmul(pix_color, get_color_from_obj(obj, rayhit->intersect_p_local));
+	pix_color = tmul(pix_color, get_color_from_obj(obj,
+				rayhit->intersect_p_local));
 	return (pix_color);
 }

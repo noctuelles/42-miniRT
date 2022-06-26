@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 22:07:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/26 10:48:32 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/26 12:44:48 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_uv	get_spherical_map(t_point3 intersect_p)
 	double	phi;
 
 	theta = atan2(intersect_p.x, intersect_p.z);
-	phi = acos(intersect_p.y / vec_mag(intersect_p));
+	phi = acos(intersect_p.y);
 	uv.u = 1 - ((theta / (2 * M_PI)) + 0.5);
 	uv.v = 1 - (phi / M_PI);
 	return (uv);

@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/26 11:34:46 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/26 13:15:44 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@
 #include "math_utils.h"
 #include <limits.h>
 #include <stdio.h>
+#include <sys/time.h>
 #include <stdint.h>
 
 static inline void	generate_ray(t_ray *ray, t_point3 viewport_point)
 {
-	ray->org = point(0.0, 3, 0);
+	ray->org = point(-5, 3, 0);
 	ray->dir = vec_norm(viewport_point);
 	ray->dir.w = 0;
 }
@@ -66,6 +67,11 @@ uint32_t	get_color(t_color color)
 	return (dot);
 }*/
 
+uint64_t	get_mlsec_time(struct timeval t)
+{
+	return (t.tv_sec * 1000 + t.tv_usec / 1000);
+}
+
 void	render_img(t_minirt *minirt)
 {
 	t_point3	viewport_point;
@@ -94,12 +100,15 @@ void	render_img(t_minirt *minirt)
 	cobj = add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0, 1, 0), 0xeeeeee));
 	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0xFFFFFF, 0x000000));
 
-	add_light_to_scene(&minirt->scene, point(0, 5, 0), 0xFFFFFF, 0.3);
-	add_light_to_scene(&minirt->scene, point(0, 5, 25), 0x00FFFF, 0.3);
-	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.1);
+	add_light_to_scene(&minirt->scene, point(0, 5, 0), 0xFFFFFF, 1);
+	//add_light_to_scene(&minirt->scene, point(0, 10, 35), 0xFFFFFF, 0.5);
+	set_ambiant_light(&minirt->scene, 0xFF00FF, 0.0);
+
 
 	viewport_point.z = WIDTH / (2 * tan(FOV / 2));
 	i = 0;
+	struct timeval	t, t1;
+	gettimeofday(&t, NULL);
 	while (i < HEIGHT)
 	{
 		j = 0;
@@ -126,6 +135,8 @@ void	render_img(t_minirt *minirt)
 		mlx_string_put(minirt->mlx.ptr, minirt->mlx.win, WIDTH / 2 - strlen(str) * 4, HEIGHT / 2, 0xFFFFFF, str);
 		i++;
 	}
+	gettimeofday(&t1, NULL);
+	printf("Rendered in %lu mlsec.\n", get_mlsec_time(t1) - get_mlsec_time(t));
 	puts("Rendering done");
 	mlx_put_image_to_window(minirt->mlx.ptr, minirt->mlx.win, minirt->mlx.img.img, 0, 0);
 }
