@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/26 11:25:48 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/26 16:06:53 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef enum e_texture_type
 	TX_NONE,
 	TX_CHECKER,
 	TX_IMAGE,
+	TX_IMAGEW_NMAP,
 	TX_FAILED
 }			t_texture_type;
 
@@ -149,6 +150,7 @@ typedef t_uv (*t_uvmap_fnct)(t_point3);
 typedef struct s_texture
 {
 	t_image			img;
+	t_image			nmap;
 	t_texture_type	texture_type;
 	t_color			checker_color[2];
 	int				width;
