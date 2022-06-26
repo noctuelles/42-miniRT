@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/26 11:30:34 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/26 11:34:46 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ void	render_img(t_minirt *minirt)
 
 	//add_obj_to_scene(&minirt->scene, new_sphere(point(4, 0, 8), 1, 0xFFFFFF));
 	puts("loading texture");
-	t_texture earth = create_image_texture(minirt->mlx.ptr, "earth.xpm");
-	t_texture moon = create_image_texture(minirt->mlx.ptr, "moon.xpm");
-	t_texture tennis = create_image_texture(minirt->mlx.ptr, "tennis.xpm");
+	t_texture earth = create_image_texture(minirt->mlx.ptr, "textures/earth.xpm");
+	t_texture moon = create_image_texture(minirt->mlx.ptr, "textures/moon.xpm");
+	t_texture tennis = create_image_texture(minirt->mlx.ptr, "textures/tennis.xpm");
 	puts("done");
 
 	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(-5, 3, 15), 3, 0x00FF00));
