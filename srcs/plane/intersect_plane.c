@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 17:17:47 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/25 20:54:08 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/26 11:28:21 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ bool	plane_intersection(t_object *object, t_ray *ray, t_rayhit *rayhit)
 		/ vec_dot(object->p.plan.normal, ray->dir);
 	rayhit->intersect_p = tadd(ray->org, tmul_scalar(ray->dir,
 				rayhit->t));;
+	rayhit->intersect_p_local = rayhit->intersect_p;
 	if (rayhit->t > 0)
 		return (true);
 	else

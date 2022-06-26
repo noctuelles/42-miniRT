@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 23:21:31 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/26 00:30:12 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/26 10:53:56 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ t_color	get_image_color(t_texture texture, t_uv uv)
 	size_t		x;
 	size_t		y;
 
-	x = roundf(uv.u * texture.width);
-	y = roundf(uv.v * texture.height);
+	x = roundf(uv.u * (texture.width - 1));
+	y = roundf(uv.v * (texture.height - 1));
 	dest = texture.img.addr + x * (texture.img.bits_per_pixel / 8) +
 		(texture.height - y) * texture.img.line_length;
 	color = * (uint32_t *) dest;

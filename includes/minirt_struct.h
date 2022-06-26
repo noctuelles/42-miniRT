@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/26 00:07:52 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/26 11:25:48 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ typedef struct s_rayhit
 {
 	double		t;
 	t_point3	intersect_p;
+	t_point3	intersect_p_local;
 	t_vec3		normal;
 	uint32_t	pixel_color;
 }	t_rayhit;

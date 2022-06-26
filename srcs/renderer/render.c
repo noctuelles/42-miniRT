@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/26 00:26:24 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/26 11:30:34 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 static inline void	generate_ray(t_ray *ray, t_point3 viewport_point)
 {
-	ray->org = point(0.0, 2., 0);
+	ray->org = point(0.0, 3, 0);
 	ray->dir = vec_norm(viewport_point);
 	ray->dir.w = 0;
 }
@@ -72,15 +72,30 @@ void	render_img(t_minirt *minirt)
 	t_ray		ray;
 	t_rayhit	rayhit;
 	size_t		i;
+	t_object	*cobj;
 	size_t		j;
 
 	//add_obj_to_scene(&minirt->scene, new_sphere(point(4, 0, 8), 1, 0xFFFFFF));
-	t_texture text = create_image_texture(minirt->mlx.ptr, "earth.xpm");
-	//add_obj_to_scene(&minirt->scene, new_sphere(point(20, 1, 50), 2, 0x00FF00));
-	add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0, 1, 0), 0xeeeeee));
-	apply_obj_texture(minirt->scene.objs->content, text);
+	puts("loading texture");
+	t_texture earth = create_image_texture(minirt->mlx.ptr, "earth.xpm");
+	t_texture moon = create_image_texture(minirt->mlx.ptr, "moon.xpm");
+	t_texture tennis = create_image_texture(minirt->mlx.ptr, "tennis.xpm");
+	puts("done");
 
-	add_light_to_scene(&minirt->scene, point(0, 10, 10), 0xFFFFFF, 0.6);
+	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(-5, 3, 15), 3, 0x00FF00));
+	apply_obj_texture(cobj, earth);
+
+	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(4, 3, 10), 2, 0x00FF00));
+	apply_obj_texture(cobj, moon);
+
+	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(3, 7, 18), 1, 0x00FF00));
+	apply_obj_texture(cobj, tennis);
+
+	cobj = add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0, 1, 0), 0xeeeeee));
+	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0xFFFFFF, 0x000000));
+
+	add_light_to_scene(&minirt->scene, point(0, 5, 0), 0xFFFFFF, 0.3);
+	add_light_to_scene(&minirt->scene, point(0, 5, 25), 0x00FFFF, 0.3);
 	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.1);
 
 	viewport_point.z = WIDTH / (2 * tan(FOV / 2));
@@ -103,6 +118,12 @@ void	render_img(t_minirt *minirt)
 			}
 			j++;
 		}
+		double	percentage = (double) i / HEIGHT * 100;
+		char	str[20];
+
+		sprintf(str, "Rendering... %.2f\n", percentage);
+		mlx_clear_window(minirt->mlx.ptr, minirt->mlx.win);
+		mlx_string_put(minirt->mlx.ptr, minirt->mlx.win, WIDTH / 2 - strlen(str) * 4, HEIGHT / 2, 0xFFFFFF, str);
 		i++;
 	}
 	puts("Rendering done");

@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 22:11:16 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/26 00:23:05 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/26 10:48:25 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /* uv_mapping.c */
 
 t_uv	get_planar_map(t_point3 intersect_p);
+t_uv	get_spherical_map(t_point3 intersect_p);
 
 /* texture.c */
 

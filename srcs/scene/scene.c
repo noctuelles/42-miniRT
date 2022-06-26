@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:32:57 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 20:09:40 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/26 11:04:39 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "tuple.h"
 #include <stdlib.h>
 
-t_list	*add_obj_to_scene(t_scene *scene, t_object *obj)
+t_object	*add_obj_to_scene(t_scene *scene, t_object *obj)
 {
 	t_list	*elem;
 
@@ -23,7 +23,7 @@ t_list	*add_obj_to_scene(t_scene *scene, t_object *obj)
 	if (!elem)
 		return (NULL);
 	ft_lstadd_back(&scene->objs, elem);
-	return (elem);
+	return (obj);
 }
 
 t_list	*add_light_to_scene(t_scene *scene, t_point3 pos, uint32_t color,

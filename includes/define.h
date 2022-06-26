@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:10:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/25 04:30:12 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/26 11:24:51 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
  *	Define windows
  */
 
-# define HEIGHT 800
-# define WIDTH 800
+# define HEIGHT 900
+# define WIDTH 900
 
 /*
  *	Temporary define
