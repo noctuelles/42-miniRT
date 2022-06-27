@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/26 13:56:20 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:00:00 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct e_cone
 	t_point3	top;
 	t_vec3		direction;
 	double		hauteur;
-	double		angle; //* Demi angle du sommet, il doit etre caper a 90 degres non compris
+	double		angle; //* Demi angle du sommet, il doit etre caper a 90 degres non compris et superrieur strict a 0
 	double		len_pente; //* fonction expres
 	double		rayon_base; //* fonction expres
 }				t_cone;
