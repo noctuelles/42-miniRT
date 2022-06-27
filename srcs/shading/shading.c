@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 20:16:01 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/26 12:56:33 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/27 21:25:33 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "math_utils.h"
 #include <math.h>
 
-# define L_POWER 3e2
+# define L_POWER 1.2e2
 
 /* Using lambertian shading.
  * Note that i'm dividing by the distance square to get a more realistic
@@ -32,14 +32,19 @@ static inline void apply_diffuse_coeff(t_light *light, t_vec3 lightv,
 	double	coeff;
 
 	dot = max(0, vec_dot(vec_norm(lightv), normal));
-	coeff = (L_POWER /  M_PI) * light->intensity * dot / vec_mag_sqr(lightv);
+	coeff = (L_POWER / M_PI) * light->intensity * dot / vec_mag_sqr(lightv);
 	*color = tadd(*color, tmul_scalar(light->color, coeff));
 }
 
 static inline void	apply_specular_coeff(t_light *light, t_vec3 lightv,
-		t_vec3 normal, t_color *color)
+		t_vec3 normal, t_vec3 eyev, t_color *color)
 {
+	t_vec3	reflectionv;
+	double	factor;
 
+	reflectionv = get_reflection_vec(vec_norm(lightv), normal);
+	factor = 400 * pow(max(0, vec_dot(eyev, reflectionv)), 20) / vec_mag_sqr(lightv) * light->intensity;
+	*color = tadd(*color, tmul_scalar(vector(1, 1, 1), factor));
 }
 
 static bool	is_a_shadow(t_scene *scene, t_rayhit const *f_rayhit,
@@ -75,7 +80,7 @@ static t_color	get_color_from_obj(t_object *obj, t_point3 intersect_p)
 /* Loop through every light in the scene.
  * The diffuse coeffecient is applied before the loop. */
 
-t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit)
+t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit, t_ray *ray)
 {
 	t_list	*elem;
 	t_light	*light;
@@ -91,7 +96,7 @@ t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit)
 		if (!is_a_shadow(scene, rayhit, lightv))
 		{
 			apply_diffuse_coeff(light, lightv, rayhit->normal, &pix_color);
-			apply_specular_coeff(light, lightv, rayhit->normal, &pix_color);
+			apply_specular_coeff(light, lightv, rayhit->normal, tnegate(ray->dir), &pix_color);
 		}
 		elem = elem->next;
 	}
