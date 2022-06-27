@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:43:00 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/26 14:15:30 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:31:19 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_object	*new_cone(t_point3 top, t_vec3 direction, double angle, double hauteur,
 	if (!obj)
 		return (NULL);
 	obj->p.cone.top = top;
-	obj->p.cone.direction = direction;
+	obj->p.cone.direction = vec_norm(direction);
 	obj->p.cone.angle = angle;
 	obj->p.cone.hauteur = hauteur;
 	obj->fnct = &intersect_cone;
@@ -105,6 +105,7 @@ t_object	*new_cone(t_point3 top, t_vec3 direction, double angle, double hauteur,
 	b = 0xFF & color;
 	obj->albedo = get_norm_color(color);
 	len_and_rayon_cone(obj);
+	//printf("hypo: %lf base: %lf haut: %lf\nverif: %lf == %lf\n", obj->p.cone.len_pente, obj->p.cone.rayon_base, obj->p.cone.hauteur, pow(obj->p.cone.hauteur, 2) +  pow(obj->p.cone.rayon_base, 2), pow(obj->p.cone.len_pente, 2));
 	return (obj);
 }
 

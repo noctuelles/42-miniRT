@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:09:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/26 15:25:45 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:26:12 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_vec3 find_normal_cone(t_object *obj, t_rayhit rayhit, t_ray *ray)
 
 	distance = vec_mag(tsub(obj->p.cone.top, rayhit.intersect_p));
 	point = tadd(obj->p.cone.top, tmul_scalar(obj->p.cone.direction, distance));
-	return (vec_norm(tsub(point, rayhit.intersect_p)));
+	return (vec_norm(tsub(rayhit.intersect_p, point)));
 }
 
 void	intersect_cone_inf(t_cone_utils *all_inter, t_object *obj, t_ray *ray)
@@ -73,7 +73,7 @@ void	intersect_cone_inf(t_cone_utils *all_inter, t_object *obj, t_ray *ray)
 			all_inter->rayhit_first_inter.normal = find_normal_cone(obj, all_inter->rayhit_first_inter, ray);
 		}
 		//* Second
-		all_inter->rayhit_second_inter.intersect_p = get_ray_point(*ray, distance[0]);
+		all_inter->rayhit_second_inter.intersect_p = get_ray_point(*ray, distance[1]);
 		if (vec_dot(tsub(all_inter->rayhit_second_inter.intersect_p, obj->p.cone.top), obj->p.cone.direction) > 0)
 		{
 			all_inter->second_inter = true;
