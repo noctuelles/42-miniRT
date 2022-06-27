@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 20:16:01 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/27 21:25:33 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/27 22:16:08 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,15 @@ static inline void	apply_specular_coeff(t_light *light, t_vec3 lightv,
 {
 	t_vec3	reflectionv;
 	double	factor;
+	double	dot;
 
 	reflectionv = get_reflection_vec(vec_norm(lightv), normal);
-	factor = 400 * pow(max(0, vec_dot(eyev, reflectionv)), 20) / vec_mag_sqr(lightv) * light->intensity;
-	*color = tadd(*color, tmul_scalar(vector(1, 1, 1), factor));
+	dot = vec_dot(eyev, reflectionv);
+	if (dot > 0)
+	{
+		factor = 30 * pow(dot, 50) / vec_mag_sqr(lightv) * light->intensity;
+		*color = tadd(*color, tmul_scalar(vector(1, 1, 1), factor));
+	}
 }
 
 static bool	is_a_shadow(t_scene *scene, t_rayhit const *f_rayhit,
@@ -96,7 +101,8 @@ t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit, t_ray *ray)
 		if (!is_a_shadow(scene, rayhit, lightv))
 		{
 			apply_diffuse_coeff(light, lightv, rayhit->normal, &pix_color);
-			apply_specular_coeff(light, lightv, rayhit->normal, tnegate(ray->dir), &pix_color);
+			apply_specular_coeff(light, lightv, rayhit->normal,
+					tnegate(ray->dir), &pix_color);
 		}
 		elem = elem->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/27 21:20:42 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/27 23:01:57 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ void	render_img(t_minirt *minirt)
 	t_texture tennis = create_image_texture(minirt->mlx.ptr, "textures/tennis.xpm");
 	puts("done");
 
-	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(0, 0, 5), 1, 0x00FF00));
+	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 6), 1, 0x00FF00));
+	apply_obj_texture(cobj, create_checkered_texture(10, 10, 0xFFFFFF, 0xFF00FF));
 
 	/*cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(4, 3, 10), 1, 0x00FF00));
 	apply_obj_texture(cobj, moon);
@@ -100,8 +101,8 @@ void	render_img(t_minirt *minirt)
 	cobj = add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0, 1, 0), 0xeeeeee));
 	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0xFFFFFF, 0x000000));
 
-	add_light_to_scene(&minirt->scene, point(0, 2, 0), 0xFFFFFF, 0.5);
-	set_ambiant_light(&minirt->scene, 0xFF00FF, 0.0);
+	add_light_to_scene(&minirt->scene, point(2, 5, 0), 0xFFFFFF, 1);
+	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.09);
 
 
 	viewport_point.z = WIDTH / (2 * tan(FOV / 2));
