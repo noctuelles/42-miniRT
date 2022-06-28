@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:43:00 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/27 12:31:19 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/28 11:10:17 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ t_object	*new_plan(t_point3 pos, t_vec3 normal, uint32_t color)
 t_object	*new_cylindre(t_point3 center, t_vec3 orientation, double rayon, double hauteur, uint32_t color)
 {
 	t_object	*obj;
-	uint8_t	r, g, b;
 
 	obj = malloc(sizeof(t_object));
 	if (!obj)
@@ -68,9 +67,6 @@ t_object	*new_cylindre(t_point3 center, t_vec3 orientation, double rayon, double
 	obj->p.cylindre.rayon = rayon;
 	obj->fnct = &intersect_cylindre;
 	obj->type = T_CYLINDRE;
-	r = color >> 16;
-	g = color >> 8;
-	b = 0xFF & color;
 	obj->M = matrix4_translate(center.x, center.y, center.z);
 	obj->M_inv = matrix4_inv(obj->M);
 	obj->albedo = get_norm_color(color);
@@ -80,32 +76,27 @@ t_object	*new_cylindre(t_point3 center, t_vec3 orientation, double rayon, double
 void	len_and_rayon_cone(t_object *obj)
 {
 	double	radian_angle;
-	
-	radian_angle = DG_RAD(obj->p.cone.angle);
-	obj->p.cone.len_pente = obj->p.cone.hauteur / cos(radian_angle);
-	obj->p.cone.rayon_base = obj->p.cone.hauteur * tan(radian_angle);
+
+	radian_angle = (obj->p.cone.angle * M_PI) / 180;
+	obj->p.cone.len_pente = obj->p.cone.height / cos(radian_angle);
+	obj->p.cone.rayon_base = obj->p.cone.height * tan(radian_angle);
 }
 
-t_object	*new_cone(t_point3 top, t_vec3 direction, double angle, double hauteur, uint32_t color)
+t_object	*new_cone(t_point3 top, t_vec3 dir, double angle, double height, uint32_t color)
 {
 	t_object	*obj;
-	uint8_t	r, g, b;
 
 	obj = malloc(sizeof(t_object));
 	if (!obj)
 		return (NULL);
 	obj->p.cone.top = top;
-	obj->p.cone.direction = vec_norm(direction);
+	obj->p.cone.dir = vec_norm(dir);
 	obj->p.cone.angle = angle;
-	obj->p.cone.hauteur = hauteur;
+	obj->p.cone.height = height;
 	obj->fnct = &intersect_cone;
 	obj->type = T_CYLINDRE;
-	r = color >> 16;
-	g = color >> 8;
-	b = 0xFF & color;
 	obj->albedo = get_norm_color(color);
 	len_and_rayon_cone(obj);
-	//printf("hypo: %lf base: %lf haut: %lf\nverif: %lf == %lf\n", obj->p.cone.len_pente, obj->p.cone.rayon_base, obj->p.cone.hauteur, pow(obj->p.cone.hauteur, 2) +  pow(obj->p.cone.rayon_base, 2), pow(obj->p.cone.len_pente, 2));
 	return (obj);
 }
 
