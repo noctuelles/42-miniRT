@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 22:04:00 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/28 11:17:16 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_color	compute_light(t_object *obj, t_light *light)
 	normal_to_light = vec_sub(light->point, obj->rayhit.intersect_p);
 	dot_normal_light = max(0.2, vec_dot(vec_normalize(normal_to_light),
 			obj->rayhit.normal));
-	color = vec_mul_scalar(obj->albedo,
+	color = tmul_scalar(obj->albedo,
 			1e6 * light->ratio * dot_normal_light / vec_lenght_p(normal_to_light));
 	return (color);
 }
@@ -76,7 +76,7 @@ void	render_img(t_minirt *minirt)
 	add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 15), 2, 0xFF0000));
 	//add_obj_to_scene(&minirt->scene, new_sphere(point(20, 1, 50), 2, 0x00FF00));
 	add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0, 1, 0), 0xeeeeee));
-
+	add_obj_to_scene(&minirt->scene, new_cone(point(0, 0, 5), vector(0, 0, 1), 20, 1, 0xFF0000));
 	add_light_to_scene(&minirt->scene, point(-5, 10, 10), 0xFFFFFF, 0.5);
 	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.1);
 

@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 20:06:06 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/28 11:15:54 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 typedef enum e_object_type
 {
 	T_SPHERE,
-	T_PLAN
+	T_PLAN,
+	T_CYLINDRE,
+	T_CONE
 }			t_object_type;
 
 /* ################################# Tuple ################################## */
@@ -69,6 +71,31 @@ typedef struct s_plan
 	t_point3	pos;
 	t_vec3		normal;
 }				t_plan;
+
+typedef struct e_disk
+{
+	t_point3	center;
+	double		rayon;
+	t_vec3		normal;
+}				t_disk;
+
+typedef struct e_cylindre
+{
+	t_point3	center;
+	t_vec3		orientation;
+	double		rayon;  //* le parsing donne le diametre mais il me faut le rayon
+	double		hauteur;
+}				t_cylindre;
+
+typedef struct e_cone
+{
+	t_point3	top;
+	t_vec3		dir;
+	double		height;
+	double		angle; //* Demi angle du sommet, il doit etre caper a 90 degres non compris et superrieur strict a 0
+	double		len_pente; //* fonction expres
+	double		rayon_base; //* fonction expres
+}				t_cone;
 
 typedef struct s_light
 {
@@ -136,7 +163,11 @@ struct s_object
 	{
 		t_sphere	sphere;
 		t_plan		plan;
+		t_cone		cone;
+		t_cylindre	cylindre;
+		t_disk		disk;
 	} p;
+	t_rayhit			rayhit;
 	t_matrix4			M;
 	t_matrix4			M_inv;
 	t_matrix4			M_inv_trans;
@@ -144,5 +175,29 @@ struct s_object
 	t_object_type		type;
 	t_intersect_fnct	fnct;
 };
+
+/* ################################# Utils ################################## */
+
+typedef struct s_cyl_utils
+{
+	bool		first_paille;
+	bool		second_paille;
+	bool		up_disk;
+	bool		down_disk;
+	t_rayhit	rayhit_first_paille;
+	t_rayhit	rayhit_second_paille;
+	t_rayhit	rayhit_up_disk;
+	t_rayhit	rayhit_down_disk;
+}	t_cyl_utils;
+
+typedef struct s_cone_utils
+{
+	bool		first;
+	bool		second;
+	bool		close_disk;
+	t_rayhit	rayhit_first;
+	t_rayhit	rayhit_second;
+	t_rayhit	rayhit_close_disk;
+}	t_cone_utils;
 
 #endif
