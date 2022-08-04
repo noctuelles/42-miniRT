@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:45:30 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/27 22:30:07 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/07/29 14:25:29 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ t_vec3	vec_norm(t_vec3 a)
 {
 	double	inv_mag;
 
-	inv_mag = 1. / vec_mag(a);
-	return (vector(a.x * inv_mag, a.y * inv_mag, a.z * inv_mag));
+	inv_mag = vec_mag(a);
+	return (vector(a.x / inv_mag, a.y / inv_mag, a.z / inv_mag));
 }
 
 double	vec_mag_sqr(t_vec3 a)

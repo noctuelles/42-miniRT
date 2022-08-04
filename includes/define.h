@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:10:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/26 13:02:44 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/04 13:26:32 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@
  *	Temporary define
  */
 
-# define FOV_ANGLE 70.0
+# define FOV_ANGLE 150.0
 # define FOV       (FOV_ANGLE * M_PI) / 180
 
+# define ANGLE(x) (x * M_PI) / 180
 /*
  *	Define hook
  */

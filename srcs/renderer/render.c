@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/27 23:01:57 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/04 13:24:16 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ uint64_t	get_mlsec_time(struct timeval t)
 	return (t.tv_sec * 1000 + t.tv_usec / 1000);
 }
 
+t_matrix4	build_rotation_from_dir_vec(t_vec3 forward);
+
 void	render_img(t_minirt *minirt)
 {
 	t_point3	viewport_point;
@@ -89,20 +91,32 @@ void	render_img(t_minirt *minirt)
 	t_texture tennis = create_image_texture(minirt->mlx.ptr, "textures/tennis.xpm");
 	puts("done");
 
-	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 6), 1, 0x00FF00));
-	apply_obj_texture(cobj, create_checkered_texture(10, 10, 0xFFFFFF, 0xFF00FF));
+	//cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 4), 1, 0x00FF00));
+	//apply_obj_texture(cobj, create_checkered_texture(10, 10, 0xFF00FF, 0xFFFF00));
 
-	/*cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(4, 3, 10), 1, 0x00FF00));
-	apply_obj_texture(cobj, moon);
 
-	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(3, 7, 18), 1, 0x00FF00));
-	apply_obj_texture(cobj, tennis);*/
+	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 8), 1, 0x00FF00));
+	apply_obj_texture(cobj, tennis);
+	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(2, 3, 8), 1, 0x00FF00));
+	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(-2, 3, 8), 1, 0x00FF00));
 
-	cobj = add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0, 1, 0), 0xeeeeee));
-	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0xFFFFFF, 0x000000));
+	cobj = add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0, 1, 0), 0xffffff));
+	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0x000000, 0xFFFFFF));
+	cobj = add_obj_to_scene(&minirt->scene, new_plan(point(0, 5, 0), vector(0.0, -1, -0.01), 0xffffff));
+	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0x00FFFF, 0xFFFFFF));
 
-	add_light_to_scene(&minirt->scene, point(2, 5, 0), 0xFFFFFF, 1);
-	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.09);
+	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(0, 0.0, 8), 0.6, 4, vector(0, 1, 0), 0x00ffff));
+	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(1, 2.0, 8), 0.5, 4, vector(1, 1, 0), 0x00ffff));
+	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(-1, 2.0, 8), 0.5, 4, vector(-1, 1, 0), 0x00ffff));
+
+	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(2, 0.0, 8), 0.5, 9, vector(0, 1, 0), 0xff00ff));
+	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(-2, 0.0, 8), 0.5, 9, vector(0, 1, 0), 0xff00ff));
+
+	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(5.5, 0.0, 8), 0.5, 39, vector(-1, 1, 0), 0xff00ff));
+	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(-5.5, 0.0, 8), 0.5, 39, vector(1, 1, 0), 0xff00ff));
+
+	add_light_to_scene(&minirt->scene, point(0, 2, 4), 0xFFFFFF, 0.2);
+	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.1);
 
 
 	viewport_point.z = WIDTH / (2 * tan(FOV / 2));

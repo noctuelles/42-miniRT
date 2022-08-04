@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/26 16:06:53 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/07/30 16:36:38 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef enum e_object_type
 {
 	T_SPHERE,
 	T_PLAN,
+	T_CYLINDER
 }			t_object_type;
 
 typedef enum e_texture_type
@@ -84,6 +85,13 @@ typedef struct s_plan
 	t_point3	pos;
 	t_vec3		normal;
 }				t_plan;
+
+typedef struct s_cylinder
+{
+	t_point3	pos;
+	double height;
+	double diameter;
+}				t_cylinder;
 
 typedef struct s_light
 {
@@ -163,6 +171,7 @@ struct s_object
 	{
 		t_sphere	sphere;
 		t_plan		plan;
+		t_cylinder	cylinder;
 	} p;
 	t_matrix4			M;
 	t_matrix4			M_inv;

@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 20:16:01 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/27 22:16:08 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/02 21:03:43 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,9 @@ t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit, t_ray *ray)
 		if (!is_a_shadow(scene, rayhit, lightv))
 		{
 			apply_diffuse_coeff(light, lightv, rayhit->normal, &pix_color);
-			apply_specular_coeff(light, lightv, rayhit->normal,
-					tnegate(ray->dir), &pix_color);
+			if (obj->type == T_SPHERE)
+				apply_specular_coeff(light, lightv, rayhit->normal,
+						tnegate(ray->dir), &pix_color);
 		}
 		elem = elem->next;
 	}
