@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/07/30 15:53:26 by plouvel          ###   ########.fr        #
+#    Updated: 2022/08/05 11:41:30 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 NAME = miniRT
 
 CC = cc 
-CFLAGS = -g3 -O3
+CFLAGS = -g3
 
 
 ARGUMENT_RUN = 
@@ -50,13 +50,13 @@ SRCS =	end/good_exit.c					\
 		matrix/matrix_transform.c		\
 		texture/texture.c				\
 		texture/uv_mapping.c			\
-		main.c							\
-		cylinder.c						\
 		plane/intersect_plane.c			\
 		sphere/intersect_sphere.c		\
+		cylinder/intersect_cylinder.c	\
 		scene/object.c					\
 		scene/scene.c					\
 		shading/shading.c				\
+		main.c							\
 
 ################################################################################
 ########							Libraries							########

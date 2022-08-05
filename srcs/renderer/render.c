@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/04 13:24:16 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/05 11:41:09 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	render_img(t_minirt *minirt)
 	tprint(get_reflection_vec(vector(1, -1, 0), vector(0, 1, 0)));
 	//add_obj_to_scene(&minirt->scene, new_sphere(point(4, 0, 8), 1, 0xFFFFFF));
 	puts("loading texture");
-	t_texture earth = create_image_texture(minirt->mlx.ptr, "textures/earth.xpm");
+	t_texture earth = create_image_texture(minirt->mlx.ptr, "textures/woodplank.xpm");
 	t_texture moon = create_image_texture(minirt->mlx.ptr, "textures/moon.xpm");
 	t_texture tennis = create_image_texture(minirt->mlx.ptr, "textures/tennis.xpm");
 	puts("done");
@@ -100,8 +100,8 @@ void	render_img(t_minirt *minirt)
 	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(2, 3, 8), 1, 0x00FF00));
 	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(-2, 3, 8), 1, 0x00FF00));
 
-	cobj = add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0, 1, 0), 0xffffff));
-	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0x000000, 0xFFFFFF));
+	cobj = add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0, 1, -0.01), 0xffffff));
+	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0x00FFFF, 0xFFFFFF));
 	cobj = add_obj_to_scene(&minirt->scene, new_plan(point(0, 5, 0), vector(0.0, -1, -0.01), 0xffffff));
 	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0x00FFFF, 0xFFFFFF));
 
@@ -115,7 +115,8 @@ void	render_img(t_minirt *minirt)
 	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(5.5, 0.0, 8), 0.5, 39, vector(-1, 1, 0), 0xff00ff));
 	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(-5.5, 0.0, 8), 0.5, 39, vector(1, 1, 0), 0xff00ff));
 
-	add_light_to_scene(&minirt->scene, point(0, 2, 4), 0xFFFFFF, 0.2);
+
+	add_light_to_scene(&minirt->scene, point(0,2, 3), 0xFFFFFF, 0.4);
 	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.1);
 
 
@@ -133,6 +134,8 @@ void	render_img(t_minirt *minirt)
 			viewport_point.x = j - (WIDTH / 2.0);
 			viewport_point.y = i - (HEIGHT / 2.0);
 			generate_ray(&ray, viewport_point);
+			if (i == 450 && j == 550)
+				puts("prout");
 			obj = ray_intersect_scene_objs(&minirt->scene, &ray, &rayhit);
 			if (obj)
 			{
@@ -141,16 +144,16 @@ void	render_img(t_minirt *minirt)
 			}
 			j++;
 		}
-		double	percentage = (double) i / HEIGHT * 100;
+		/*double	percentage = (double) i / HEIGHT * 100;
 		char	str[20];
 
 		sprintf(str, "Rendering... %.2f\n", percentage);
 		mlx_clear_window(minirt->mlx.ptr, minirt->mlx.win);
-		mlx_string_put(minirt->mlx.ptr, minirt->mlx.win, WIDTH / 2 - strlen(str) * 4, HEIGHT / 2, 0xFFFFFF, str);
+		mlx_string_put(minirt->mlx.ptr, minirt->mlx.win, WIDTH / 2 - strlen(str) * 4, HEIGHT / 2, 0xFFFFFF, str);*/
 		i++;
 	}
 	gettimeofday(&t1, NULL);
+	mlx_put_image_to_window(minirt->mlx.ptr, minirt->mlx.win, minirt->mlx.img.img, 0, 0);
 	printf("Rendered in %lu mlsec.\n", get_mlsec_time(t1) - get_mlsec_time(t));
 	puts("Rendering done");
-	mlx_put_image_to_window(minirt->mlx.ptr, minirt->mlx.win, minirt->mlx.img.img, 0, 0);
 }

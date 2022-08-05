@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:43:00 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/02 20:53:47 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/04 20:16:28 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_object	*new_cylinder(t_point3 pos, double diameter, double height, t_vec3 orie
 	if (!obj)
 		return (NULL);
 	obj->p.cylinder.diameter = diameter;
-	obj->p.cylinder.height = height;
+	obj->p.cylinder.half_height = height / 2;
 	obj->type = T_CYLINDER;
 	obj->albedo = get_norm_color(color);
 	obj->fnct = &intersect_cylinder;

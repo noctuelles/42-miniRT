@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 20:16:01 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/02 21:03:43 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/05 11:40:13 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ static inline void	apply_specular_coeff(t_light *light, t_vec3 lightv,
 }
 
 static bool	is_a_shadow(t_scene *scene, t_rayhit const *f_rayhit,
-		t_vec3 lightv)
+		t_vec3 lightv, t_object *ofd)
 {
 	t_ray		ray;
 	t_rayhit	rayhit;
 	t_object	*obj;
 	double		distance_to_light;
 
-	ray.org = tadd(f_rayhit->intersect_p, tmul_scalar(f_rayhit->normal, 1e-9));
+	ray.org = tadd(f_rayhit->intersect_p, tmul_scalar(f_rayhit->normal, 0.1));
 	ray.dir = vec_norm(lightv);
 	obj = ray_intersect_scene_objs(scene, &ray, &rayhit);
 	if (obj)
@@ -98,12 +98,13 @@ t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit, t_ray *ray)
 	{
 		light = elem->content;
 		lightv = tsub(light->pos, rayhit->intersect_p);
-		if (!is_a_shadow(scene, rayhit, lightv))
+		//if (is_a_shadow(scene, rayhit, lightv) && obj->type == T_CYLINDER)
+		//	puts("woww");
+		if (!is_a_shadow(scene, rayhit, lightv, obj))
 		{
 			apply_diffuse_coeff(light, lightv, rayhit->normal, &pix_color);
-			if (obj->type == T_SPHERE)
-				apply_specular_coeff(light, lightv, rayhit->normal,
-						tnegate(ray->dir), &pix_color);
+			apply_specular_coeff(light, lightv, rayhit->normal,
+					tnegate(ray->dir), &pix_color);
 		}
 		elem = elem->next;
 	}
