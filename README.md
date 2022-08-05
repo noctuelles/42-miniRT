@@ -18,10 +18,12 @@ The technique used here to rotate primitives is to compute $\alpha$ and $\beta$ 
 Given $\vec{u}$, the angle between the up axis and the vector can be compute with : 
 
 $$
-\alpha = -\frac
+\alpha = \arctan2(\frac
 {
-\arctan2 \sqrt{{x_{\vec{u}}}^{2} + {z_{\vec{u}}}^{2}}}
-{
-{y_{\vec{u}}}^{2}
+\sqrt{{x_{\vec{u}}}^2 + {z_{\vec{u}}}^2}
 }
+{
+{y_{\vec{u}}}^2
+}
+)
 $$
