@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/05 11:41:09 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/05 12:27:42 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	render_img(t_minirt *minirt)
 	//apply_obj_texture(cobj, create_checkered_texture(10, 10, 0xFF00FF, 0xFFFF00));
 
 
-	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 8), 1, 0x00FF00));
+	/*cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 8), 1, 0x00FF00));
 	apply_obj_texture(cobj, tennis);
 	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(2, 3, 8), 1, 0x00FF00));
 	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(-2, 3, 8), 1, 0x00FF00));
@@ -113,10 +113,15 @@ void	render_img(t_minirt *minirt)
 	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(-2, 0.0, 8), 0.5, 9, vector(0, 1, 0), 0xff00ff));
 
 	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(5.5, 0.0, 8), 0.5, 39, vector(-1, 1, 0), 0xff00ff));
-	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(-5.5, 0.0, 8), 0.5, 39, vector(1, 1, 0), 0xff00ff));
+	apply_obj_texture(cobj, create_checkered_texture(5, 5, 0x00FFFF, 0xFFFFFF));
+	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(-5.5, 0.0, 8), 0.5, 39, vector(1, 1, 0), 0xff00ff));*/
 
 
-	add_light_to_scene(&minirt->scene, point(0,2, 3), 0xFFFFFF, 0.4);
+	cobj = add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0, 1, -0.01), 0xffffff));
+	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(0, 0.0, 6), 0.7, 6, vector(0, 1, 0), 0xff00ff));
+	apply_obj_texture(cobj, tennis);
+	apply_obj_texture(cobj, create_checkered_texture(16, 4, 0x00FFFF, 0xFFFFFF));
+	add_light_to_scene(&minirt->scene, point(0,5, 4), 0xFFFFFF, 0.7);
 	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.1);
 
 
