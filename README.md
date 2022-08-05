@@ -1,5 +1,11 @@
 # 42-miniRT
 
+## Before reading
+
+Note that we use a right-hand coordinate system, using the y-axis as the up vector and z-axis as the forward vector of our coordinate system.
+
+Matrices are used in column-major order.
+
 ## The orientation vector
 
 The subject gives room for interpretation : what should this "orientation vector" do ?
