@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:41:15 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/05 11:46:15 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/05 17:18:06 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,8 @@ bool	intersect_cylinder(t_object *obj, t_ray *ray, t_rayhit *rayhit)
 	cyl_t[0] = INFINITY;
 	cyl_t[1] = INFINITY;
 	lray = ray_transform(*ray, obj->M_inv);
-
 	intersect_cylinder_body(lray, obj->p.cylinder.half_height, &cyl_t[0]);
 	intersect_cylinder_endcap(lray, obj->p.cylinder.half_height, &cyl_t[1]);
-
 	rayhit->t = min(cyl_t[0], cyl_t[1]);
 	if (rayhit->t == INFINITY)
 		return (false);

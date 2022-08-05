@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/05 12:27:42 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/05 17:23:35 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,14 @@ void	render_img(t_minirt *minirt)
 	tprint(get_reflection_vec(vector(1, -1, 0), vector(0, 1, 0)));
 	//add_obj_to_scene(&minirt->scene, new_sphere(point(4, 0, 8), 1, 0xFFFFFF));
 	puts("loading texture");
-	t_texture earth = create_image_texture(minirt->mlx.ptr, "textures/woodplank.xpm");
+	t_texture earth = create_image_texture(minirt->mlx.ptr, "textures/earth.xpm");
+
 	t_texture moon = create_image_texture(minirt->mlx.ptr, "textures/moon.xpm");
+apply_normal_map_to_texture(minirt->mlx.ptr, &earth, "textures/earth_normal_map.xpm");
+apply_normal_map_to_texture(minirt->mlx.ptr, &moon, "textures/moon_nmap.xpm");
+
 	t_texture tennis = create_image_texture(minirt->mlx.ptr, "textures/tennis.xpm");
+
 	puts("done");
 
 	//cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 4), 1, 0x00FF00));
@@ -117,12 +122,13 @@ void	render_img(t_minirt *minirt)
 	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(-5.5, 0.0, 8), 0.5, 39, vector(1, 1, 0), 0xff00ff));*/
 
 
-	cobj = add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0, 1, -0.01), 0xffffff));
-	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(0, 0.0, 6), 0.7, 6, vector(0, 1, 0), 0xff00ff));
-	apply_obj_texture(cobj, tennis);
-	apply_obj_texture(cobj, create_checkered_texture(16, 4, 0x00FFFF, 0xFFFFFF));
-	add_light_to_scene(&minirt->scene, point(0,5, 4), 0xFFFFFF, 0.7);
-	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.1);
+	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 6), 1.5, 0x00FF00));
+	apply_obj_texture(cobj, moon);
+	cobj = add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0.0), vector(0, 1, -0.00), 0xffffff));
+	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(1, 0.0, 3), 0.5, 4, vector(1, 1, 1), 0xff00ff));
+	apply_obj_texture(cobj, create_checkered_texture(16, 2, 0xFFFFFF, 0x000000));
+	add_light_to_scene(&minirt->scene, point(0,3, 1), 0xFFFFFF, 0.3);
+	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.2);
 
 
 	viewport_point.z = WIDTH / (2 * tan(FOV / 2));
@@ -139,8 +145,6 @@ void	render_img(t_minirt *minirt)
 			viewport_point.x = j - (WIDTH / 2.0);
 			viewport_point.y = i - (HEIGHT / 2.0);
 			generate_ray(&ray, viewport_point);
-			if (i == 450 && j == 550)
-				puts("prout");
 			obj = ray_intersect_scene_objs(&minirt->scene, &ray, &rayhit);
 			if (obj)
 			{

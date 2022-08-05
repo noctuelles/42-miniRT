@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/05 11:41:30 by plouvel          ###   ########.fr        #
+#    Updated: 2022/08/05 16:56:23 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 NAME = miniRT
 
 CC = cc 
-CFLAGS = -g3
+CFLAGS = -g3 -O3
 
 
 ARGUMENT_RUN = 
@@ -56,6 +56,7 @@ SRCS =	end/good_exit.c					\
 		scene/object.c					\
 		scene/scene.c					\
 		shading/shading.c				\
+		shading/shading_utils.c				\
 		main.c							\
 
 ################################################################################

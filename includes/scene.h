@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:47:41 by plouvel           #+#    #+#             */
-/*   Updated: 2022/07/30 15:51:25 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/05 17:17:56 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void		set_ambiant_light(t_scene *scene, uint32_t color, double intensity);
 /* shading.c */
 
 t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit, t_ray *ray);
+void	perturb_normal(t_texture texture, t_rayhit *rayhit);
 
 #endif

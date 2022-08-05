@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 20:16:01 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/05 12:27:45 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/05 17:19:35 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "scene.h"
 #include "math_utils.h"
 #include <math.h>
+#include <string.h>
 
 # define L_POWER 1.2e2
 
@@ -53,7 +54,7 @@ static inline void	apply_specular_coeff(t_light *light, t_vec3 lightv,
 }
 
 static bool	is_a_shadow(t_scene *scene, t_rayhit const *f_rayhit,
-		t_vec3 lightv, t_object *ofd)
+		t_vec3 lightv)
 {
 	t_ray		ray;
 	t_rayhit	rayhit;
@@ -72,12 +73,12 @@ static bool	is_a_shadow(t_scene *scene, t_rayhit const *f_rayhit,
 	return (false);
 }
 
-static t_color	get_color_from_obj(t_object *obj, t_point3 intersect_p)
+static t_color	get_color_from_obj(t_object *obj, t_rayhit *rayhit)
 {
 	if (obj->texture.texture_type == TX_CHECKER)
-		return (get_checker_color(obj->texture, obj->uvmap_fnct(intersect_p)));
-	else if (obj->texture.texture_type == TX_IMAGE)
-		return (get_image_color(obj->texture, obj->uvmap_fnct(intersect_p)));
+		return (get_checker_color(obj->texture, rayhit->uv));
+	else if (obj->texture.texture_type >= TX_IMAGE)
+		return (get_image_color(obj->texture, rayhit->uv));
 	else
 		return (obj->albedo);
 }
@@ -94,13 +95,17 @@ t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit, t_ray *ray)
 
 	pix_color = tmul_scalar(scene->amb_light.color, scene->amb_light.intensity);
 	elem = scene->light;
+	if (obj->texture.texture_type != TX_NONE)
+	{
+		rayhit->uv = obj->uvmap_fnct(rayhit->intersect_p_local);
+		if (obj->texture.texture_type == TX_IMAGEW_NMAP)
+			perturb_normal(obj->texture, rayhit);
+	}
 	while (elem)
 	{
 		light = elem->content;
 		lightv = tsub(light->pos, rayhit->intersect_p);
-		//if (is_a_shadow(scene, rayhit, lightv) && obj->type == T_CYLINDER)
-		//	puts("woww");
-		if (!is_a_shadow(scene, rayhit, lightv, obj))
+		if (!is_a_shadow(scene, rayhit, lightv))
 		{
 			apply_diffuse_coeff(light, lightv, rayhit->normal, &pix_color);
 			apply_specular_coeff(light, lightv, rayhit->normal,
@@ -108,7 +113,5 @@ t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit, t_ray *ray)
 		}
 		elem = elem->next;
 	}
-	pix_color = tmul(pix_color, get_color_from_obj(obj,
-				rayhit->intersect_p_local));
-	return (pix_color);
+	return (tmul(pix_color, get_color_from_obj(obj, rayhit)));
 }
