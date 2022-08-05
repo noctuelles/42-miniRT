@@ -13,11 +13,12 @@ Given $\vec{d}(0, 0, 1)$, the cylinder should be aligned with the z axis, the cy
 
 In space, any orientation can be describe using two angles, just like in the plan, it can be describe with one angle.
 
-The technique used here to rotate primitives is to compute $\alpha$ and $\beta$ angle, commonly called the pitch and yaw angle.
+The technique used here to rotate primitives is to compute $\alpha$ and $\beta$ angle, these angle are then used in rotation matrices to build the transformation matrix.
+
 Given $\vec{u}$, the angle between the up axis and the vector can be compute with : 
 
 $$
-\alpha = \frac
+\alpha = -\frac
 {
 \arctan2(\sqrt{{x_{\vec{u}}}^{2} + {z_{\vec{u}}}^{2}}}
 {
