@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/05 17:23:35 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/06 16:50:21 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@
 #include <sys/time.h>
 #include <stdint.h>
 
-static inline void	generate_ray(t_ray *ray, t_point3 viewport_point)
+static inline void	generate_ray(t_ray *ray, t_rayhit *rayhit, t_point3 viewport_point)
 {
 	ray->org = point(0, 0, 0);
 	ray->dir = vec_norm(viewport_point);
 	ray->dir.w = 0;
+	rayhit->eyev = tnegate(ray->dir);
 }
 
 /*
@@ -122,12 +123,9 @@ apply_normal_map_to_texture(minirt->mlx.ptr, &moon, "textures/moon_nmap.xpm");
 	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(-5.5, 0.0, 8), 0.5, 39, vector(1, 1, 0), 0xff00ff));*/
 
 
-	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 6), 1.5, 0x00FF00));
-	apply_obj_texture(cobj, moon);
 	cobj = add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0.0), vector(0, 1, -0.00), 0xffffff));
 	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(1, 0.0, 3), 0.5, 4, vector(1, 1, 1), 0xff00ff));
-	apply_obj_texture(cobj, create_checkered_texture(16, 2, 0xFFFFFF, 0x000000));
-	add_light_to_scene(&minirt->scene, point(0,3, 1), 0xFFFFFF, 0.3);
+	add_light_to_scene(&minirt->scene, point(0,5, 1), 0xFFFFFF, 0.6);
 	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.2);
 
 
@@ -144,12 +142,12 @@ apply_normal_map_to_texture(minirt->mlx.ptr, &moon, "textures/moon_nmap.xpm");
 
 			viewport_point.x = j - (WIDTH / 2.0);
 			viewport_point.y = i - (HEIGHT / 2.0);
-			generate_ray(&ray, viewport_point);
+			generate_ray(&ray, &rayhit, viewport_point);
 			obj = ray_intersect_scene_objs(&minirt->scene, &ray, &rayhit);
 			if (obj)
 			{
 				mlx_pixel_img_put(minirt, j, i, get_color(
-							get_shade(&minirt->scene, obj, &rayhit, &ray)));
+							get_shade(&minirt->scene, obj, &rayhit)));
 			}
 			j++;
 		}

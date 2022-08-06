@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 20:16:01 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/05 17:19:35 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/06 16:49:52 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,35 +26,29 @@
  * lightning.
  * I'm also dividing the light power by Pi to get a more rounded light. */
 
-static inline void apply_diffuse_coeff(t_light *light, t_vec3 lightv,
-		t_vec3 normal, t_color *color)
-{
-	double	dot;
-	double	coeff;
-
-	dot = max(0, vec_dot(vec_norm(lightv), normal));
-	coeff = (L_POWER / M_PI) * light->intensity * dot / vec_mag_sqr(lightv);
-	*color = tadd(*color, tmul_scalar(light->color, coeff));
-}
-
-static inline void	apply_specular_coeff(t_light *light, t_vec3 lightv,
-		t_vec3 normal, t_vec3 eyev, t_color *color)
+static inline void	apply_lightning(t_light *light, t_rayhit *rayhit)
 {
 	t_vec3	reflectionv;
 	double	factor;
+	double	coeff;
 	double	dot;
 
-	reflectionv = get_reflection_vec(vec_norm(lightv), normal);
-	dot = vec_dot(eyev, reflectionv);
+	dot = max(0, vec_dot(vec_norm(rayhit->lightv), rayhit->normal));
+	coeff = (L_POWER / M_PI) * light->intensity * dot /
+		vec_mag_sqr(rayhit->lightv);
+	rayhit->pcolor = tadd(rayhit->pcolor, tmul_scalar(light->color, coeff));
+	reflectionv = get_reflection_vec(vec_norm(rayhit->lightv), rayhit->normal);
+	dot = vec_dot(rayhit->eyev, reflectionv);
 	if (dot > 0)
 	{
-		factor = 30 * pow(dot, 50) / vec_mag_sqr(lightv) * light->intensity;
-		*color = tadd(*color, tmul_scalar(vector(1, 1, 1), factor));
+		factor = 30 * pow(dot, 50) / vec_mag_sqr(rayhit->lightv)
+			* light->intensity;
+		rayhit->pcolor = tadd(rayhit->pcolor,
+				tmul_scalar(vector(1, 1, 1), factor));
 	}
 }
 
-static bool	is_a_shadow(t_scene *scene, t_rayhit const *f_rayhit,
-		t_vec3 lightv)
+static bool	is_a_shadow(t_scene *scene, t_rayhit *f_rayhit)
 {
 	t_ray		ray;
 	t_rayhit	rayhit;
@@ -62,11 +56,11 @@ static bool	is_a_shadow(t_scene *scene, t_rayhit const *f_rayhit,
 	double		distance_to_light;
 
 	ray.org = tadd(f_rayhit->intersect_p, tmul_scalar(f_rayhit->normal, 0.1));
-	ray.dir = vec_norm(lightv);
+	ray.dir = vec_norm(f_rayhit->lightv);
 	obj = ray_intersect_scene_objs(scene, &ray, &rayhit);
 	if (obj)
 	{
-		distance_to_light = vec_mag_sqr(lightv);
+		distance_to_light = vec_mag_sqr(f_rayhit->lightv);
 		if (rayhit.t * rayhit.t < distance_to_light)
 			return (true);
 	}
@@ -86,14 +80,13 @@ static t_color	get_color_from_obj(t_object *obj, t_rayhit *rayhit)
 /* Loop through every light in the scene.
  * The diffuse coeffecient is applied before the loop. */
 
-t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit, t_ray *ray)
+t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit)
 {
 	t_list	*elem;
 	t_light	*light;
-	t_color	pix_color;
-	t_vec3	lightv;
 
-	pix_color = tmul_scalar(scene->amb_light.color, scene->amb_light.intensity);
+	rayhit->pcolor = tmul_scalar(scene->amb_light.color,
+			scene->amb_light.intensity);
 	elem = scene->light;
 	if (obj->texture.texture_type != TX_NONE)
 	{
@@ -104,14 +97,10 @@ t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit, t_ray *ray)
 	while (elem)
 	{
 		light = elem->content;
-		lightv = tsub(light->pos, rayhit->intersect_p);
-		if (!is_a_shadow(scene, rayhit, lightv))
-		{
-			apply_diffuse_coeff(light, lightv, rayhit->normal, &pix_color);
-			apply_specular_coeff(light, lightv, rayhit->normal,
-					tnegate(ray->dir), &pix_color);
-		}
+		rayhit->lightv = tsub(light->pos, rayhit->intersect_p);
+		if (!is_a_shadow(scene, rayhit))
+			apply_lightning(light, rayhit);
 		elem = elem->next;
 	}
-	return (tmul(pix_color, get_color_from_obj(obj, rayhit)));
+	return (tmul(rayhit->pcolor, get_color_from_obj(obj, rayhit)));
 }
