@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/06 16:46:07 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/06 18:01:26 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,17 @@ typedef struct s_rayhit
 	t_vec3		normal;
 	t_color		pcolor;
 }	t_rayhit;
+
+typedef struct	s_camera
+{
+	t_matrix4	M;
+	size_t		hsize;
+	size_t		vsize;
+	double		half_width;
+	double		half_height;
+	double		pixel_size;
+	double		fov;
+}	t_camera;
 
 typedef struct s_object	t_object;
 

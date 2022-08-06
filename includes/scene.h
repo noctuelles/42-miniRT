@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:47:41 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/06 16:44:45 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/06 18:05:26 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ void		set_ambiant_light(t_scene *scene, uint32_t color, double intensity);
 
 t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit);
 void	perturb_normal(t_texture texture, t_rayhit *rayhit);
+
+t_camera new_camera(size_t hsize, size_t vsize, double fov);
 
 #endif

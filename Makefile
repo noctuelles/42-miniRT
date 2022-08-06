@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/06 16:50:33 by plouvel          ###   ########.fr        #
+#    Updated: 2022/08/06 18:07:05 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRCS =	end/good_exit.c					\
 		cylinder/intersect_cylinder.c	\
 		scene/object.c					\
 		scene/scene.c					\
+		scene/camera.c					\
 		shading/shading.c				\
 		shading/shading_utils.c				\
 		main.c							\

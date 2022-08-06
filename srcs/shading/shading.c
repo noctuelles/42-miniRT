@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 20:16:01 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/06 16:49:52 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/06 17:10:51 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 #include "texture.h"
 #include "scene.h"
 #include "math_utils.h"
+#include "define.h"
 #include <math.h>
 #include <string.h>
 
-# define L_POWER 1.2e2
+# define L_POWER 6.0e1
 
 /* Using lambertian shading.
  * Note that i'm dividing by the distance square to get a more realistic
@@ -55,7 +56,8 @@ static bool	is_a_shadow(t_scene *scene, t_rayhit *f_rayhit)
 	t_object	*obj;
 	double		distance_to_light;
 
-	ray.org = tadd(f_rayhit->intersect_p, tmul_scalar(f_rayhit->normal, 0.1));
+	ray.org = tadd(f_rayhit->intersect_p, tmul_scalar(f_rayhit->normal,
+				EPSILON));
 	ray.dir = vec_norm(f_rayhit->lightv);
 	obj = ray_intersect_scene_objs(scene, &ray, &rayhit);
 	if (obj)
@@ -93,6 +95,10 @@ t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit)
 		rayhit->uv = obj->uvmap_fnct(rayhit->intersect_p_local);
 		if (obj->texture.texture_type == TX_IMAGEW_NMAP)
 			perturb_normal(obj->texture, rayhit);
+	}
+	if (vec_dot(rayhit->eyev, rayhit->normal) < 0)
+	{
+		puts("hiwerwerewr");
 	}
 	while (elem)
 	{
