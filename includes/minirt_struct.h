@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/07 14:49:45 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/07 16:54:42 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 typedef enum e_object_type
 {
 	T_SPHERE,
+	T_SPHERE_SKYBOX,
 	T_PLAN,
 	T_CYLINDER
 }			t_object_type;
@@ -157,7 +158,6 @@ struct s_minirt
 	t_scene		scene;
 	t_camera	camera;
 	t_worker	workers[THREAD_NBR];
-	bool		workers_init;
 };
 
 /* ################################## Ray ################################### */
@@ -175,6 +175,8 @@ typedef struct s_rayhit
 	t_point3	intersect_p_local;
 	t_vec3		eyev;
 	t_vec3		lightv;
+	t_vec3		nlightv;
+	double		mag_sqr_lightv;
 	t_uv		uv;
 	t_vec3		normal;
 	t_color		pcolor;
@@ -187,15 +189,15 @@ typedef t_uv (*t_uvmap_fnct)(t_point3);
 
 typedef struct s_texture
 {
-	t_image			img;
+	t_image			texel;
 	t_image			nmap;
-	t_texture_type	texture_type;
+	t_texture_type	type;
 	t_color			checker_color[2];
 	int				width;
 	int				height;
+	int				nwidth;
+	int				nheight;
 }				t_texture;
-
-
 
 struct s_object
 {

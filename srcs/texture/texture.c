@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 23:21:31 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/05 16:58:59 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/07 16:54:35 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_texture	create_checkered_texture(int width, int height, uint32_t a,
 {
 	t_texture	texture;
 
-	texture.texture_type = TX_CHECKER;
+	texture.type = TX_CHECKER;
 	texture.width = width;
 	texture.height = height;
 	texture.checker_color[0] = get_norm_color(a);
@@ -30,45 +30,48 @@ t_texture	create_checkered_texture(int width, int height, uint32_t a,
 	return (texture);
 }
 
-t_texture	create_image_texture(void *mlx, const char *path)
-{
-	t_texture	texture;
-
-	texture.texture_type = TX_IMAGE;
-	texture.img.img = mlx_xpm_file_to_image(mlx, (char *) path, &texture.width,
-			&texture.height);
-	if (texture.img.img)
-	{
-		texture.img.addr = mlx_get_data_addr(texture.img.img,
-				&texture.img.bits_per_pixel,
-				&texture.img.line_length,
-				&texture.img.endian);
-	}
-	else
-		texture.texture_type = TX_FAILED;
-	return (texture);
-}
-
-bool	apply_normal_map_to_texture(void *mlx, t_texture *texture,
+t_texture	*create_image_texture(void *mlx, t_texture *texture,
 		const char *path)
 {
-	if (texture->texture_type == TX_IMAGE)
+	texture->texel.img = mlx_xpm_file_to_image(mlx, (char *) path,
+			&texture->width,
+			&texture->height);
+	if (texture->texel.img)
+	{
+		texture->texel.addr = mlx_get_data_addr(texture->texel.img,
+				&texture->texel.bits_per_pixel,
+				&texture->texel.line_length,
+				&texture->texel.endian);
+		texture->type = TX_IMAGE;
+		return (texture);
+	}
+	return (NULL);
+}
+
+t_texture	*apply_normal_map_to_texture(void *mlx, t_texture *texture,
+		const char *path)
+{
+	if (texture->type == TX_IMAGE)
 	{
 		texture->nmap.img = mlx_xpm_file_to_image(mlx, (char *) path,
-				&texture->width, &texture->height);
+				&texture->nwidth, &texture->nheight);
+		if (texture->nwidth != texture->width
+				|| texture->nheight != texture->height)
+		{
+			mlx_destroy_image(mlx, texture->nmap.img);
+			texture->nmap.img = NULL;
+		}
 		if (texture->nmap.img)
 		{
 			texture->nmap.addr = mlx_get_data_addr(texture->nmap.img,
 					&texture->nmap.bits_per_pixel,
 					&texture->nmap.line_length,
 					&texture->nmap.endian);
-			texture->texture_type = TX_IMAGEW_NMAP;
+			texture->type = TX_IMAGEW_NMAP;
+			return (texture);
 		}
-		else
-			return (false);
-		return (true);
 	}
-	return (false);
+	return (NULL);
 }
 
 t_color	get_image_color(t_texture texture, t_uv uv)
@@ -80,8 +83,8 @@ t_color	get_image_color(t_texture texture, t_uv uv)
 
 	x = floor(uv.u * (texture.width - 1));
 	y = floor(uv.v * (texture.height - 1));
-	dest = texture.img.addr + x * (texture.img.bits_per_pixel / 8) +
-		(texture.height - y) * texture.img.line_length;
+	dest = texture.texel.addr + x * (texture.texel.bits_per_pixel / 8) +
+		(texture.height - y) * texture.texel.line_length;
 	color = * (uint32_t *) dest;
 	return (get_norm_color(color));
 }

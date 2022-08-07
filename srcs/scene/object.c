@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:43:00 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/06 19:17:40 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/07 16:21:25 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,17 @@ t_object	*new_sphere(t_point3 pos, double radius, uint32_t color)
 	obj->M = matrix4_mul(matrix4_translate(pos.x, pos.y, pos.z), obj->M);
 	obj->M_inv = matrix4_inv(obj->M);
 	obj->M_inv_trans = matrix4_trans(obj->M_inv);
+	return (obj);
+}
+
+t_object	*new_skybox(void)
+{
+	t_object	*obj;
+
+	obj = new_sphere(point(0, 0, 0), 1e5, 0x000000);
+	if (!obj)
+		return (NULL);
+	obj->type = T_SPHERE_SKYBOX;
 	return (obj);
 }
 

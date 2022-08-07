@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/07 14:12:58 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/07 16:49:19 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 #include "tuple.h"
 #include <math.h>
 #include <stdio.h>
-
-# define THREAD_NBR 8
 
 int	main(int ac, char **av)
 {

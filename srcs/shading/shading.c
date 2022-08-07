@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 20:16:01 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/06 19:17:41 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/07 16:54:41 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,21 @@ static inline void	apply_lightning(t_light *light, t_rayhit *rayhit)
 	double	coeff;
 	double	dot;
 
-	dot = max(0, vec_dot(vec_norm(rayhit->lightv), rayhit->normal));
-	coeff = (L_POWER / M_PI) * light->intensity * dot /
-		vec_mag_sqr(rayhit->lightv);
+	dot = max(0, vec_dot(rayhit->nlightv, rayhit->normal));
+	coeff = (L_POWER / M_PI) * light->intensity * dot / rayhit->mag_sqr_lightv;
 	rayhit->pcolor = tadd(rayhit->pcolor, tmul_scalar(light->color, coeff));
-	reflectionv = get_reflection_vec(vec_norm(rayhit->lightv), rayhit->normal);
+	reflectionv = get_reflection_vec(rayhit->nlightv, rayhit->normal);
 	dot = vec_dot(rayhit->eyev, reflectionv);
 	if (dot > 0)
 	{
-		factor = 30 * pow(dot, 50) / vec_mag_sqr(rayhit->lightv)
-			* light->intensity;
-		rayhit->pcolor = tadd(rayhit->pcolor,
-				tmul_scalar(vector(1, 1, 1), factor));
+		factor = 30 * pow(dot, 50) / rayhit->mag_sqr_lightv * light->intensity;
+		rayhit->pcolor.x += factor;
+		rayhit->pcolor.y += factor;
+		rayhit->pcolor.z += factor;
 	}
 }
 
-static bool	is_a_shadow(t_scene *scene, t_rayhit *f_rayhit)
+static inline bool	is_a_shadow(t_scene *scene, t_rayhit *f_rayhit)
 {
 	t_ray		ray;
 	t_rayhit	rayhit;
@@ -58,22 +57,22 @@ static bool	is_a_shadow(t_scene *scene, t_rayhit *f_rayhit)
 
 	ray.org = tadd(f_rayhit->intersect_p, tmul_scalar(f_rayhit->normal,
 				EPSILON));
-	ray.dir = vec_norm(f_rayhit->lightv);
+	ray.dir = f_rayhit->nlightv;
 	obj = ray_intersect_scene_objs(scene, &ray, &rayhit);
 	if (obj)
 	{
-		distance_to_light = vec_mag_sqr(f_rayhit->lightv);
+		distance_to_light = f_rayhit->mag_sqr_lightv;
 		if (rayhit.t * rayhit.t < distance_to_light)
 			return (true);
 	}
 	return (false);
 }
 
-static t_color	get_color_from_obj(t_object *obj, t_rayhit *rayhit)
+static inline t_color	get_color_from_obj(t_object *obj, t_rayhit *rayhit)
 {
-	if (obj->texture.texture_type == TX_CHECKER)
+	if (obj->texture.type == TX_CHECKER)
 		return (get_checker_color(obj->texture, rayhit->uv));
-	else if (obj->texture.texture_type >= TX_IMAGE)
+	else if (obj->texture.type >= TX_IMAGE)
 		return (get_image_color(obj->texture, rayhit->uv));
 	else
 		return (obj->albedo);
@@ -87,26 +86,28 @@ t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit)
 	t_list	*elem;
 	t_light	*light;
 
-	rayhit->pcolor = tmul_scalar(scene->amb_light.color,
-			scene->amb_light.intensity);
-	elem = scene->light;
-	if (obj->texture.texture_type != TX_NONE)
+	rayhit->pcolor = vector(1, 1, 1);
+	if (obj->texture.type != TX_NONE)
 	{
 		rayhit->uv = obj->uvmap_fnct(rayhit->intersect_p_local);
-		if (obj->texture.texture_type == TX_IMAGEW_NMAP)
+		if (obj->texture.type == TX_IMAGEW_NMAP)
 			perturb_normal(obj->texture, rayhit);
 	}
-	if (vec_dot(rayhit->eyev, rayhit->normal) < 0)
+	if (obj->type != T_SPHERE_SKYBOX)
 	{
-		puts("hiwerwerewr");
-	}
-	while (elem)
-	{
-		light = elem->content;
-		rayhit->lightv = tsub(light->pos, rayhit->intersect_p);
-		if (!is_a_shadow(scene, rayhit))
-			apply_lightning(light, rayhit);
-		elem = elem->next;
+		rayhit->pcolor = tmul_scalar(scene->amb_light.color,
+				scene->amb_light.intensity);
+		elem = scene->light;
+		while (elem)
+		{
+			light = elem->content;
+			rayhit->lightv = tsub(light->pos, rayhit->intersect_p);
+			rayhit->nlightv = vec_norm(rayhit->lightv);
+			rayhit->mag_sqr_lightv = vec_mag_sqr(rayhit->lightv);
+			if (!is_a_shadow(scene, rayhit))
+				apply_lightning(light, rayhit);
+			elem = elem->next;
+		}
 	}
 	return (tmul(rayhit->pcolor, get_color_from_obj(obj, rayhit)));
 }

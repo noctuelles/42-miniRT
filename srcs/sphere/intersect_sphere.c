@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 17:59:43 by plouvel           #+#    #+#             */
-/*   Updated: 2022/07/31 15:43:10 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/07 16:54:21 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ bool	intersect_sphere(t_object *obj, t_ray *ray, t_rayhit *rayhit)
 		if (t[1] < 0)
 			return (false);
 		t[0] = min(t[0], t[1]);
-		rayhit->t = t[0];
+		if (t[0] <= 0.0000001)
+			rayhit->t = t[1];
+		else
+			rayhit->t = t[0];
 		rayhit->intersect_p = get_ray_point(*ray, t[0]);
 		rayhit->intersect_p_local = get_ray_point(local_ray, t[0]);
 		rayhit->normal = compute_normal(obj, rayhit->intersect_p_local);
