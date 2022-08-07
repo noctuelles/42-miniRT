@@ -6,19 +6,23 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/01 17:02:27 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/07 14:12:58 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_utils.h"
+#include "define.h"
 #include "end.h"
 #include "renderer.h"
+#include "multithreading.h"
 #include <pthread.h>
 #include <string.h>
 #include "matrix.h"
 #include "tuple.h"
 #include <math.h>
 #include <stdio.h>
+
+# define THREAD_NBR 8
 
 int	main(int ac, char **av)
 {
@@ -40,16 +44,6 @@ int	main(int ac, char **av)
 	print_matrix4(matrix4_inv(A));*/
 	if (!init_mlx_struct(&minirt.mlx))
 		return (1);
-
-	t_vec3 forward = vector(0, 0, 1);
-	t_vec3 up = vec_norm(vector(0.5, 1, 0));
-	t_vec3 right = vec_norm(vec_cross(up, forward));
-	t_vec3 true_forward = vec_norm(vec_cross(right, up));
-
-	tprint(right);
-	tprint(up);
-	tprint(true_forward);
-	puts("");
 
 	render_img(&minirt);
 	launch_loop(&minirt);

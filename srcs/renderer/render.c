@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/06 19:05:11 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/07 14:12:45 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "scene.h"
 #include <math.h>
 #include "math_utils.h"
+#include "multithreading.h"
 #include <limits.h>
 #include <stdio.h>
 #include <sys/time.h>
@@ -53,7 +54,7 @@ t_matrix4	transform(t_vec3 from, t_vec3 forward)
 	return (matrix4_mul(M, matrix4_translate(-from.x, -from.y, -from.z)));
 }
 
-t_matrix4	build_view_matrix(t_vec3 orient)
+static t_matrix4	build_view_matrix(t_vec3 orient)
 {
 	t_matrix4	transform;
 	double		alpha;
@@ -72,8 +73,7 @@ t_matrix4	build_view_matrix(t_vec3 orient)
 static inline void	generate_ray(t_ray *ray, t_rayhit *rayhit, t_point3 viewport_point, t_matrix4 m)
 {
 	ray->org = point(0, 0, 2);
-	ray->dir = vec_norm(viewport_point);
-	ray->dir = vec_norm(matrix4_tmul(m, ray->dir));
+	ray->dir = vec_norm(matrix4_tmul(m, viewport_point));
 	ray->dir.w = 0;
 	rayhit->eyev = tnegate(ray->dir);
 }
@@ -94,7 +94,7 @@ t_color	compute_light(t_object *obj, t_light *light)
 }
 */
 
-uint32_t	get_color(t_color color)
+static uint32_t	get_color(t_color color)
 {
 		unsigned char r, g, b;
 
@@ -120,6 +120,12 @@ uint64_t	get_mlsec_time(struct timeval t)
 
 t_matrix4	build_rotation_from_dir_vec(t_vec3 forward);
 
+void	setup_scene()
+{
+
+}
+
+
 void	render_img(t_minirt *minirt)
 {
 	t_point3	viewport_point;
@@ -132,7 +138,7 @@ void	render_img(t_minirt *minirt)
 	size_t		j;
 
 	camera = new_camera(WIDTH, HEIGHT, FOV);
-	vmatrix = build_view_matrix(vector(0.3, 0.5, 1));
+	vmatrix = build_view_matrix(vector(0, 0, 1));
 	printf("-- Camera information --\n");
 	printf("Half_width : %f\n", camera.half_width);
 	printf("Half_height : %f\n", camera.half_height);
@@ -164,13 +170,16 @@ void	render_img(t_minirt *minirt)
 
 
 	add_light_to_scene(&minirt->scene, point(0,3, 0), 0xFFFFFF, 1);
-	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.2);
+	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.1);
 
-
-	viewport_point.z = WIDTH / (2 * tan(FOV / 2));
-	i = 0;
 	struct timeval	t, t1;
+	setup_workers(minirt);
 	gettimeofday(&t, NULL);
+	launch_workers(minirt);
+
+	/*viewport_point.z = WIDTH / (2 * tan(FOV / 2));
+	i = 0;
+
 	while (i < HEIGHT)
 	{
 		j = 0;
@@ -189,16 +198,13 @@ void	render_img(t_minirt *minirt)
 			}
 			j++;
 		}
-		/*double	percentage = (double) i / HEIGHT * 100;
-		char	str[20];
-
-		sprintf(str, "Rendering... %.2f\n", percentage);
-		mlx_clear_window(minirt->mlx.ptr, minirt->mlx.win);
-		mlx_string_put(minirt->mlx.ptr, minirt->mlx.win, WIDTH / 2 - strlen(str) * 4, HEIGHT / 2, 0xFFFFFF, str);*/
 		i++;
 	}
 	gettimeofday(&t1, NULL);
 	mlx_put_image_to_window(minirt->mlx.ptr, minirt->mlx.win, minirt->mlx.img.img, 0, 0);
+	*/
+	gettimeofday(&t1, NULL);
 	printf("Rendered in %lu mlsec.\n", get_mlsec_time(t1) - get_mlsec_time(t));
+mlx_put_image_to_window(minirt->mlx.ptr, minirt->mlx.win, minirt->mlx.img.img, 0, 0);
 	puts("Rendering done");
 }

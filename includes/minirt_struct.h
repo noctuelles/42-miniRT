@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/06 18:01:26 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/07 14:49:45 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define MINIRT_STRUCT_H
 
 # include "libft.h"
+# include "define.h"
+# include <pthread.h>
 # include <stdbool.h>
 
 /* ############################## Enumerations ############################## */
@@ -125,13 +127,38 @@ typedef struct s_mlx
 	void		*win;
 }				t_mlx;
 
+typedef struct s_minirt t_minirt;
+
+typedef struct s_worker
+{
+	t_minirt		*minirt;
+	pthread_t		pthread;
+	unsigned int	id;
+	unsigned int	assigned_start;
+	unsigned int	assigned_end;
+}				t_worker;
+
 /* ################################ Program ################################# */
 
-typedef struct s_minirt
+typedef struct	s_camera
 {
-	t_mlx	mlx;
-	t_scene	scene;
-}	t_minirt;
+	t_matrix4	M;
+	size_t		hsize;
+	size_t		vsize;
+	double		half_width;
+	double		half_height;
+	double		pixel_size;
+	double		fov;
+}	t_camera;
+
+struct s_minirt
+{
+	t_mlx		mlx;
+	t_scene		scene;
+	t_camera	camera;
+	t_worker	workers[THREAD_NBR];
+	bool		workers_init;
+};
 
 /* ################################## Ray ################################### */
 
@@ -153,17 +180,6 @@ typedef struct s_rayhit
 	t_color		pcolor;
 }	t_rayhit;
 
-typedef struct	s_camera
-{
-	t_matrix4	M;
-	size_t		hsize;
-	size_t		vsize;
-	double		half_width;
-	double		half_height;
-	double		pixel_size;
-	double		fov;
-}	t_camera;
-
 typedef struct s_object	t_object;
 
 typedef bool (*t_intersect_fnct)(t_object *, t_ray *, t_rayhit *);
@@ -178,6 +194,8 @@ typedef struct s_texture
 	int				width;
 	int				height;
 }				t_texture;
+
+
 
 struct s_object
 {
