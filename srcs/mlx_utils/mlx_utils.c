@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 15:10:50 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 04:04:21 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/08 15:24:46 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	mlx_pixel_img_put(t_minirt *minirt, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = minirt->mlx.img.addr + ((HEIGHT - y ) * minirt->mlx.img.line_length
-			+ x * (minirt->mlx.img.bits_per_pixel / 8));
+	dst = minirt->mlx.img.addr + y * minirt->mlx.img.line_length
+			+ x * (minirt->mlx.img.bits_per_pixel / 8);
 	*(unsigned int *)dst = color;
 }

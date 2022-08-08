@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/07 16:54:42 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/08 15:48:44 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct	s_uv
 }				t_uv;
 
 typedef t_tuple	t_vec3;
+typedef t_tuple	t_point2;
 typedef t_tuple	t_point3;
 typedef t_tuple	t_color;
 typedef t_tuple	t_albedo;
@@ -143,13 +144,13 @@ typedef struct s_worker
 
 typedef struct	s_camera
 {
-	t_matrix4	M;
-	size_t		hsize;
-	size_t		vsize;
-	double		half_width;
-	double		half_height;
-	double		pixel_size;
-	double		fov;
+	t_matrix4	transform;
+	size_t		screen_width;
+	size_t		screen_height;
+	double		aspect_ratio;
+	double		scalar_fov;
+	t_vec3		look;
+	t_point3	from;
 }	t_camera;
 
 struct s_minirt
