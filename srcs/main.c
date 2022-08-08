@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/08 15:48:49 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/08 16:37:12 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int ac, char **av)
 
 	setup_workers(&minirt);
 	setup_camera(&minirt.camera, WIDTH, HEIGHT, FOV_ANGLE);
-	set_camera_view_matrix(&minirt.camera, point(0, 0, 19), vector(0, 0.5, 1));
+	set_camera_view_matrix(&minirt.camera, point(0, 0, 0), vector(0, 0, 1));
 	render_img(&minirt);
 	launch_loop(&minirt);
 

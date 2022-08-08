@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 12:50:45 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/08 15:48:42 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/08 16:39:01 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static inline t_matrix4	build_view_matrix(t_point3 org, t_vec3 look)
 	transform = matrix4_rotate_x(-beta);
 	transform = matrix4_mul(matrix4_rotate_y(alpha), transform);
 	transform = matrix4_mul(matrix4_translate(org.x, org.y, org.z), transform);
-	print_matrix4(transform);
 	return (transform);
 }
 
