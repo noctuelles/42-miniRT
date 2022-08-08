@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/08 16:46:43 by plouvel          ###   ########.fr        #
+#    Updated: 2022/08/08 17:39:48 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,12 @@ SRCS =	end/good_exit.c					\
 		matrix/matrix_invert.c			\
 		matrix/matrix_invert_utils.c	\
 		matrix/matrix_transform.c		\
+		lexer/file.c					\
+		lexer/file_utils.c				\
+		lexer/io_utils.c				\
+		lexer/lexer.c					\
+		lexer/lexer_utils.c				\
+		lexer/tokens.c					\
 		texture/texture.c				\
 		texture/uv_mapping.c			\
 		plane/intersect_plane.c			\

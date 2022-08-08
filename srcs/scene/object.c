@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:43:00 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/08 16:45:55 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/08 17:43:52 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_object	*new_cylinder(t_point3 pos, double diameter, double height, t_vec3 orie
 		return (NULL);
 	obj->p.cylinder.diameter = diameter;
 	obj->p.cylinder.half_height = height / 2;
-	obj->type = T_CYLINDER;
+	obj->type = O_CYLINDER;
 	obj->albedo = get_norm_color(color);
 	obj->fnct = &intersect_cylinder;
 	obj->uvmap_fnct = &get_cylinder_map;
@@ -69,7 +69,7 @@ t_object	*new_sphere(t_point3 pos, double radius, uint32_t color)
 	obj->p.sphere.radius = radius;
 	obj->fnct = &intersect_sphere;
 	obj->uvmap_fnct = &get_spherical_map;
-	obj->type = T_SPHERE;
+	obj->type = O_SPHERE;
 	obj->albedo = get_norm_color(color);
 	obj->M = matrix4_scale(radius, radius, radius);
 	obj->M = matrix4_mul(matrix4_translate(pos.x, pos.y, pos.z), obj->M);
@@ -85,7 +85,7 @@ t_object	*new_skybox(void)
 	obj = new_sphere(point(0, 0, 0), 1e5, 0x000000);
 	if (!obj)
 		return (NULL);
-	obj->type = T_SPHERE_SKYBOX;
+	obj->type = O_SPHERE_SKYBOX;
 	return (obj);
 }
 
@@ -100,7 +100,7 @@ t_object	*new_plan(t_point3 pos, t_vec3 normal, uint32_t color)
 	obj->p.plan.normal = normal;
 	obj->fnct = &plane_intersection;
 	obj->uvmap_fnct = &get_planar_map;
-	obj->type = T_PLAN;
+	obj->type = O_PLAN;
 	obj->albedo = get_norm_color(color);
 	obj->M = build_rotation_matrix(vec_norm(normal));
 	obj->M = matrix4_mul(matrix4_translate(pos.x, pos.y, pos.z), obj->M);

@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/08 16:42:46 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/08 17:43:20 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 
 typedef enum e_object_type
 {
-	T_SPHERE,
-	T_SPHERE_SKYBOX,
-	T_PLAN,
-	T_CYLINDER
+	O_SPHERE,
+	O_SPHERE_SKYBOX,
+	O_PLAN,
+	O_CYLINDER
 }			t_object_type;
 
 typedef enum e_texture_type
