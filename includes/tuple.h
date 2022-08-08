@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:45:46 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 22:00:00 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/27 22:30:35 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ double		vec_dot(t_vec3 a, t_vec3 b);
 double		vec_mag(t_vec3 a);
 t_vec3		vec_norm(t_vec3 a);
 double		vec_mag_sqr(t_vec3 a);
+t_vec3	vec_cross(t_vec3 a, t_vec3 b);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:43:25 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/25 03:56:23 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/04 20:16:30 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,12 @@ t_vec3		get_normal(t_object *obj, t_point3 p)
 	obj_normal = matrix4_tmul(obj->M_inv, p);
 	world_normal = matrix4_tmul(obj->M_inv_trans, obj_normal);
 	return (vec_norm(world_normal));
+}
+
+t_vec3	get_reflection_vec(t_vec3 incident, t_vec3 normal)
+{
+	t_vec3	reflectionv;
+
+	reflectionv = tsub(tmul_scalar(normal, 2 * vec_dot(incident, normal)), incident);
+	return (reflectionv);
 }

@@ -6,15 +6,24 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/15 23:28:30 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/08 16:37:12 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_utils.h"
+#include "define.h"
 #include "end.h"
 #include "renderer.h"
+#include "multithreading.h"
 #include <pthread.h>
 #include <string.h>
+#include "matrix.h"
+#include "texture.h"
+#include "scene.h"
+#include "tuple.h"
+#include "scene.h"
+#include <math.h>
+#include <stdio.h>
 
 int	main(int ac, char **av)
 {
@@ -23,18 +32,46 @@ int	main(int ac, char **av)
 
 	(void) ac;
 	(void)av;
-	/*if (ac != 2)
-	{
-		ft_putstr_fd(BAD_NB_ARG, 2);
-		return (0);
-	}*/
+
+	t_object	*cobj;
+
 	if (!init_mlx_struct(&minirt.mlx))
 		return (1);
+
+	t_texture texture;
+	create_image_texture(minirt.mlx.ptr, &texture, "textures/moon.xpm");
+	t_texture	skybox;
+	create_image_texture(minirt.mlx.ptr, &skybox, "textures/stars.xpm");
+	apply_normal_map_to_texture(minirt.mlx.ptr, &texture, "textures/moon_nmap.xpm");
+
+	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(0, 1, 8), 1, 0x00FF00));
+	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(2, 3, 8), 1, 0x00FF00));
+	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(-2, 3, 8), 1, 0x00FF00));
+
+	cobj = add_obj_to_scene(&minirt.scene, new_plan(point(0, -1, 0), vector(0, 1, -0.01), 0xffffff));
+	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0x00FFFF, 0xFFFFFF));
+	cobj = add_obj_to_scene(&minirt.scene, new_plan(point(0, 5, 0), vector(0.0, -1, 0), 0xffffff));
+	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0x000000, 0xFFFFFF));
+
+	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(0, 0.0, 8), 0.6, 4, vector(0, 1, 0), 0x00ffff));
+	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(1, 2.0, 8), 0.5, 4, vector(1, 1, 0), 0x00ffff));
+	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(-1, 2.0, 8), 0.5, 4, vector(-1, 1, 0), 0x00ffff));
+
+	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(2, 0.0, 8), 0.5, 9, vector(0, 1, 0), 0xff00ff));
+	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(-2, 0.0, 8), 0.5, 9, vector(0, 1, 0), 0xff00ff));
+
+	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(5.5, 0.0, 8), 0.5, 39, vector(-1, 1, 0), 0xff00ff));
+	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(-5.5, 0.0, 8), 0.5, 39, vector(1, 1, 0), 0xff00ff));
+
+
+	add_light_to_scene(&minirt.scene, point(0,2, 3), 0xFFFFFF, 0.5);
+	set_ambiant_light(&minirt.scene, 0xFFFFFF, 0.15);
+
+	setup_workers(&minirt);
+	setup_camera(&minirt.camera, WIDTH, HEIGHT, FOV_ANGLE);
+	set_camera_view_matrix(&minirt.camera, point(0, 0, 0), vector(0, 0, 1));
 	render_img(&minirt);
 	launch_loop(&minirt);
-	/*mlx_hook(minirt.mlx.win, 17, 0, good_exit, &minirt.mlx);
-	mlx_key_hook(minirt.mlx.win, select_hook, &minirt);
-	ft_putstr_fd("OK", 2);
-	mlx_loop(minirt.mlx.ptr);*/
+
 	return (0);
 }

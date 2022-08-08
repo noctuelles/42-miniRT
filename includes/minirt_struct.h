@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/28 11:15:54 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:42:46 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define MINIRT_STRUCT_H
 
 # include "libft.h"
+# include "define.h"
+# include <pthread.h>
 # include <stdbool.h>
 
 /* ############################## Enumerations ############################## */
@@ -21,10 +23,19 @@
 typedef enum e_object_type
 {
 	T_SPHERE,
+	T_SPHERE_SKYBOX,
 	T_PLAN,
-	T_CYLINDRE,
-	T_CONE
+	T_CYLINDER
 }			t_object_type;
+
+typedef enum e_texture_type
+{
+	TX_NONE,
+	TX_CHECKER,
+	TX_IMAGE,
+	TX_IMAGEW_NMAP,
+	TX_FAILED
+}			t_texture_type;
 
 /* ################################# Tuple ################################## */
 
@@ -36,7 +47,14 @@ typedef struct s_tuple
 	double	w;
 }				t_tuple;
 
+typedef struct	s_uv
+{
+	double	u;
+	double	v;
+}				t_uv;
+
 typedef t_tuple	t_vec3;
+typedef t_tuple	t_point2;
 typedef t_tuple	t_point3;
 typedef t_tuple	t_color;
 typedef t_tuple	t_albedo;
@@ -72,30 +90,12 @@ typedef struct s_plan
 	t_vec3		normal;
 }				t_plan;
 
-typedef struct e_disk
+typedef struct s_cylinder
 {
-	t_point3	center;
-	double		rayon;
-	t_vec3		normal;
-}				t_disk;
-
-typedef struct e_cylindre
-{
-	t_point3	center;
-	t_vec3		orientation;
-	double		rayon;  //* le parsing donne le diametre mais il me faut le rayon
-	double		hauteur;
-}				t_cylindre;
-
-typedef struct e_cone
-{
-	t_point3	top;
-	t_vec3		dir;
-	double		height;
-	double		angle; //* Demi angle du sommet, il doit etre caper a 90 degres non compris et superrieur strict a 0
-	double		len_pente; //* fonction expres
-	double		rayon_base; //* fonction expres
-}				t_cone;
+	t_point3	pos;
+	double half_height;
+	double diameter;
+}				t_cylinder;
 
 typedef struct s_light
 {
@@ -129,13 +129,37 @@ typedef struct s_mlx
 	void		*win;
 }				t_mlx;
 
+typedef struct s_minirt t_minirt;
+
+typedef struct s_worker
+{
+	t_minirt		*minirt;
+	pthread_t		pthread;
+	unsigned int	id;
+	unsigned int	assigned_start;
+	unsigned int	assigned_end;
+}				t_worker;
+
 /* ################################ Program ################################# */
 
-typedef struct s_minirt
+typedef struct	s_camera
 {
-	t_mlx	mlx;
-	t_scene	scene;
-}	t_minirt;
+	t_matrix4	transform;
+	size_t		screen_width;
+	size_t		screen_height;
+	double		aspect_ratio;
+	double		scalar_fov;
+	t_vec3		look;
+	t_point3	from;
+}	t_camera;
+
+struct s_minirt
+{
+	t_mlx		mlx;
+	t_scene		scene;
+	t_camera	camera;
+	t_worker	workers[THREAD_NBR];
+};
 
 /* ################################## Ray ################################### */
 
@@ -149,13 +173,32 @@ typedef struct s_rayhit
 {
 	double		t;
 	t_point3	intersect_p;
+	t_point3	intersect_p_local;
+	t_vec3		eyev;
+	t_vec3		lightv;
+	t_vec3		nlightv;
+	double		mag_sqr_lightv;
+	t_uv		uv;
 	t_vec3		normal;
-	uint32_t	pixel_color;
+	t_color		pcolor;
 }	t_rayhit;
 
 typedef struct s_object	t_object;
 
 typedef bool (*t_intersect_fnct)(t_object *, t_ray *, t_rayhit *);
+typedef t_uv (*t_uvmap_fnct)(t_point3);
+
+typedef struct s_texture
+{
+	t_image			texel;
+	t_image			nmap;
+	t_texture_type	type;
+	t_color			checker_color[2];
+	int				width;
+	int				height;
+	int				nwidth;
+	int				nheight;
+}				t_texture;
 
 struct s_object
 {
@@ -163,41 +206,17 @@ struct s_object
 	{
 		t_sphere	sphere;
 		t_plan		plan;
-		t_cone		cone;
-		t_cylindre	cylindre;
-		t_disk		disk;
+		t_cylinder	cylinder;
 	} p;
 	t_rayhit			rayhit;
 	t_matrix4			M;
 	t_matrix4			M_inv;
 	t_matrix4			M_inv_trans;
 	t_albedo			albedo;
+	t_texture			texture;
 	t_object_type		type;
 	t_intersect_fnct	fnct;
+	t_uvmap_fnct		uvmap_fnct;
 };
-
-/* ################################# Utils ################################## */
-
-typedef struct s_cyl_utils
-{
-	bool		first_paille;
-	bool		second_paille;
-	bool		up_disk;
-	bool		down_disk;
-	t_rayhit	rayhit_first_paille;
-	t_rayhit	rayhit_second_paille;
-	t_rayhit	rayhit_up_disk;
-	t_rayhit	rayhit_down_disk;
-}	t_cyl_utils;
-
-typedef struct s_cone_utils
-{
-	bool		first;
-	bool		second;
-	bool		close_disk;
-	t_rayhit	rayhit_first;
-	t_rayhit	rayhit_second;
-	t_rayhit	rayhit_close_disk;
-}	t_cone_utils;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 14:06:22 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/24 18:32:09 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/07/23 17:44:50 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_matrix4(t_matrix4 const M)
 		printf("{");
 		while (j < 4)
 		{
-			printf("%10.5f", M.m[i][j]);
+			printf("%10.6f", M.m[i][j]);
 			if (j != 3)
 				printf(", ");
 			j++;

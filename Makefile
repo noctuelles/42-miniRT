@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/06/28 11:15:45 by bsavinel         ###   ########.fr        #
+#    Updated: 2022/08/08 16:46:43 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRCS =	end/good_exit.c					\
 		mlx_utils/launch_loop.c			\
 		mlx_utils/mlx_utils.c			\
 		renderer/render.c				\
+		renderer/multithreading.c		\
 		math/vector.c					\
 		math/tuple.c					\
 		math/tuple2.c					\
@@ -48,16 +49,17 @@ SRCS =	end/good_exit.c					\
 		matrix/matrix_invert.c			\
 		matrix/matrix_invert_utils.c	\
 		matrix/matrix_transform.c		\
-		main.c							\
+		texture/texture.c				\
+		texture/uv_mapping.c			\
 		plane/intersect_plane.c			\
 		sphere/intersect_sphere.c		\
-		cylindre/instersect_cylindre.c	\
-		cylindre/intersect_disk.c		\
-		cone/intersect_cone.c			\
-		cone/intersect_cone_utils.c		\
+		cylinder/intersect_cylinder.c	\
 		scene/object.c					\
 		scene/scene.c					\
+		scene/camera.c					\
 		shading/shading.c				\
+		shading/shading_utils.c			\
+		main.c							\
 
 ################################################################################
 ########							Libraries							########
@@ -114,7 +116,7 @@ header:
 		@echo "${NO_COLOR}"
 
 $(NAME) : $(OBJS) $(LIBS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -lm -lbsd -lX11 -lXext -o $(NAME) $(INCS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -lm -lbsd -lX11 -lXext -lpthread -o $(NAME) $(INCS)
 	echo "$(BLUE)$(NAME): $(GREEN)Success $(NO_COLOR)"
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c Makefile

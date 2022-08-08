@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 16:11:08 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/15 14:40:37 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/08 15:22:04 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 # include "minirt_struct.h"
 
 void	render_img(t_minirt *minirt);
+void	*render(void *pwrkrs);
 
 #endif
