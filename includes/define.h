@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:10:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/09 10:39:48 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 16:09:50 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # include <stddef.h> // -> NULL
 
 # define THREAD_NBR 16
+
+#define D_LEX_CONTENT ((t_token *)(*lexer)->content)
+
+#ifndef D_BONUS
+# define D_BONUS 1
+#endif
 
 /*
  *	Define windows

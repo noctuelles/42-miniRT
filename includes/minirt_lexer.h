@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_lexer.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:12:27 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/08 21:37:18 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 14:02:12 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,12 @@ typedef struct e_lexer
 	size_t				line_nbr;
 	t_lexer_errcode		errcode;
 }				t_lexer;
+
+/*
+ *	lexer.c
+ */
+
+t_list	*lex_from_file(const char *filename);
 
 /* file.c */
 
