@@ -6,11 +6,12 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:54:50 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/08 17:47:15 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 16:43:14 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_lexer.h"
+#include "libft.h"
 #include <stdlib.h>
 
 static void	*quit(t_lexer *lexer, t_lexer_errcode errcode)
@@ -73,9 +74,10 @@ t_list	*lex_file(t_lexer *lexer)
 
 t_list	*lex_from_file(const char *filename)
 {
-	t_lexer	lexer = {0};
-	size_t			i;
+	t_lexer	lexer;
+	size_t	i;
 
+	ft_memset(&lexer, 0, sizeof(lexer));
 	lexer.file_content = read_file(filename);
 	if (!lexer.file_content)
 		return (NULL);

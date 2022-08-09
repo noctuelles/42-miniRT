@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 17:59:43 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 15:32:00 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 16:18:28 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
  *     negative then the sphere is begind the sphere origin.)
 */
 
-static inline t_vec3 compute_normal(t_object *obj, t_point3 t)
+static inline t_vec3	compute_normal(t_object *obj, t_point3 t)
 {
 	t_vec3	world_normal;
 
@@ -41,10 +41,10 @@ bool	intersect_sphere(t_object *obj, t_ray *ray, t_rayhit *rayhit)
 	local_ray = ray_transform(*ray, obj->M_inv);
 	sphere_to_ray = tsub(local_ray.org, point(0., 0., 0.));
 	if (solve_quadratic(
-				vec_dot(local_ray.dir, local_ray.dir),
-				2 * vec_dot(local_ray.dir, sphere_to_ray),
-				vec_dot(sphere_to_ray, sphere_to_ray) - 1,
-				t))
+			vec_dot(local_ray.dir, local_ray.dir),
+			2 * vec_dot(local_ray.dir, sphere_to_ray),
+			vec_dot(sphere_to_ray, sphere_to_ray) - 1,
+			t))
 	{
 		if (t[1] < 0)
 			return (false);

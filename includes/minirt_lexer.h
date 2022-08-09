@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:12:27 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 14:02:12 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:56:07 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define STR_SPHERE           "sp"
 # define STR_PLAN             "pl"
 # define STR_CYLINDER         "cy"
+# define STR_CONE             "cn"
 
 # define STR_ERROR                  "Error\n"
 # define STR_INVALID_FILE_EXTENSION "invalid file extension"
@@ -56,6 +57,7 @@ typedef enum e_token_type
 	T_SPHERE,
 	T_PLAN,
 	T_CYLINDER,
+	T_CONE,
 	T_VALUE,
 	T_NEWLINE,
 	T_COMMA,

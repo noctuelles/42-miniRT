@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:41:15 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 15:31:56 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 16:20:29 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * It detects if the intersection point is on one of the endcaps or the body,
  * and set the object normal vector accordingly. */
 
-static inline t_vec3 compute_normal(t_object *obj, t_point3 t)
+static inline t_vec3	compute_normal(t_object *obj, t_point3 t)
 {
 	t_vec3	obj_normal;
 	t_vec3	world_normal;
@@ -57,7 +57,7 @@ static inline bool	check_end_cap(t_ray ray, double t)
 }
 
 static inline void
-		intersect_cylinder_endcap(t_ray lray, double halfh, double *endcap_t)
+	intersect_cylinder_endcap(t_ray lray, double halfh, double *endcap_t)
 {
 	double	t[2];
 	double	inter_t[2];
@@ -74,7 +74,7 @@ static inline void
 }
 
 static inline void
-			intersect_cylinder_body(t_ray lray, double halfh, double *body_t)
+	intersect_cylinder_body(t_ray lray, double halfh, double *body_t)
 {
 	double	t[2];
 	double	valid_t[2];
@@ -83,14 +83,14 @@ static inline void
 	valid_t[0] = INFINITY;
 	valid_t[1] = INFINITY;
 	if (solve_quadratic(
-				lray.dir.x * lray.dir.x + lray.dir.z * lray.dir.z,
-				2 * (lray.org.x * lray.dir.x) + 2 * (lray.org.z * lray.dir.z),
-				(lray.org.x * lray.org.x) + (lray.org.z * lray.org.z) - 1, t))
+			lray.dir.x * lray.dir.x + lray.dir.z * lray.dir.z,
+			2 * (lray.org.x * lray.dir.x) + 2 * (lray.org.z * lray.dir.z),
+			(lray.org.x * lray.org.x) + (lray.org.z * lray.org.z) - 1, t))
 	{
 		if (t[1] < 0)
 			return ;
-		y[0] = lray.org.y + lray.dir.y * t[0]; 
-		y[1] = lray.org.y + lray.dir.y * t[1]; 
+		y[0] = lray.org.y + lray.dir.y * t[0];
+		y[1] = lray.org.y + lray.dir.y * t[1];
 		if (y[0] > -halfh && y[0] < halfh)
 			valid_t[0] = t[0];
 		if (y[1] > -halfh && y[1] < halfh)
