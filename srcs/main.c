@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/08 17:49:36 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 10:58:10 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,27 @@ int	main(int ac, char **av)
 	(void)av;
 
 	t_object	*cobj;
-
+	/*t_list	*tkns = lex_from_file(av[1]);
+	if (!tkns)
+		return (1);*/
 	if (!init_mlx_struct(&minirt.mlx))
 		return (1);
 
-	t_texture texture;
+	/*t_texture texture;
 	create_image_texture(minirt.mlx.ptr, &texture, "textures/moon.xpm");
 	t_texture	skybox;
 	create_image_texture(minirt.mlx.ptr, &skybox, "textures/stars.xpm");
-	apply_normal_map_to_texture(minirt.mlx.ptr, &texture, "textures/moon_nmap.xpm");
+	apply_normal_map_to_texture(minirt.mlx.ptr, &texture, "textures/moon_nmap.xpm");*/
 
-	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(0, 1, 8), 1, 0x00FF00));
-	/*cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(2, 3, 8), 1, 0x00FF00));
+	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(0, 0.0, 8), 1, 4, vector(0, 1, 0), 0x00ffff));
+	apply_obj_texture(cobj, create_checkered_texture(16, 2, 0x00FFFF, 0xFFFFFF));
+
+	/*cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(0, 1, 8), 1, 0x00FF00));
+	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(2, 3, 8), 1, 0x00FF00));
 	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(-2, 3, 8), 1, 0x00FF00));
 
-	cobj = add_obj_to_scene(&minirt.scene, new_plan(point(0, -1, 0), vector(0, 1, -0.01), 0xffffff));
+	cobj = add_obj_to_scene(&minirt.scene, new_plan(point(0, -1, 0), vector(0, 1, 0.0), 0xffffff));
 	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0x00FFFF, 0xFFFFFF));
-	cobj = add_obj_to_scene(&minirt.scene, new_plan(point(0, 5, 0), vector(0.0, -1, 0), 0xffffff));
-	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0x000000, 0xFFFFFF));
 
 	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(0, 0.0, 8), 0.6, 4, vector(0, 1, 0), 0x00ffff));
 	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(1, 2.0, 8), 0.5, 4, vector(1, 1, 0), 0x00ffff));
@@ -66,6 +69,7 @@ int	main(int ac, char **av)
 
 	add_light_to_scene(&minirt.scene, point(0,2, 3), 0xFFFFFF, 0.5);
 	set_ambiant_light(&minirt.scene, 0xFFFFFF, 0.15);
+
 
 	setup_workers(&minirt);
 	setup_camera(&minirt.camera, WIDTH, HEIGHT, FOV_ANGLE);

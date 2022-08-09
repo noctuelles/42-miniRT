@@ -6,13 +6,14 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:43:25 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/04 20:16:30 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 10:58:11 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_struct.h"
 #include "matrix.h"
 #include "tuple.h"
+#include "define.h"
 #include "math_utils.h"
 #include <stdbool.h>
 #include <math.h>
@@ -31,6 +32,14 @@ double	max(double a, double b)
 		return (a);
 	else
 		return (b);
+}
+
+bool	fequals(double a, double b)
+{
+	if (fabs(a - b) < EPSILON)
+		return (true);
+	else
+		return (false);
 }
 
 /* Solve a given quadratic equation with the given parameter. */

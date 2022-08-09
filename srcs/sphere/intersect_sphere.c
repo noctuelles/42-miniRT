@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 17:59:43 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/07 16:54:21 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 10:58:13 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ bool	intersect_sphere(t_object *obj, t_ray *ray, t_rayhit *rayhit)
 	t_ray	local_ray;
 	double	t[2];
 
-	// Converting the ray to object space.
-
 	local_ray = ray_transform(*ray, obj->M_inv);
 	sphere_to_ray = tsub(local_ray.org, point(0., 0., 0.));
 	if (solve_quadratic(
@@ -50,13 +48,12 @@ bool	intersect_sphere(t_object *obj, t_ray *ray, t_rayhit *rayhit)
 	{
 		if (t[1] < 0)
 			return (false);
-		t[0] = min(t[0], t[1]);
-		if (t[0] <= 0.0000001)
+		if (t[0] < 0)
 			rayhit->t = t[1];
 		else
 			rayhit->t = t[0];
-		rayhit->intersect_p = get_ray_point(*ray, t[0]);
-		rayhit->intersect_p_local = get_ray_point(local_ray, t[0]);
+		rayhit->intersect_p = get_ray_point(*ray, rayhit->t);
+		rayhit->intersect_p_local = get_ray_point(local_ray, rayhit->t);
 		rayhit->normal = compute_normal(obj, rayhit->intersect_p_local);
 		return (true);
 	}

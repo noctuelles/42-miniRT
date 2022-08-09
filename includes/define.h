@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:10:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/08 16:41:17 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 10:39:48 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 # include <stddef.h> // -> NULL
 
-# define THREAD_NBR 8
+# define THREAD_NBR 16
 
 /*
  *	Define windows
  */
 
-# define WIDTH  1920 
-# define HEIGHT 1200
+# define WIDTH  1440 
+# define HEIGHT 900
 
 # define EPSILON 0.00001
 

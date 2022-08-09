@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 17:17:47 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/05 11:39:38 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 10:58:13 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 #include "math_utils.h"
 #include "tuple.h"
 #include "matrix.h"
+#include <math.h>
 
 bool	plane_intersection(t_object *object, t_ray *ray, t_rayhit *rayhit)
 {
 	t_ray	new_ray;
 
 	new_ray = ray_transform(*ray, object->M_inv);
+	if (fequals(new_ray.dir.y, 0))
+		return (false);
 	rayhit->t = -new_ray.org.y / new_ray.dir.y;
 	if (rayhit->t < 0)
 		return (false);

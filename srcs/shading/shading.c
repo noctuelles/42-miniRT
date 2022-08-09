@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 20:16:01 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/08 17:44:06 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 10:58:10 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit)
 		if (obj->texture.type == TX_IMAGEW_NMAP)
 			perturb_normal(obj->texture, rayhit);
 	}
-	if (obj->type != O_SPHERE_SKYBOX)
+	rayhit->pcolor = tmul_scalar(scene->amb_light.color,
+			scene->amb_light.intensity);
+	if (vec_dot(rayhit->eyev, rayhit->normal) > 0)
 	{
-		rayhit->pcolor = tmul_scalar(scene->amb_light.color,
-				scene->amb_light.intensity);
 		elem = scene->light;
 		while (elem)
 		{
