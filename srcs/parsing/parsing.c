@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:43:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/09 16:43:10 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:45:35 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	skip_break(t_list **lexer)
 		*lexer = (*lexer)->next;
 		retour = true;
 	}
-	return (retour)
+	return (retour);
 }
 
 bool feed_scene(t_minirt *minirt, t_list **lexer)

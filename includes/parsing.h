@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:06:14 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/09 16:08:51 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:49:53 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,12 @@ void	extract_cylinder(t_minirt *minirt, t_list **lexer, int line);
 void	extract_camera(t_minirt *minirt, t_list **lexer, int line);
 void	extract_light(t_minirt *minirt, t_list **lexer, int line);
 void	extract_ambiante_light(t_minirt *minirt, t_list **lexer, int line);
+
+/*
+ *	parsing.c
+ */
+
+bool	parser(t_minirt *minirt, char *filename);
+bool	skip_break(t_list **lexer);
 
 #endif
