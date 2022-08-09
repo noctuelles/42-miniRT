@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 13:54:03 by plouvel           #+#    #+#             */
-/*   Updated: 2022/07/23 18:06:48 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 16:07:50 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 t_matrix4	matrix4_mul(t_matrix4 const A, t_matrix4 const B)
 {
-	t_matrix4	M;
+	t_matrix4	m;
 	uint8_t		i;
 	uint8_t		j;
 
@@ -32,15 +32,15 @@ t_matrix4	matrix4_mul(t_matrix4 const A, t_matrix4 const B)
 		j = 0;
 		while (j < 4)
 		{
-			M.m[i][j] = A.m[i][0] * B.m[0][j] +
-					A.m[i][1] * B.m[1][j] +
-					A.m[i][2] * B.m[2][j] +
-					A.m[i][3] * B.m[3][j];
+			m.m[i][j] = A.m[i][0] * B.m[0][j]
+				+ A.m[i][1] * B.m[1][j]
+				+ A.m[i][2] * B.m[2][j]
+				+ A.m[i][3] * B.m[3][j];
 			j++;
 		}
 		i++;
 	}
-	return (M);
+	return (m);
 }
 
 /* Multiply matrix A with the identity matrix. */
@@ -68,14 +68,12 @@ t_matrix4	matrix4_mul_id(t_matrix4 const A)
 	return (matrix4_mul(A, id));
 }
 
-
-
 /* Transpose a 4x4 matrix.
  * Turn rows into columns and vise-versa.*/
 
 t_matrix4	matrix4_trans(t_matrix4 const A)
 {
-	t_matrix4	M;
+	t_matrix4	m;
 	uint8_t		i;
 	uint8_t		j;
 
@@ -85,12 +83,12 @@ t_matrix4	matrix4_trans(t_matrix4 const A)
 		j = 0;
 		while (j < 4)
 		{
-			M.m[i][j] = A.m[j][i];
+			m.m[i][j] = A.m[j][i];
 			j++;
 		}
 		i++;
 	}
-	return (M);
+	return (m);
 }
 
 /* Multiply a tuple by a 4x4 matrix. Return the transformed tuple. */

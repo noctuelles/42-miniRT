@@ -6,25 +6,25 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:29:32 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/08 17:49:28 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 16:44:49 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "libft.h"
-# include "get_next_line.h"
-# include "minirt_lexer.h"
-# include <stdbool.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <errno.h>
-# include <stdlib.h>
+#include "libft.h"
+#include "get_next_line.h"
+#include "minirt_lexer.h"
+#include <stdbool.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <stdlib.h>
 
 /* check_file_extension() check if filename is a file with the
  * .rt extension. */
 
 static bool	check_file_extension(const char *filename)
 {
-	char *dot;
+	char	*dot;
 
 	dot = ft_strchr(filename, '.');
 	if (!dot)

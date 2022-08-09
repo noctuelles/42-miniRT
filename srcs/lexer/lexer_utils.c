@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:56:35 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/08 17:38:20 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 16:44:28 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	*add_known_token_to_list(t_lexer *lexer)
 		if (lexer->tkn.type == T_LIGHT)
 			lexer->declared_light++;
 		if (add_token_to_list(lexer, lexer->tkn.value, lexer->tkn.len,
-					lexer->tkn.type) == NULL)
+				lexer->tkn.type) == NULL)
 			return (NULL);
 	}
 	lexer->prev = lexer->line;

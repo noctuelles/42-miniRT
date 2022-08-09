@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/09 15:32:45 by plouvel          ###   ########.fr        #
+#    Updated: 2022/08/09 16:31:52 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,39 +34,40 @@ INCS =	$(addprefix -I ,	\
 		libft/includes		\
 		minilibx			)
 		
-SRCS =	end/good_exit.c					\
-		mlx_utils/mlx_struct_manage.c	\
-		mlx_utils/launch_loop.c			\
-		mlx_utils/mlx_utils.c			\
-		renderer/render.c				\
-		renderer/multithreading.c		\
-		math/vector.c					\
-		math/tuple.c					\
-		math/tuple2.c					\
-		math/math_utils.c				\
-		matrix/matrix.c					\
-		matrix/matrix_utils.c			\
-		matrix/matrix_invert.c			\
-		matrix/matrix_invert_utils.c	\
-		matrix/matrix_transform.c		\
-		lexer/file.c					\
-		lexer/file_utils.c				\
-		lexer/io_utils.c				\
-		lexer/lexer.c					\
-		lexer/lexer_utils.c				\
-		lexer/tokens.c					\
-		texture/texture.c				\
-		texture/uv_mapping.c			\
-		plane/intersect_plane.c			\
-		sphere/intersect_sphere.c		\
-		cone/intersect_cone.c			\
-		cylinder/intersect_cylinder.c	\
-		scene/object.c					\
-		scene/scene.c					\
-		scene/camera.c					\
-		shading/shading.c				\
-		shading/shading_utils.c			\
-		main.c							\
+SRCS =	end/good_exit.c						\
+		mlx_utils/mlx_struct_manage.c		\
+		mlx_utils/launch_loop.c				\
+		mlx_utils/mlx_utils.c				\
+		renderer/render.c					\
+		renderer/multithreading.c			\
+		math/vector.c						\
+		math/tuple.c						\
+		math/tuple2.c						\
+		math/math_utils.c					\
+		math/math_utils2.c					\
+		math/matrix/matrix.c				\
+		math/matrix/matrix_utils.c			\
+		math/matrix/matrix_invert.c			\
+		math/matrix/matrix_invert_utils.c	\
+		math/matrix/matrix_transform.c		\
+		lexer/file.c						\
+		lexer/file_utils.c					\
+		lexer/io_utils.c					\
+		lexer/lexer.c						\
+		lexer/lexer_utils.c					\
+		lexer/tokens.c						\
+		texture/texture.c					\
+		texture/uv_mapping.c				\
+		primitives/intersect_plane.c		\
+		primitives/intersect_sphere.c		\
+		primitives/intersect_cone.c			\
+		primitives/intersect_cylinder.c		\
+		scene/object.c						\
+		scene/scene.c						\
+		scene/camera.c						\
+		shading/shading.c					\
+		shading/shading_utils.c				\
+		main.c								\
 
 ################################################################################
 ########							Libraries							########

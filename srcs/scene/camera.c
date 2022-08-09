@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 12:50:45 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 14:00:44 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 16:38:09 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static inline t_matrix4	build_view_matrix(t_point3 org, t_vec3 look)
 	return (transform);
 }
 
-void setup_camera(t_camera *camera, size_t width, size_t height, double fov)
+void	setup_camera(t_camera *camera, size_t width, size_t height, double fov)
 {
 	camera->aspect_ratio = (double) width / height;
 	camera->scalar_fov = tan(((fov / 2) * M_PI) / 180);

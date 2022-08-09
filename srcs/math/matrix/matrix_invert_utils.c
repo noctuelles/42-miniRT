@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 14:09:39 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/24 14:12:08 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 16:09:55 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 static t_matrix2	matrix3_submatrix(t_matrix3 const A, uint8_t row,
 		uint8_t column)
 {
-	t_matrix2	M;
-	uint8_t	i;
-	uint8_t	j;
-	uint8_t	k;
-	uint8_t	l;
+	t_matrix2	m;
+	uint8_t		i;
+	uint8_t		j;
+	uint8_t		k;
+	uint8_t		l;
 
 	i = 0;
 	k = 0;
@@ -33,14 +33,14 @@ static t_matrix2	matrix3_submatrix(t_matrix3 const A, uint8_t row,
 			while (j < 3)
 			{
 				if (j != column)
-					M.m[k][l++] = A.m[i][j];
+					m.m[k][l++] = A.m[i][j];
 				j++;
 			}
 			k++;
 		}
 		i++;
 	}
-	return (M);
+	return (m);
 }
 
 static inline double	matrix2_determinant(t_matrix2 const A)
