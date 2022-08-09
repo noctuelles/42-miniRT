@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:47:41 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/08 16:44:32 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 14:00:43 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 
 /* object.c */
 
-t_object	*new_cone(t_point3 top, t_vec3 direction, double angle, double hauteur, uint32_t color);
 t_object	*new_sphere(t_point3 center, double radius, uint32_t color);
 t_object	*new_plan(t_point3 point, t_vec3 normal, uint32_t color);
 t_object	*new_cylinder(t_point3 pos, double diameter, double height, t_vec3 orientation,
+		uint32_t color);
+t_object	*new_cone(t_point3 pos, double diameter, double height, t_vec3 orient,
 		uint32_t color);
 t_object	*ray_intersect_scene_objs(t_scene *scene, t_ray *ray,
 		t_rayhit *rayhit);
