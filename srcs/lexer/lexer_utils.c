@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:56:35 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 16:44:28 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 16:53:16 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_token	search_known_token(const char *str)
 		return (set_token(STR_PLAN, T_PLAN));
 	if (ft_strncmp(str, STR_CYLINDER, 2) == 0)
 		return (set_token(STR_CYLINDER, T_CYLINDER));
+	if (ft_strncmp(str, STR_CONE, 1) == 0)
+		return (set_token(STR_CONE, T_CONE));
 	if (ft_strncmp(str, STR_AMBIANT_LIGHT, 1) == 0)
 		return (set_token(STR_AMBIANT_LIGHT, T_AMBIANT_LIGHT));
 	if (ft_strncmp(str, STR_CAMERA, 1) == 0)
