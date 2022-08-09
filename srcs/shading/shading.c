@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 20:16:01 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 16:59:24 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 17:22:26 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,17 +99,16 @@ t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit)
 	}
 	rayhit->pcolor = tmul_scalar(scene->amb_light.color,
 			scene->amb_light.intensity);
-	if (vec_dot(rayhit->eyev, rayhit->normal) > 0)
+	if (vec_dot(rayhit->eyev, rayhit->normal) < 0)
+		rayhit->normal = tnegate(rayhit->normal);
+	elem = scene->light;
+	while (elem)
 	{
-		elem = scene->light;
-		while (elem)
-		{
-			light = elem->content;
-			pre_compute(light, rayhit);
-			if (!is_a_shadow(scene, rayhit))
-				apply_lightning(light, rayhit);
-			elem = elem->next;
-		}
+		light = elem->content;
+		pre_compute(light, rayhit);
+		if (!is_a_shadow(scene, rayhit))
+			apply_lightning(light, rayhit);
+		elem = elem->next;
 	}
 	return (tmul(rayhit->pcolor, get_color_from_obj(obj, rayhit)));
 }
