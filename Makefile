@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/09 16:31:52 by plouvel          ###   ########.fr        #
+#    Updated: 2022/08/09 17:03:44 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRCS =	end/good_exit.c						\
 		lexer/lexer_utils.c					\
 		lexer/tokens.c						\
 		texture/texture.c					\
+		texture/texture_utils.c				\
 		texture/uv_mapping.c				\
 		primitives/intersect_plane.c		\
 		primitives/intersect_sphere.c		\

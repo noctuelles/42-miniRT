@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:10:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/09 14:00:49 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 16:57:09 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stddef.h> // -> NULL
 
 # define THREAD_NBR 16
+#define L_POWER 6.0e1
 
 /*
  *	Define windows

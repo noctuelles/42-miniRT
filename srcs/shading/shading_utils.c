@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 16:33:24 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/06 16:51:44 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 16:56:44 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 static inline t_matrix4	build_tbn_matrix(t_vec3 world_normal)
 {
 	t_matrix4	tbn;
-	t_vec3	t;
-	t_vec3	b;
+	t_vec3		t;
+	t_vec3		b;
 
 	t = vec_cross(world_normal, vector(0, 1, 0));
 	if (vec_mag(t) == 0.)
@@ -43,6 +43,5 @@ void	perturb_normal(t_texture texture, t_rayhit *rayhit)
 {
 	rayhit->normal = vec_norm(
 			matrix4_tmul(build_tbn_matrix(rayhit->normal),
-			get_image_normal(texture, rayhit->uv)
-			));
+				get_image_normal(texture, rayhit->uv)));
 }

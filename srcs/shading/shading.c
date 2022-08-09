@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 20:16:01 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 14:00:45 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 16:59:24 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 #include "define.h"
 #include <math.h>
 #include <string.h>
-
-# define L_POWER 6.0e1
 
 /* Using lambertian shading.
  * Note that i'm dividing by the distance square to get a more realistic
@@ -78,6 +76,13 @@ static inline t_color	get_color_from_obj(t_object *obj, t_rayhit *rayhit)
 		return (obj->albedo);
 }
 
+static inline void	pre_compute(t_light *light, t_rayhit *rayhit)
+{
+	rayhit->lightv = tsub(light->pos, rayhit->intersect_p);
+	rayhit->nlightv = vec_norm(rayhit->lightv);
+	rayhit->mag_sqr_lightv = vec_mag_sqr(rayhit->lightv);
+}
+
 /* Loop through every light in the scene.
  * The diffuse coeffecient is applied before the loop. */
 
@@ -86,7 +91,6 @@ t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit)
 	t_list	*elem;
 	t_light	*light;
 
-	rayhit->pcolor = vector(1, 1, 1);
 	if (obj->texture.type != TX_NONE)
 	{
 		rayhit->uv = obj->uvmap_fnct(rayhit->intersect_p_local);
@@ -101,9 +105,7 @@ t_color	get_shade(t_scene *scene, t_object *obj, t_rayhit *rayhit)
 		while (elem)
 		{
 			light = elem->content;
-			rayhit->lightv = tsub(light->pos, rayhit->intersect_p);
-			rayhit->nlightv = vec_norm(rayhit->lightv);
-			rayhit->mag_sqr_lightv = vec_mag_sqr(rayhit->lightv);
+			pre_compute(light, rayhit);
 			if (!is_a_shadow(scene, rayhit))
 				apply_lightning(light, rayhit);
 			elem = elem->next;
