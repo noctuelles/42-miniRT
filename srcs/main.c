@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/09 16:51:17 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/09 17:04:08 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char **av)
 	(void) ac;
 	(void)av;
 
-	t_object	*cobj;
+	//t_object	*cobj;
 	/*t_list	*tkns = lex_from_file(av[1]);
 	if (!tkns)
 		return (1);*/

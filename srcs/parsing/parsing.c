@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:43:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/09 16:45:35 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/09 17:09:23 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,17 @@
 #include "tuple.h"
 #include "parsing.h"
 #include "define.h"
+#include <stdlib.h>
+
+void bad_exit_msg(t_minirt *minirt, t_list **lexer, char *str, int line)
+{
+	ft_lstclear(lexer, &free);
+	printf("Error\n%s%d\n", str, line);
+	(void)minirt;
+	//! mettre clear scene
+	exit(1);
+}
+
 
 bool	skip_break(t_list **lexer)
 {
@@ -37,7 +48,7 @@ bool feed_scene(t_minirt *minirt, t_list **lexer)
 	int		line;
 
 	line = 1;
-	while (D_LEX_CONTENT->type = T_NULL)
+	while (D_LEX_CONTENT->type == T_NULL)
 	{
 		new_line = false;
 		if (D_LEX_CONTENT->type == T_SPHERE)
@@ -46,11 +57,11 @@ bool feed_scene(t_minirt *minirt, t_list **lexer)
 			extract_plan(minirt, lexer, line);
 		else if (D_LEX_CONTENT->type == T_CYLINDER)
 			extract_cylinder(minirt, lexer, line);
-		else if (D_LEX_CONTENT->type = T_CAMERA)
+		else if (D_LEX_CONTENT->type == T_CAMERA)
 			extract_camera(minirt, lexer, line);
-		else if (D_LEX_CONTENT->type = T_LIGHT)
+		else if (D_LEX_CONTENT->type == T_LIGHT)
 			extract_light(minirt, lexer, line);
-		else if (D_LEX_CONTENT->type = T_AMBIANT_LIGHT)
+		else if (D_LEX_CONTENT->type == T_AMBIANT_LIGHT)
 			extract_ambiante_light(minirt, lexer, line);
 		while (D_LEX_CONTENT->type == T_NEWLINE || D_LEX_CONTENT->type == T_BREAK)
 		{
@@ -79,6 +90,8 @@ bool	parser(t_minirt *minirt, char *filename)
 	}
 	if (!feed_scene(minirt, &lex_file))
 	{
-		exit(0);
+		printf("Error\n Sommething bad arrive\n");
+		exit(1);
 	}
+	return (true);
 }

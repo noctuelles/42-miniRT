@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:04:59 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/09 16:39:33 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/09 17:03:53 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	extract_point(t_list **lexer, t_point3 *place)
 	i = 0;
 	while (D_LEX_CONTENT->type != T_NULL && i < 3)
 	{
-		if (D_LEX_CONTENT->type != T_VALUE && ((t_token *)(*lexer)->next->content)->type != T_COMMA || i == 2)
+		if (D_LEX_CONTENT->type != T_VALUE && (((t_token *)(*lexer)->next->content)->type != T_COMMA || i == 2))
 			return (false);
 		cor[i] = ft_atof(D_LEX_CONTENT->value);
 		*lexer = (*lexer)->next;
@@ -48,7 +48,7 @@ bool	extract_vector(t_list **lexer, t_vec3 *vect)
 	i = 0;
 	while (D_LEX_CONTENT->type != T_NULL && i < 3)
 	{
-		if (D_LEX_CONTENT->type != T_VALUE && ((t_token *)(*lexer)->next->content)->type != T_COMMA || i == 2)
+		if (D_LEX_CONTENT->type != T_VALUE && (((t_token *)(*lexer)->next->content)->type != T_COMMA || i == 2))
 			return (false);
 		cor[i] = ft_atof(D_LEX_CONTENT->value);
 		*lexer = (*lexer)->next;
@@ -70,7 +70,7 @@ bool	extract_vector_norm(t_list **lexer, t_vec3 *vect)
 	i = 0;
 	while (D_LEX_CONTENT->type != T_NULL && i < 3)
 	{
-		if (D_LEX_CONTENT->type != T_VALUE && ((t_token *)(*lexer)->next->content)->type != T_COMMA || i == 2)
+		if (D_LEX_CONTENT->type != T_VALUE && (((t_token *)(*lexer)->next->content)->type != T_COMMA || i == 2))
 			return (false);
 		cor[i] = ft_atof(D_LEX_CONTENT->value);
 		if (cor[i] > 1 || cor[i] < -1)
@@ -94,7 +94,7 @@ bool	extract_color(t_list **lexer, uint32_t *color)
 	i = 0;
 	while (D_LEX_CONTENT->type != T_NULL && i < 3)
 	{
-		if (D_LEX_CONTENT->type != T_VALUE && ((t_token *)(*lexer)->next->content)->type != T_COMMA || i == 2)
+		if (D_LEX_CONTENT->type != T_VALUE && (((t_token *)(*lexer)->next->content)->type != T_COMMA || i == 2))
 			return (false);
 		cor[i] = ft_atoi(D_LEX_CONTENT->value);
 		if (cor[i] > 255 || cor[i] < 0)
@@ -106,7 +106,7 @@ bool	extract_color(t_list **lexer, uint32_t *color)
 	}
 	if (i != 3)
 		return false;
-	color = cor[0] << 16 | cor[1] << 8 | cor[2];
+	*color = cor[0] << 16 | cor[1] << 8 | cor[2];
 	return (true);
 }
 
