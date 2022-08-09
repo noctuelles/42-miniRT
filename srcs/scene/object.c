@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:43:00 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 16:39:03 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 23:34:44 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ t_object	*new_cylinder(t_point3 pos, double diameter, double height, t_vec3 orie
 	if (!obj)
 		return (NULL);
 	obj->p.cylinder.diameter = diameter;
-	obj->p.cylinder.half_height = height / 2;
+	obj->p.cylinder.height = 1;
 	obj->type = O_CYLINDER;
 	obj->albedo = get_norm_color(color);
 	obj->fnct = &intersect_cylinder;
 	obj->uvmap_fnct = &get_cylinder_map;
 	obj->p.cylinder.pos = pos;
-	obj->M = matrix4_scale(diameter, diameter, diameter);
+	obj->M = matrix4_scale(diameter, height, diameter);
 	obj->M = matrix4_mul(build_rotation_matrix(vec_norm(orient)), obj->M);
 	obj->M = matrix4_mul(matrix4_translate(pos.x, pos.y, pos.z), obj->M);
 	obj->M_inv = matrix4_inv(obj->M);
@@ -126,7 +126,7 @@ t_object	*new_cone(t_point3 pos, double diameter, double height, t_vec3 orient,
 	obj->p.cylinder.pos = pos;
 	obj->M = matrix4_scale(diameter, height, diameter);
 	obj->M = matrix4_mul(build_rotation_matrix(vec_norm(orient)), obj->M);
-	obj->M = matrix4_mul(matrix4_translate(pos.x, pos.y + (height - 1), pos.z), obj->M);
+	obj->M = matrix4_mul(matrix4_translate(pos.x, pos.y, pos.z), obj->M);
 	obj->M_inv = matrix4_inv(obj->M);
 	obj->M_inv_trans = matrix4_trans(obj->M_inv);
 	return (obj);

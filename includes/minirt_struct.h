@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 15:32:02 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 23:19:24 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef struct s_plan
 typedef struct s_cylinder
 {
 	t_point3	pos;
-	double half_height;
+	double height;
 	double diameter;
 }				t_cylinder;
 

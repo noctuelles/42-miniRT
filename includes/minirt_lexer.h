@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:12:27 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 16:53:18 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 22:08:09 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ typedef enum e_token_type
 	T_SPHERE,
 	T_PLAN,
 	T_CYLINDER,
-	T_CONE,
 	T_VALUE,
 	T_NEWLINE,
 	T_COMMA,
 	T_BREAK,
-	T_NULL
+	T_NULL,
+	T_CONE
 }				t_token_type;
 
 typedef struct e_token
@@ -120,5 +120,7 @@ void	*add_known_token_to_list(t_lexer *lexer);
 t_token	search_known_token(const char *str);
 t_token	*add_token_to_list(t_lexer *lexer, char *value, size_t len,
 		t_token_type type);
+
+t_list		*lex_from_file(const char *filename);
 
 #endif
