@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:43:00 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/08 17:43:52 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 15:31:58 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ t_object	*new_cylinder(t_point3 pos, double diameter, double height, t_vec3 orie
 	obj->fnct = &intersect_cylinder;
 	obj->uvmap_fnct = &get_cylinder_map;
 	obj->p.cylinder.pos = pos;
-	obj->M = build_rotation_matrix(vec_norm(orient));
-	obj->M = matrix4_mul(matrix4_scale(diameter, diameter, diameter), obj->M);
+	obj->M = matrix4_scale(diameter, diameter, diameter);
+	obj->M = matrix4_mul(build_rotation_matrix(vec_norm(orient)), obj->M);
 	obj->M = matrix4_mul(matrix4_translate(pos.x, pos.y, pos.z), obj->M);
 	obj->M_inv = matrix4_inv(obj->M);
 	obj->M_inv_trans = matrix4_trans(obj->M_inv);
@@ -104,6 +104,29 @@ t_object	*new_plan(t_point3 pos, t_vec3 normal, uint32_t color)
 	obj->albedo = get_norm_color(color);
 	obj->M = build_rotation_matrix(vec_norm(normal));
 	obj->M = matrix4_mul(matrix4_translate(pos.x, pos.y, pos.z), obj->M);
+	obj->M_inv = matrix4_inv(obj->M);
+	obj->M_inv_trans = matrix4_trans(obj->M_inv);
+	return (obj);
+}
+
+t_object	*new_cone(t_point3 pos, double diameter, double height, t_vec3 orient,
+		uint32_t color)
+{
+	t_object	*obj;
+
+	obj = malloc(sizeof(t_object));
+	if (!obj)
+		return (NULL);
+	obj->p.cone.diameter = diameter;
+	obj->p.cone.height = height;
+	obj->type = O_CONE;
+	obj->albedo = get_norm_color(color);
+	obj->fnct = &intersect_cone;
+	obj->uvmap_fnct = &get_cone_map;
+	obj->p.cylinder.pos = pos;
+	obj->M = matrix4_scale(diameter, height, diameter);
+	obj->M = matrix4_mul(build_rotation_matrix(vec_norm(orient)), obj->M);
+	obj->M = matrix4_mul(matrix4_translate(pos.x, pos.y + (height - 1), pos.z), obj->M);
 	obj->M_inv = matrix4_inv(obj->M);
 	obj->M_inv_trans = matrix4_trans(obj->M_inv);
 	return (obj);

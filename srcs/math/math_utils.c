@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:43:25 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 10:58:11 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 15:31:55 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ bool	fequals(double a, double b)
 		return (true);
 	else
 		return (false);
+}
+
+double	sqr(double a)
+{
+	return (a * a);
 }
 
 /* Solve a given quadratic equation with the given parameter. */

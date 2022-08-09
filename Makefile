@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/08 17:39:48 by plouvel          ###   ########.fr        #
+#    Updated: 2022/08/09 15:32:45 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCS =	end/good_exit.c					\
 		texture/uv_mapping.c			\
 		plane/intersect_plane.c			\
 		sphere/intersect_sphere.c		\
+		cone/intersect_cone.c			\
 		cylinder/intersect_cylinder.c	\
 		scene/object.c					\
 		scene/scene.c					\

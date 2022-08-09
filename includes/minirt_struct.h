@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/08 17:43:20 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 15:32:02 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef enum e_object_type
 	O_SPHERE,
 	O_SPHERE_SKYBOX,
 	O_PLAN,
+	O_CONE,
 	O_CYLINDER
 }			t_object_type;
 
@@ -96,6 +97,13 @@ typedef struct s_cylinder
 	double half_height;
 	double diameter;
 }				t_cylinder;
+
+typedef struct s_cone
+{
+	t_point3	pos;
+	double height;
+	double diameter;
+}				t_cone;
 
 typedef struct s_light
 {
@@ -207,6 +215,7 @@ struct s_object
 		t_sphere	sphere;
 		t_plan		plan;
 		t_cylinder	cylinder;
+		t_cone		cone;
 	} p;
 	t_rayhit			rayhit;
 	t_matrix4			M;
