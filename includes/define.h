@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:10:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 09:47:57 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:29:34 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stddef.h> // -> NULL
 
 # define THREAD_NBR 16
+#define L_POWER 6.0e1
 
 #define D_LEX_CONTENT ((t_token *)(*lexer)->content)
 #define D_LEX_NEXT_CONTENT ((t_token *)(*lexer)->next->content)

@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 09:37:20 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:30:16 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "renderer.h"
 #include "multithreading.h"
 #include "minirt_lexer.h"
+#include "minirt_lexer.h"
 #include <pthread.h>
 #include <string.h>
 #include "matrix.h"
@@ -26,7 +27,40 @@
 #include "scene.h"
 #include <math.h>
 #include <stdio.h>
-
+char *translate(t_token_type type)
+{
+	if (type == 0)
+		return ("T_AMBIANT_LIGHT");
+	if (type == 1)
+		return ("T_CAMERA");
+	if (type == 2)
+		return ("T_LIGHT");
+	if (type == 3)
+		return ("T_SPHERE");
+	if (type == 4)
+		return ("T_PLAN");
+	if (type == 5)
+		return ("T_CYLINDER");
+	if (type == 6)
+		return ("T_VALUE");
+	if (type == 7)
+		return ("T_NEWLINE");
+	if (type == 8)
+		return ("T_COMMA");
+	if (type == 9)
+		return ("T_CONE");
+	return ("NULL");
+}
+void	print_tokens(t_list *tkns)
+{
+	for (t_list *elem = tkns; elem; elem = elem->next)
+	{
+		t_token *tkn = elem->content;
+		printf("<%s> ", translate(tkn->type));
+		if (tkn->type == T_NEWLINE)
+			printf("\n");
+	}
+}
 int	main(int ac, char **av)
 {
 	t_minirt	minirt;
@@ -50,17 +84,40 @@ int	main(int ac, char **av)
 	if (!tkns)
 		return (1);*/
 
-	/*t_texture texture;
-	create_image_texture(minirt.mlx.ptr, &texture, "textures/moon.xpm");
-	t_texture	skybox;
+	/*t_texture	skybox;
 	create_image_texture(minirt.mlx.ptr, &skybox, "textures/stars.xpm");
 	apply_normal_map_to_texture(minirt.mlx.ptr, &texture, "textures/moon_nmap.xpm");
 
-	cobj = add_obj_to_scene(&minirt.scene, new_plan(point(0, -1, 0), vector(0, 1, 0.0), 0xffffff));
-	cobj = add_obj_to_scene(&minirt.scene, new_cone(point(4, 0, 5), 2, 4, vector(0, 1, 0.), 0x00ffff));
-	apply_obj_texture(cobj, create_checkered_texture(16, 8, 0xFF0000, 0xFFFFFF));
-	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(0, 0.0, 5), 1, 3, vector(0, 1, 0), 0x00ffff));
-	apply_obj_texture(cobj, create_checkered_texture(16, 2, 0x00FFFF, 0xFFFFFF));
+	cobj = add_obj_to_scene(&minirt.scene, new_plan(point(0, 0, 0), vector(0, 1, 0), 0xffffff));
+	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0x000000, 0xFFFFFF));
+	cobj = add_obj_to_scene(&minirt.scene, new_plan(point(0, 0, 10), vector(0, 0, -1), 0x00ffff));
+	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0x000000, 0xFFFFFF));
+	cobj = add_obj_to_scene(&minirt.scene, new_plan(point(-5, 0, 0), vector(-1, 0, 0), 0xff00ff));
+	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0x000000, 0xFFFFFF));
+	cobj = add_obj_to_scene(&minirt.scene, new_plan(point(5, 0, 0), vector(1, 0, 0), 0xffff00));
+	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0x000000, 0xFFFFFF));
+	cobj = add_obj_to_scene(&minirt.scene, new_plan(point(0, 10, 0), vector(0, -1, 0), 0xff0000));
+	apply_obj_texture(cobj, create_checkered_texture(4, 4, 0x000000, 0xFFFFFF));
+
+	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(-1, 0, 6), 1, 2, vector(0, 1, 0), 0xff00ff));
+	apply_obj_texture(cobj, create_checkered_texture(16, 8, 0x00FFFF, 0xFFFFFF));
+
+	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(1, 0, 7), 0.7, 3, vector(0, 1, 0), 0xff00ff));
+	apply_obj_texture(cobj, create_checkered_texture(16, 8, 0x00FFFF, 0xFFFFFF));
+
+	cobj = add_obj_to_scene(&minirt.scene, new_cone(point(-1, 4, 6), 1, 2, vector(0, 1, 0), 0xff00ff));
+	apply_obj_texture(cobj, create_checkered_texture(16, 8, 0x00FFFF, 0xFFFFFF));
+
+	cobj = add_obj_to_scene(&minirt.scene, new_cone(point(1, 5, 7), 0.7, 2, vector(0, 1, 0), 0xff00ff));
+	apply_obj_texture(cobj, create_checkered_texture(16, 8, 0x00FFFF, 0xFFFFFF));
+
+	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(-1, 5, 6), 1, 0x00FFFF));
+	apply_obj_texture(cobj, create_checkered_texture(8, 8, 0x000000, 0x00FFFF));
+	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(1, 6, 7), 1, 0x00FFFF));
+	apply_obj_texture(cobj, create_checkered_texture(8, 8, 0x000000, 0xFFFFFF));
+	//cobj = add_obj_to_scene(&minirt.scene, new_cone(point(-1, 3.4, 7), 0.7, 2, vector(0, 1, 0), 0xff00ff));
+
+
 
 	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(0, 1, 8), 1, 0x00FF00));
 	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(2, 3, 8), 1, 0x00FF00));

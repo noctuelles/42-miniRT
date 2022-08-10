@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:12:27 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 16:56:07 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:29:39 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@
 # define STR_ERROR                  "Error\n"
 # define STR_INVALID_FILE_EXTENSION "invalid file extension"
 # define STR_ERROR_FILE_READ        "an error occured during file reading"
-# define STR_EMPTY_FILE             "empty file"
+# define STR_EMPTY_FILE             "empty or invalid file, every line must be\
+terminated by a newline."
 
 # define STR_TOO_MUCH_AMLIGHT       "minirt: line %u: ambiant light cannot be \
 declared more than once.\n"
@@ -57,12 +58,12 @@ typedef enum e_token_type
 	T_SPHERE,
 	T_PLAN,
 	T_CYLINDER,
-	T_CONE,
 	T_VALUE,
 	T_NEWLINE,
 	T_COMMA,
 	T_BREAK,
-	T_NULL
+	T_NULL,
+	T_CONE
 }				t_token_type;
 
 typedef struct e_token
@@ -126,5 +127,7 @@ void	*add_known_token_to_list(t_lexer *lexer);
 t_token	search_known_token(const char *str);
 t_token	*add_token_to_list(t_lexer *lexer, char *value, size_t len,
 		t_token_type type);
+
+t_list		*lex_from_file(const char *filename);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:41:15 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 16:20:29 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 13:25:01 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static inline t_vec3	compute_normal(t_object *obj, t_point3 t)
 	double	radius;
 
 	radius = t.x * t.x + t.z * t.z;
-	if (radius < 1 && t.y >= obj->p.cylinder.half_height - EPSILON)
+	if (radius < 1 && t.y >= 1 - EPSILON)
 		obj_normal = vector(0, 1, 0);
-	else if (radius < 1 && t.y <= -obj->p.cylinder.half_height + EPSILON)
+	else if (radius < 1 && t.y <= 0 + EPSILON)
 		obj_normal = vector(0, -1, 0);
 	else
 		obj_normal = vector(t.x, 0, t.z);
@@ -57,15 +57,15 @@ static inline bool	check_end_cap(t_ray ray, double t)
 }
 
 static inline void
-	intersect_cylinder_endcap(t_ray lray, double halfh, double *endcap_t)
+	intersect_cylinder_endcap(t_ray lray, double *endcap_t)
 {
 	double	t[2];
 	double	inter_t[2];
 
 	inter_t[0] = INFINITY;
 	inter_t[1] = INFINITY;
-	t[0] = (-halfh - lray.org.y) / lray.dir.y;
-	t[1] = (halfh - lray.org.y) / lray.dir.y;
+	t[0] = -lray.org.y / lray.dir.y;
+	t[1] = (1 - lray.org.y) / lray.dir.y;
 	if (t[0] > 0 && check_end_cap(lray, t[0]))
 		inter_t[0] = t[0];
 	if (t[1] > 0 && check_end_cap(lray, t[1]))
@@ -74,7 +74,7 @@ static inline void
 }
 
 static inline void
-	intersect_cylinder_body(t_ray lray, double halfh, double *body_t)
+	intersect_cylinder_body(t_ray lray, double *body_t)
 {
 	double	t[2];
 	double	valid_t[2];
@@ -91,9 +91,9 @@ static inline void
 			return ;
 		y[0] = lray.org.y + lray.dir.y * t[0];
 		y[1] = lray.org.y + lray.dir.y * t[1];
-		if (y[0] > -halfh && y[0] < halfh)
+		if (y[0] > 0 && y[0] < 1)
 			valid_t[0] = t[0];
-		if (y[1] > -halfh && y[1] < halfh)
+		if (y[1] > 0 && y[1] < 1)
 			valid_t[1] = t[1];
 		if (valid_t[0] < valid_t[1] && valid_t[0] > 0)
 			*body_t = valid_t[0];
@@ -110,8 +110,8 @@ bool	intersect_cylinder(t_object *obj, t_ray *ray, t_rayhit *rayhit)
 	cyl_t[0] = INFINITY;
 	cyl_t[1] = INFINITY;
 	lray = ray_transform(*ray, obj->M_inv);
-	intersect_cylinder_body(lray, obj->p.cylinder.half_height, &cyl_t[0]);
-	intersect_cylinder_endcap(lray, obj->p.cylinder.half_height, &cyl_t[1]);
+	intersect_cylinder_body(lray, &cyl_t[0]);
+	intersect_cylinder_endcap(lray, &cyl_t[1]);
 	rayhit->t = min(cyl_t[0], cyl_t[1]);
 	if (rayhit->t == INFINITY)
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 09:15:30 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:29:48 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef struct s_plan
 typedef struct s_cylinder
 {
 	t_point3	pos;
-	double half_height;
+	double height;
 	double diameter;
 }				t_cylinder;
 
@@ -211,13 +211,6 @@ typedef struct s_texture
 
 struct s_object
 {
-	union
-	{
-		t_sphere	sphere;
-		t_plan		plan;
-		t_cylinder	cylinder;
-		t_cone		cone;
-	} p;
 	t_rayhit			rayhit;
 	t_matrix4			M;
 	t_matrix4			M_inv;
