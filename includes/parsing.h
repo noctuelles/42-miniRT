@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:06:14 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/09 17:03:02 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 09:14:10 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ bool	extract_double_range(t_list **lexer, double *dbl, double min, double max);
  *	extract_obejct.c
  */
 
-void	extract_sphere(t_minirt *minirt, t_list **lexer, int line);
-void	extract_plan(t_minirt *minirt, t_list **lexer, int line);
-void	extract_cylinder(t_minirt *minirt, t_list **lexer, int line);
-void	extract_camera(t_minirt *minirt, t_list **lexer, int line);
-void	extract_light(t_minirt *minirt, t_list **lexer, int line);
-void	extract_ambiante_light(t_minirt *minirt, t_list **lexer, int line);
+void	extract_sphere(t_minirt *minirt, t_list **lexer);
+void	extract_plan(t_minirt *minirt, t_list **lexer);
+void	extract_cylinder(t_minirt *minirt, t_list **lexer);
+void	extract_camera(t_minirt *minirt, t_list **lexer);
+void	extract_light(t_minirt *minirt, t_list **lexer);
+void	extract_ambiante_light(t_minirt *minirt, t_list **lexer);
 
 /*
  *	parsing.c
  */
 
-void bad_exit_msg(t_minirt *minirt, t_list **lexer, char *str, int line);
+void	bad_exit_msg(t_minirt *minirt, char *str);
 bool	parser(t_minirt *minirt, char *filename);
 bool	skip_break(t_list **lexer);
 

@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:43:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 09:08:02 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 09:19:04 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@
 #include "define.h"
 #include <stdlib.h>
 
-void bad_exit_msg(t_minirt *minirt, t_list **lexer, char *str, int line)
+void bad_exit_msg(t_minirt *minirt, char *str)
 {
-	ft_lstclear(lexer, &free);
-	printf("Error\n%s%d\n", str, line);
-	(void)minirt;
+	ft_lstclear(minirt->start_lexer, &free);
+	printf("Error\n%s\n", str);
 	//! mettre clear scene
 	exit(1);
 }
@@ -45,32 +44,29 @@ bool	skip_break(t_list **lexer)
 bool feed_scene(t_minirt *minirt, t_list **lexer)
 {
 	bool	new_line;
-	int		line;
 
-	line = 1;
 	while (D_LEX_CONTENT->type != T_NULL)
 	{
 		new_line = false;
 		if (D_LEX_CONTENT->type == T_SPHERE)
-			extract_sphere(minirt, lexer, line);
+			extract_sphere(minirt, lexer);
 		else if (D_LEX_CONTENT->type == T_PLAN)
-			extract_plan(minirt, lexer, line);
+			extract_plan(minirt, lexer);
 		else if (D_LEX_CONTENT->type == T_CYLINDER)
-			extract_cylinder(minirt, lexer, line);
+			extract_cylinder(minirt, lexer);
 		else if (D_LEX_CONTENT->type == T_CAMERA)
-			extract_camera(minirt, lexer, line);
+			extract_camera(minirt, lexer);
 		else if (D_LEX_CONTENT->type == T_LIGHT)
-			extract_light(minirt, lexer, line);
+			extract_light(minirt, lexer);
 		else if (D_LEX_CONTENT->type == T_AMBIANT_LIGHT)
-			extract_ambiante_light(minirt, lexer, line);
-		while (D_LEX_CONTENT->type == T_NEWLINE)
+			extract_ambiante_light(minirt, lexer);
+		if (D_LEX_CONTENT->type == T_NEWLINE)
 		{
-			line++;
 			new_line = true;
 			*lexer = (*lexer)->next;
 		}
-		if (new_line == false && lexer) //! reste information qui ne peuvent etre traite
-			bad_exit_msg(minirt, lexer, "Bad format line: ", line);
+		if (new_line == false && D_LEX_CONTENT->type != T_NULL) //! reste information qui ne peuvent etre traite
+			bad_exit_msg(minirt, "Bad idenfier");
 	}
 	return (true);
 }
