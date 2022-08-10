@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:10:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 13:29:34 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 20:11:09 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stddef.h> // -> NULL
 
-# define THREAD_NBR 16
+# define THREAD_NBR 8
 #define L_POWER 6.0e1
 
 #define D_LEX_CONTENT ((t_token *)(*lexer)->content)
@@ -32,13 +32,13 @@
 # define WIDTH  1440 
 # define HEIGHT 900
 
-# define EPSILON 0.00001
+# define EPSILON 0.0001
 
 /*
  *	Temporary define
  */
 
-# define FOV_ANGLE 90.0
+# define FOV_ANGLE 100.0
 # define FOV       (FOV_ANGLE * M_PI) / 180
 
 # define ANGLE(x) (x * M_PI) / 180

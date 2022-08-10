@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:12:27 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 13:29:39 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 20:11:20 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define STR_ERROR_FILE_READ        "an error occured during file reading"
 # define STR_EMPTY_FILE             "empty or invalid file, every line must be\
 terminated by a newline."
+# define STR_INVALID_SYNTAX         "minirt: line %u: invalid syntax.\n"
 
 # define STR_TOO_MUCH_AMLIGHT       "minirt: line %u: ambiant light cannot be \
 declared more than once.\n"
@@ -127,6 +128,8 @@ void	*add_known_token_to_list(t_lexer *lexer);
 t_token	search_known_token(const char *str);
 t_token	*add_token_to_list(t_lexer *lexer, char *value, size_t len,
 		t_token_type type);
+ssize_t	analysis_syntax(t_list	*tkns);
+void	remove_break_tokens(t_list **tkns);
 
 t_list		*lex_from_file(const char *filename);
 
