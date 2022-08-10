@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:56:35 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 15:54:12 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 17:43:07 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	*add_known_token_to_list(t_lexer *lexer)
 			lexer->declared_ambiant_light++;
 		if (lexer->tkn.type == T_CAMERA)
 			lexer->declared_camera++;
-		if (lexer->tkn.type == T_LIGHT)
-			lexer->declared_light++;
 	}
 	if (add_token_to_list(lexer, lexer->tkn.value, lexer->tkn.len,
 			lexer->tkn.type) == NULL)
@@ -89,4 +87,60 @@ t_token	*add_token_to_list(t_lexer *lexer, char *value, size_t len,
 	}
 	ft_lstadd_back(&lexer->list_tkns, elem);
 	return (tkn);
+}
+
+ssize_t	analysis_syntax(t_list	*tkns)
+{
+	t_list	*elem;
+	t_token	*tkn;
+	t_token	*prev_tkn;
+	size_t	i;
+
+	elem = tkns;
+	prev_tkn = NULL;
+	i = 0;
+	while (elem)
+	{
+		tkn = elem->content;
+		if (prev_tkn)
+		{
+			if ((prev_tkn->type == T_VALUE) && (tkn->type != T_NEWLINE
+					&& tkn->type != T_COMMA && tkn->type != T_BREAK))
+				return (i);
+			else if ((prev_tkn->type >= T_AMBIANT_LIGHT && prev_tkn->type
+					<= T_LIGHT) && tkn->type != T_BREAK) 
+				return (i);
+		}
+		prev_tkn = tkn;
+		elem = elem->next;
+	}
+	return (-1);
+}
+
+void	remove_break_tokens(t_list **tkns)
+{
+	t_list	*elem;
+	t_list	*prev_elem;
+	t_token	*tkn;
+
+	elem = *tkns;
+	prev_elem = NULL;
+	while (elem)
+	{
+		tkn = elem->content;
+		if (prev_elem && tkn->type == T_BREAK)
+		{
+			prev_elem->next = elem->next;
+			ft_lstdelone(elem, free);
+			elem = prev_elem;
+		}
+		prev_elem = elem;
+		elem = elem->next;
+	}
+	if (((t_token *)(*tkns)->content)->type == T_BREAK)
+	{
+		elem = (*tkns)->next;
+		ft_lstdelone(*tkns, free);
+		*tkns = elem;
+	}
 }

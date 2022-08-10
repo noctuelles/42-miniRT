@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 15:05:09 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 17:43:12 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,8 @@ int	main(int ac, char **av)
 	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(5.5, 0.0, 8), 0.5, 39, vector(-1, 1, 0), 0xff00ff));
 	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(-5.5, 0.0, 8), 0.5, 39, vector(1, 1, 0), 0xff00ff));*/
 
-	add_light_to_scene(&minirt.scene, point(0, 0, 0), 0xffffff, 0.5);
-	set_ambiant_light(&minirt.scene, 0xFFFFFF, 0.1);
+	add_light_to_scene(&minirt.scene, point(0, 0, 0), 0xffffff, 0.8);
+	set_ambiant_light(&minirt.scene, 0xFFFFFF, 0.2);
 
 
 	setup_workers(&minirt);

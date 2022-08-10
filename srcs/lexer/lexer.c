@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:54:50 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 16:45:37 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 17:43:06 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,66 +72,12 @@ t_list	*lex_file(t_lexer *lexer)
 	return (lexer->list_tkns);
 }
 
-bool	analysis_syntax(t_list	*tkns)
-{
-	t_list	*elem;
-	t_token	*tkn;
-	t_token	*prev_tkn;
 
-	elem = tkns;
-	prev_tkn = NULL;
-	while (elem)
-	{
-		tkn = elem->content;
-		if (prev_tkn)
-		{
-			if ((prev_tkn->type == T_VALUE) &&
-					(tkn->type != T_NEWLINE && tkn->type != T_COMMA
-					 && tkn->type != T_BREAK))
-				return (false);
-			else if ((prev_tkn->type >= T_AMBIANT_LIGHT
-					&& prev_tkn->type <= T_LIGHT)
-					&& tkn->type != T_BREAK) 
-				return (false);
-		}
-		prev_tkn = tkn;
-		elem = elem->next;
-	}
-	return (true);
-}
-
-void	remove_break_tokens(t_list **tkns)
-{
-	t_list	*elem;
-	t_list	*prev_elem;
-	t_token	*tkn;
-
-	elem = *tkns;
-	prev_elem = NULL;
-	while (elem)
-	{
-		tkn = elem->content;
-		if (prev_elem && tkn->type == T_BREAK)
-		{
-			prev_elem->next = elem->next;
-			ft_lstdelone(elem, free);
-			elem = prev_elem;
-		}
-		prev_elem = elem;
-		elem = elem->next;
-	}
-	if (((t_token *)(*tkns)->content)->type == T_BREAK)
-	{
-		elem = (*tkns)->next;
-		ft_lstdelone(*tkns, free);
-		*tkns = elem;
-	}
-}
 
 t_list	*lex_from_file(const char *filename)
 {
 	t_lexer	lexer;
-	size_t	i;
+	ssize_t	i;
 
 	ft_memset(&lexer, 0, sizeof(lexer));
 	lexer.file_content = read_file(filename);
@@ -142,58 +88,15 @@ t_list	*lex_from_file(const char *filename)
 		i = 0;
 		while (lexer.file_content[i] != NULL)
 			free(lexer.file_content[i++]);
+		i = analysis_syntax(lexer.list_tkns);
+		if (i == -1)
+			remove_break_tokens(&lexer.list_tkns);
+		else
+		{
+			print_error_line_nbr(STR_INVALID_SYNTAX, i);
+			ft_lstclear(&lexer.list_tkns, free);
+		}
 	}
-	else
-		print_error(STR_ERROR_FILE_READ);
-	if (analysis_syntax(lexer.list_tkns))
-		printf("Analys ok !\n");
-	else
-		puts("Analysis bad.");
-	remove_break_tokens(&lexer.list_tkns);
 	free(lexer.file_content);
 	return (lexer.list_tkns);
 }
-
-/* char *translate(t_token_type type)
-{
-	if (type == 0)
-		return ("T_AMBIANT_LIGHT");
-	if (type == 1)
-		return ("T_CAMERA");
-	if (type == 2)
-		return ("T_LIGHT");
-	if (type == 3)
-		return ("T_SPHERE");
-	if (type == 4)
-		return ("T_PLAN");
-	if (type == 5)
-		return ("T_CYLINDER");
-	if (type == 6)
-		return ("T_VALUE");
-	if (type == 7)
-		return ("T_NEWLINE");
-	if (type == 8)
-		return ("T_COMMA");
-	return ("NULL");
-}
-void	print_tokens(t_list *tkns)
-{
-	for (t_list *elem = tkns; elem; elem = elem->next)
-	{
-		t_token *tkn = elem->content;
-		printf("<%s> ", translate(tkn->type));
-		if (tkn->type == T_NEWLINE)
-			printf("\n");
-	}
-}
-int main(int argc, char **argv)
-{
-	if (argc > 1)
-	{
-		t_list	*test_list = lex_from_file(argv[1]);
-		if (test_list)
-		{
-			print_tokens(test_list);
-		}
-	}
-}*/
