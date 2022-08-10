@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:54:50 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 17:46:18 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 22:08:42 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ static void	*finish_line(t_lexer *lexer)
 	return (lexer);
 }
 
+static void	*finish_lexing(t_lexer *lexer)
+{
+	if (add_token_to_list(lexer, NULL, 0, T_NULL) == NULL)
+		return (quit(lexer, E_LEX_MALLOC));
+	return (lexer->list_tkns);
+}
+
 t_list	*lex_file(t_lexer *lexer)
 {
 	while (lexer->file_content[lexer->line_nbr] != NULL)
@@ -69,7 +76,7 @@ t_list	*lex_file(t_lexer *lexer)
 		if (!finish_line(lexer))
 			return (NULL);
 	}
-	return (lexer->list_tkns);
+	return (finish_lexing(lexer));
 }
 
 t_list	*lex_from_file(const char *filename)
@@ -79,7 +86,7 @@ t_list	*lex_from_file(const char *filename)
 
 	ft_memset(&lexer, 0, sizeof(lexer));
 	lexer.file_content = read_file(filename);
-	if (lexer.file_content && *lexer.file_content != NULL)
+	if (lexer.file_content)
 	{
 		lexer.line = *lexer.file_content;
 		lexer.list_tkns = lex_file(&lexer);
@@ -87,12 +94,12 @@ t_list	*lex_from_file(const char *filename)
 		while (lexer.file_content[i] != NULL)
 			free(lexer.file_content[i++]);
 		i = analysis_syntax(lexer.list_tkns);
-		if (i == -1)
+		if (i == ANALYSIS_OK)
 			remove_break_tokens(&lexer.list_tkns);
 		else
 		{
 			print_error_line_nbr(STR_INVALID_SYNTAX, i);
-			ft_lstclear(&lexer.list_tkns, free);
+			ft_lstclear(&lexer.list_tkns, free_token);
 		}
 	}
 	free(lexer.file_content);

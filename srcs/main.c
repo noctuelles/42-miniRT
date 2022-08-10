@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 18:09:42 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 21:54:01 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,14 @@ int	main(int ac, char **av)
 	(void)av;
 
 	t_object	*cobj;
-	//t_list	*tkns = lex_from_file(av[1]);
-	/*if (!tkns)
+	t_list	*tkns = lex_from_file(av[1]);
+	if (!tkns)
 		return (1);
 	else
 	{
 		print_tokens(tkns);
 		return (0);
-	}*/
+	}
 	if (!init_mlx_struct(&minirt.mlx))
 		return (1);
 

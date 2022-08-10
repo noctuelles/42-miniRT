@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:56:35 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 17:46:18 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 22:07:30 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ ssize_t	analysis_syntax(t_list	*tkns)
 		if (prev_tkn)
 		{
 			if ((prev_tkn->type == T_VALUE) && (tkn->type != T_NEWLINE
-					&& tkn->type != T_COMMA && tkn->type != T_BREAK))
+					&& tkn->type != T_COMMA && tkn->type != T_BREAK
+					&& tkn->type != T_NULL))
 				return (i);
 			else if ((prev_tkn->type >= T_AMBIANT_LIGHT && prev_tkn->type
 					<= T_LIGHT) && tkn->type != T_BREAK) 
@@ -114,7 +115,7 @@ ssize_t	analysis_syntax(t_list	*tkns)
 		prev_tkn = tkn;
 		elem = elem->next;
 	}
-	return (-1);
+	return (ANALYSIS_OK);
 }
 
 void	remove_break_tokens(t_list **tkns)

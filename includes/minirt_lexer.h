@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:12:27 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 17:46:20 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 22:04:03 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ declared more than once.\n"
 # define STR_FUNCTION_READ          "read"
 # define STR_FUNCTION_OPEN          "open"
 # define STR_FUNCTION_MALLOC        "malloc"
+
+# define ANALYSIS_OK                -1
 
 typedef enum e_token_type
 {
@@ -103,6 +105,7 @@ char	**read_file(const char *filename);
 /* file_utils.c */
 
 size_t	get_file_nbr_lines(int fd);
+char	*readline(int fd, char **line);
 
 /* io_utils.c */
 
