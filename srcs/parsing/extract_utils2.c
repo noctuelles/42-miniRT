@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 15:08:19 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 15:09:40 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 15:30:32 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ bool	extract_point(t_list **lexer, t_point3 *place)
 	{
 		if (!(*lexer) || (i != 2 && !((*lexer)->next)))
 			return (false);
-		if (D_LEX_CONTENT->type != T_VALUE && (D_LEX_NEXT_CONTENT->type != T_COMMA || i == 2))
+		if (D_LEX_CONTENT->type != T_VALUE
+			&& (D_LEX_NEXT_CONTENT->type != T_COMMA || i == 2))
 			return (false);
 		cor[i] = ft_atof(D_LEX_CONTENT->value);
 		*lexer = (*lexer)->next;
@@ -53,7 +54,8 @@ bool	extract_vector(t_list **lexer, t_vec3 *vect)
 	{
 		if (!(*lexer) || (i != 2 && !((*lexer)->next)))
 			return (false);
-		if (D_LEX_CONTENT->type != T_VALUE && (D_LEX_NEXT_CONTENT->type != T_COMMA || i == 2))
+		if (D_LEX_CONTENT->type != T_VALUE
+			&& (D_LEX_NEXT_CONTENT->type != T_COMMA || i == 2))
 			return (false);
 		cor[i] = ft_atof(D_LEX_CONTENT->value);
 		*lexer = (*lexer)->next;
@@ -77,7 +79,8 @@ bool	extract_vector_norm(t_list **lexer, t_vec3 *vect)
 	{
 		if (!(*lexer) || (i != 2 && !((*lexer)->next)))
 			return (false);
-		if (D_LEX_CONTENT->type != T_VALUE && (D_LEX_NEXT_CONTENT->type != T_COMMA || i == 2))
+		if (D_LEX_CONTENT->type != T_VALUE
+			&& (D_LEX_NEXT_CONTENT->type != T_COMMA || i == 2))
 			return (false);
 		cor[i] = ft_atof(D_LEX_CONTENT->value);
 		if (cor[i] > 1 || cor[i] < -1)
@@ -101,10 +104,10 @@ bool	extract_color(t_list **lexer, uint32_t *color)
 	i = 0;
 	while (i < 3)
 	{
-		printf ("i : %d\n", i);
 		if (!(*lexer) || (i != 2 && !((*lexer)->next)))
 			return (false);
-		if (D_LEX_CONTENT->type != T_VALUE && (D_LEX_NEXT_CONTENT->type != T_COMMA || i == 2))
+		if (D_LEX_CONTENT->type != T_VALUE
+			&& (D_LEX_NEXT_CONTENT->type != T_COMMA || i == 2))
 			return (false);
 		cor[i] = ft_atoi(D_LEX_CONTENT->value);
 		if (cor[i] > 255 || cor[i] < 0)

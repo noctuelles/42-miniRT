@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:04:59 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 15:09:53 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 15:32:24 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ bool	extract_double_pos(t_list **lexer, double *dbl)
 	return (true);
 }
 
-bool	extract_double_range(t_list **lexer, double *dbl, double min, double max)
+bool	extract_double_range(t_list **lexer, double *dbl, double min,
+								double max)
 {
 	if (!(*lexer) || D_LEX_CONTENT->type != T_VALUE)
 		return (false);
@@ -46,7 +47,6 @@ bool	extract_texture(t_minirt *minirt, t_list **lexer, t_object *obj, double wid
 	uint32_t	color1;
 	uint32_t	color2;
 
-	printf("str: %s\n", D_LEX_CONTENT->value);
 	if (D_LEX_CONTENT->type == T_NEWLINE)
 		return (true);
 	if (ft_strcmp(D_LEX_CONTENT->value, "texture") == 0)
@@ -74,9 +74,9 @@ bool	extract_texture(t_minirt *minirt, t_list **lexer, t_object *obj, double wid
 	{
 		*lexer = (*lexer)->next;
 		if (!extract_color(lexer, &color1))
-			bad_exit_msg(minirt, "1Bad format for checker texture");
+			bad_exit_msg(minirt, "Bad format for checker texture");
 		if (!extract_color(lexer, &color2))
-			bad_exit_msg(minirt, "2Bad format for checker texture");
+			bad_exit_msg(minirt, "Bad format for checker texture");
 		obj->texture = create_checkered_texture(width, height, color1, color2);
 	}
 	return (true);

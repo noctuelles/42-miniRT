@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:04:48 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 15:08:57 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 15:30:44 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	extract_sphere(t_minirt *minirt, t_list **lexer)
 	uint32_t	color;
 	t_object	*obj;
 
-	printf("Sphere%d\n", D_BONUS);
 	*lexer = (*lexer)->next;
 	if (!extract_point(lexer, &centre))
 		bad_exit_msg(minirt, "Bad format for sphere");
