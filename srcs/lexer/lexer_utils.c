@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:56:35 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 22:12:26 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 22:27:48 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	*add_known_token_to_list(t_lexer *lexer)
 			lexer->declared_ambiant_light++;
 		if (lexer->tkn.type == T_CAMERA)
 			lexer->declared_camera++;
+		if (lexer->tkn.type == T_LIGHT)
+			lexer->declared_light++;
 	}
 	if (add_token_to_list(lexer, lexer->tkn.value, lexer->tkn.len,
 			lexer->tkn.type) == NULL)
