@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 23:19:24 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 13:25:11 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,13 +210,6 @@ typedef struct s_texture
 
 struct s_object
 {
-	union
-	{
-		t_sphere	sphere;
-		t_plan		plan;
-		t_cylinder	cylinder;
-		t_cone		cone;
-	} p;
 	t_rayhit			rayhit;
 	t_matrix4			M;
 	t_matrix4			M_inv;
