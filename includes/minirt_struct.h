@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 20:11:39 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:01:05 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ struct s_minirt
 	t_scene		scene;
 	t_camera	camera;
 	t_worker	workers[THREAD_NBR];
-	t_list		**start_lexer;
+	t_list		*start_lexer;
 };
 
 /* ################################## Ray ################################### */
