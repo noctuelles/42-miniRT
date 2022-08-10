@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:43:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 09:19:04 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 09:36:24 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool feed_scene(t_minirt *minirt, t_list **lexer)
 {
 	bool	new_line;
 
-	while (D_LEX_CONTENT->type != T_NULL)
+	while (*lexer && D_LEX_CONTENT->type != T_NULL)
 	{
 		new_line = false;
 		if (D_LEX_CONTENT->type == T_SPHERE)
@@ -60,12 +60,12 @@ bool feed_scene(t_minirt *minirt, t_list **lexer)
 			extract_light(minirt, lexer);
 		else if (D_LEX_CONTENT->type == T_AMBIANT_LIGHT)
 			extract_ambiante_light(minirt, lexer);
-		if (D_LEX_CONTENT->type == T_NEWLINE)
+		if (*lexer && D_LEX_CONTENT->type == T_NEWLINE)
 		{
 			new_line = true;
 			*lexer = (*lexer)->next;
 		}
-		if (new_line == false && D_LEX_CONTENT->type != T_NULL) //! reste information qui ne peuvent etre traite
+		if (*lexer && new_line == false && D_LEX_CONTENT->type != T_NULL) //! reste information qui ne peuvent etre traite
 			bad_exit_msg(minirt, "Bad idenfier");
 	}
 	return (true);
@@ -77,14 +77,9 @@ bool	parser(t_minirt *minirt, char *filename)
 
 	lex_file = lex_from_file(filename);
 	if (lex_file == NULL)
-	{
-		printf("exit apres lexing\n");
-		exit(0);
-	}
+		bad_exit_msg(minirt, "lexing fail");
 	if (!feed_scene(minirt, &lex_file))
-	{
-		printf("Error\n Sommething bad arrive\n");
-		exit(1);
-	}
+		bad_exit_msg(minirt, "Sommething bad arrive");
+	printf("fin du parsing\n");
 	return (true);
 }

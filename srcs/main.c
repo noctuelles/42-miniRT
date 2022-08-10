@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/09 17:04:08 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 09:37:20 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,8 @@
 int	main(int ac, char **av)
 {
 	t_minirt	minirt;
+
 	memset(&minirt, 0, sizeof(t_minirt));
-
-	(void) ac;
-	(void)av;
-
-	//t_object	*cobj;
-	/*t_list	*tkns = lex_from_file(av[1]);
-	if (!tkns)
-		return (1);*/
 	if (ac != 2)
 	{
 		printf("Error\nBad numeber of argument\n");
@@ -47,6 +40,15 @@ int	main(int ac, char **av)
 	parser(&minirt, av[1]);
 	if (!init_mlx_struct(&minirt.mlx))
 		return (1);
+	setup_workers(&minirt);
+	render_img(&minirt);
+	launch_loop(&minirt);
+	return (0);
+}
+	//t_object	*cobj;
+	/*t_list	*tkns = lex_from_file(av[1]);
+	if (!tkns)
+		return (1);*/
 
 	/*t_texture texture;
 	create_image_texture(minirt.mlx.ptr, &texture, "textures/moon.xpm");
@@ -79,12 +81,5 @@ int	main(int ac, char **av)
 
 	add_light_to_scene(&minirt.scene, point(0,2, 0), 0xFFFFFF, 0.5);
 	set_ambiant_light(&minirt.scene, 0xFFFFFF, 0.15);*/
-
-	setup_workers(&minirt);
 	//setup_camera(&minirt.camera, WIDTH, HEIGHT, FOV_ANGLE);
 	//set_camera_view_matrix(&minirt.camera, point(-2, 3, 0), vector(1, -.5, 1));
-	render_img(&minirt);
-	launch_loop(&minirt);
-
-	return (0);
-}

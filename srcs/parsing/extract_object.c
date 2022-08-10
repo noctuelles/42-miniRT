@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:04:48 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 09:14:17 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 09:24:10 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ void	extract_camera(t_minirt *minirt, t_list **lexer)
 	*lexer = (*lexer)->next;
 	if (!extract_point(lexer, &centre))
 		bad_exit_msg(minirt, "Bad format for camera");
-	if (!extract_double_range(lexer, &fov, 0, 180))
-		bad_exit_msg(minirt, "Bad format for camera");
 	if (!extract_vector_norm(lexer, &orien))
+		bad_exit_msg(minirt, "Bad format for camera");
+	if (!extract_double_range(lexer, &fov, 0, 180))
 		bad_exit_msg(minirt, "Bad format for camera");
 	setup_camera(&minirt->camera, WIDTH, HEIGHT, fov);
 	set_camera_view_matrix(&minirt->camera, centre, orien);
