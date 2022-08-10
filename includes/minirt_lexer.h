@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:12:27 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 22:04:03 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 22:14:24 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define STR_SPACE            " "
 # define STR_SPHERE           "sp"
 # define STR_PLAN             "pl"
-# define STR_CYLINDER         "cy"
+# define STR_CYLINDER         "cl"
 # define STR_CONE             "cn"
 
 # define STR_ERROR                  "Error\n"
