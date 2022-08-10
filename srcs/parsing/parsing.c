@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:43:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 13:11:18 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 15:11:49 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "define.h"
 #include <stdlib.h>
 
-void bad_exit_msg(t_minirt *minirt, char *str)
+void	bad_exit_msg(t_minirt *minirt, char *str)
 {
 	ft_lstclear(minirt->start_lexer, &free);
 	printf("Error\n%s\n", str);
@@ -27,7 +27,7 @@ void bad_exit_msg(t_minirt *minirt, char *str)
 	exit(1);
 }
 
-bool feed_scene(t_minirt *minirt, t_list **lexer)
+bool	feed_scene(t_minirt *minirt, t_list **lexer)
 {
 	bool	new_line;
 	t_list	*save_lexer;
@@ -48,8 +48,8 @@ bool feed_scene(t_minirt *minirt, t_list **lexer)
 			extract_light(minirt, lexer);
 		else if (D_LEX_CONTENT->type == T_AMBIANT_LIGHT)
 			extract_ambiante_light(minirt, lexer);
-		//else if (D_BONUS && D_LEX_CONTENT->type == T_CONE)
-		//	extract_ambiante_cone(minirt, lexer);
+		else if (D_BONUS && D_LEX_CONTENT->type == T_CONE)
+			extract_cone(minirt, lexer);
 		if (*lexer && D_LEX_CONTENT->type == T_NEWLINE)
 		{
 			new_line = true;
