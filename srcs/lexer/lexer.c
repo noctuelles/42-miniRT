@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:54:50 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 13:17:46 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 16:45:37 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,62 @@ t_list	*lex_file(t_lexer *lexer)
 	return (lexer->list_tkns);
 }
 
+bool	analysis_syntax(t_list	*tkns)
+{
+	t_list	*elem;
+	t_token	*tkn;
+	t_token	*prev_tkn;
+
+	elem = tkns;
+	prev_tkn = NULL;
+	while (elem)
+	{
+		tkn = elem->content;
+		if (prev_tkn)
+		{
+			if ((prev_tkn->type == T_VALUE) &&
+					(tkn->type != T_NEWLINE && tkn->type != T_COMMA
+					 && tkn->type != T_BREAK))
+				return (false);
+			else if ((prev_tkn->type >= T_AMBIANT_LIGHT
+					&& prev_tkn->type <= T_LIGHT)
+					&& tkn->type != T_BREAK) 
+				return (false);
+		}
+		prev_tkn = tkn;
+		elem = elem->next;
+	}
+	return (true);
+}
+
+void	remove_break_tokens(t_list **tkns)
+{
+	t_list	*elem;
+	t_list	*prev_elem;
+	t_token	*tkn;
+
+	elem = *tkns;
+	prev_elem = NULL;
+	while (elem)
+	{
+		tkn = elem->content;
+		if (prev_elem && tkn->type == T_BREAK)
+		{
+			prev_elem->next = elem->next;
+			ft_lstdelone(elem, free);
+			elem = prev_elem;
+		}
+		prev_elem = elem;
+		elem = elem->next;
+	}
+	if (((t_token *)(*tkns)->content)->type == T_BREAK)
+	{
+		elem = (*tkns)->next;
+		ft_lstdelone(*tkns, free);
+		*tkns = elem;
+	}
+}
+
 t_list	*lex_from_file(const char *filename)
 {
 	t_lexer	lexer;
@@ -89,6 +145,11 @@ t_list	*lex_from_file(const char *filename)
 	}
 	else
 		print_error(STR_ERROR_FILE_READ);
+	if (analysis_syntax(lexer.list_tkns))
+		printf("Analys ok !\n");
+	else
+		puts("Analysis bad.");
+	remove_break_tokens(&lexer.list_tkns);
 	free(lexer.file_content);
 	return (lexer.list_tkns);
 }
