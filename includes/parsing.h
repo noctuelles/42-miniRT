@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:06:14 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 09:14:10 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:10:00 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,5 @@ void	extract_ambiante_light(t_minirt *minirt, t_list **lexer);
 
 void	bad_exit_msg(t_minirt *minirt, char *str);
 bool	parser(t_minirt *minirt, char *filename);
-bool	skip_break(t_list **lexer);
 
 #endif
