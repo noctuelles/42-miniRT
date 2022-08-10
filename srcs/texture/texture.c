@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 23:21:31 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 17:03:18 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 22:18:45 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,23 @@ t_texture	*apply_normal_map_to_texture(void *mlx, t_texture *texture,
 	{
 		texture->nmap.img = mlx_xpm_file_to_image(mlx, (char *) path,
 				&texture->nwidth, &texture->nheight);
-		if (texture->nwidth != texture->width
-			|| texture->nheight != texture->height)
-		{
-			mlx_destroy_image(mlx, texture->nmap.img);
-			texture->nmap.img = NULL;
-		}
 		if (texture->nmap.img)
 		{
-			texture->nmap.addr = mlx_get_data_addr(texture->nmap.img,
-					&texture->nmap.bits_per_pixel,
-					&texture->nmap.line_length,
-					&texture->nmap.endian);
-			texture->type = TX_IMAGEW_NMAP;
-			return (texture);
+			if (texture->nwidth != texture->width
+				|| texture->nheight != texture->height)
+			{
+				mlx_destroy_image(mlx, texture->nmap.img);
+				texture->nmap.img = NULL;
+			}
+			else
+			{
+				texture->nmap.addr = mlx_get_data_addr(texture->nmap.img,
+						&texture->nmap.bits_per_pixel,
+						&texture->nmap.line_length,
+						&texture->nmap.endian);
+				texture->type = TX_IMAGEW_NMAP;
+				return (texture);
+			}
 		}
 	}
 	return (NULL);

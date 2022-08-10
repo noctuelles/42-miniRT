@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:10:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 18:11:05 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 22:35:57 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 
 # define THREAD_NBR 8
 #define L_POWER 6.0e1
+
+#define D_LEX_CONTENT ((t_token *)(*lexer)->content)
+#define D_LEX_NEXT_CONTENT ((t_token *)(*lexer)->next->content)
+
+#ifndef D_BONUS
+# define D_BONUS 1
+#endif
 
 /*
  *	Define windows

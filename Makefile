@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/09 22:06:27 by plouvel          ###   ########.fr        #
+#    Updated: 2022/08/10 15:10:20 by bsavinel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 NAME = miniRT
 
 CC = cc 
-CFLAGS = -g3
+CFLAGS = -g3 -O3 -Wall -Wextra -Werror
 
 
 ARGUMENT_RUN = 
@@ -63,6 +63,11 @@ SRCS =	end/good_exit.c						\
 		primitives/intersect_sphere.c		\
 		primitives/intersect_cone.c			\
 		primitives/intersect_cylinder.c		\
+		parsing/parsing.c					\
+		parsing/extract_object.c			\
+		parsing/extract_utils.c				\
+		parsing/extract_object2.c			\
+		parsing/extract_utils2.c			\
 		scene/object.c						\
 		scene/scene.c						\
 		scene/camera.c						\
