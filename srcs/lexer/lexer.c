@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:54:50 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 17:43:06 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 17:46:18 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ t_list	*lex_file(t_lexer *lexer)
 	}
 	return (lexer->list_tkns);
 }
-
-
 
 t_list	*lex_from_file(const char *filename)
 {

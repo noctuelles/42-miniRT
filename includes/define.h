@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:10:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 17:21:32 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 17:51:30 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define WIDTH  1440 
 # define HEIGHT 900
 
-# define EPSILON 0.00001
+# define EPSILON 0.0001
 
 /*
  *	Temporary define

@@ -1,0 +1,9 @@
+C		0,0,0			0,0,1		90
+
+A		0.2				255,255,255
+L		0,0,0	1		255,255,255
+
+sp		0,0,0		6		0,0,0	texture	textures/stars.xpm
+sp		4,2,3.5		0.7		0,0,0	texture	textures/moon.xpm	normal_map textures/moon_normal_map.xpm
+sp		-4,2,5.5	1.7		0,0,0	texture	textures/sun.xpm	normal_map textures/sun_normal_map.xpm
+sp		1,-0.5,4	1.5		0,0,0	texture	textures/earth.xpm	normal_map textures/earth_normal_map.xpm

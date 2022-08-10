@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 17:43:12 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 18:09:42 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,14 @@ int	main(int ac, char **av)
 	(void)av;
 
 	t_object	*cobj;
-	t_list	*tkns = lex_from_file(av[1]);
-	if (!tkns)
+	//t_list	*tkns = lex_from_file(av[1]);
+	/*if (!tkns)
 		return (1);
 	else
 	{
 		print_tokens(tkns);
 		return (0);
-	}
+	}*/
 	if (!init_mlx_struct(&minirt.mlx))
 		return (1);
 
@@ -89,17 +89,17 @@ int	main(int ac, char **av)
 	create_image_texture(minirt.mlx.ptr, &moon, "textures/moon.xpm");
 	create_image_texture(minirt.mlx.ptr, &sun, "textures/sun.xpm");
 	create_image_texture(minirt.mlx.ptr, &earth, "textures/earth.xpm");
-	apply_normal_map_to_texture(minirt.mlx.ptr, &moon, "textures/moon_nmap.xpm" );
+	apply_normal_map_to_texture(minirt.mlx.ptr, &moon, "textures/moon_normal_map.xpm" );
 	apply_normal_map_to_texture(minirt.mlx.ptr, &sun, "textures/sun_normal_map.xpm" );
-	apply_normal_map_to_texture(minirt.mlx.ptr, &earth, "textures/earth_normal_map1.xpm" );
+	apply_normal_map_to_texture(minirt.mlx.ptr, &earth, "textures/earth_normal_map.xpm" );
 
-	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(0, 0, 0), 10, 0x00FFFF));
+	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(0, 0, 0), 6, 0x00FFFF));
 	apply_obj_texture(cobj, skybox);
-	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(2, 2, 4.5), 1, 0x00FFFF));
+	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(4, 2, 3.5), 0.7, 0x00FFFF));
 	apply_obj_texture(cobj, moon);
-	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(6, 3, 1.5), 1, 0x00FFFF));
+	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(-4, 2, 5.5), 1.7, 0x00FFFF));
 	apply_obj_texture(cobj, sun);
-	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(0, -0.5, 4), 1, 0x00FFFF));
+	cobj = add_obj_to_scene(&minirt.scene, new_sphere(point(1, -0.5, 4), 1.5, 0x00FFFF));
 	apply_obj_texture(cobj, earth);
 
 	//cobj = add_obj_to_scene(&minirt.scene, new_cone(point(-1, 3.4, 7), 0.7, 2, vector(0, 1, 0), 0xff00ff));
@@ -123,13 +123,13 @@ int	main(int ac, char **av)
 	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(5.5, 0.0, 8), 0.5, 39, vector(-1, 1, 0), 0xff00ff));
 	cobj = add_obj_to_scene(&minirt.scene, new_cylinder(point(-5.5, 0.0, 8), 0.5, 39, vector(1, 1, 0), 0xff00ff));*/
 
-	add_light_to_scene(&minirt.scene, point(0, 0, 0), 0xffffff, 0.8);
+	add_light_to_scene(&minirt.scene, point(0, 0, 0), 0xffffff, 1);
 	set_ambiant_light(&minirt.scene, 0xFFFFFF, 0.2);
 
 
 	setup_workers(&minirt);
 	setup_camera(&minirt.camera, WIDTH, HEIGHT, FOV_ANGLE);
-	set_camera_view_matrix(&minirt.camera, point(0, 0, 0), vector(1, 0, 1));
+	set_camera_view_matrix(&minirt.camera, point(0, 0, 0), vector(0, 0, 1));
 	render_img(&minirt);
 	launch_loop(&minirt);
 
