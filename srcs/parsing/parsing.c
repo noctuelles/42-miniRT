@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:43:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 21:48:57 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 22:33:20 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,38 @@
 #include "define.h"
 #include <stdlib.h>
 
+bool ft_isdouble(char *str)
+{
+	int	i;
+	int	point;
+	
+	i = 0;
+	point = 0;
+	if (str[0] == '-')
+		i++;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+		{
+			if (point == 1)
+				return false;
+			if (str[i] == '.')
+				point++;
+			else
+				return false;
+		}
+		i++;
+	}
+	return (true);
+}
+
 void	bad_exit_msg(t_minirt *minirt, char *str)
 {
-	ft_lstclear(&minirt->start_lexer, &free);
+	ft_lstclear(&minirt->start_lexer, free_token);
+	ft_lstclear(&minirt->scene.light, &free);
+	ft_lstclear(&minirt->scene.objs, &free);
 	destruct_mlx(&minirt->mlx);
 	printf("Error\n%s\n", str);
-	//! mettre clear scene
 	exit(1);
 }
 
@@ -69,45 +95,6 @@ bool	feed_scene(t_minirt *minirt, t_list **lexer)
 	return (true);
 }
 
-static char *translate(t_token_type type)
-{
-	if (type == 0)
-		return ("T_AMBIANT_LIGHT");
-	if (type == 1)
-		return ("T_CAMERA");
-	if (type == 2)
-		return ("T_LIGHT");
-	if (type == 3)
-		return ("T_SPHERE");
-	if (type == 4)
-		return ("T_PLAN");
-	if (type == 5)
-		return ("T_CYLINDER");
-	if (type == 6)
-		return ("T_VALUE");
-	if (type == 7)
-		return ("T_NEWLINE");
-	if (type == 8)
-		return ("T_COMMA");
-	if (type == 9)
-		return ("T_BREAK");
-	if (type == 10)
-		return ("T_NULL");
-	if (type == 11)
-		return ("T_CONE");
-	return ("NULL");
-}
-static void	print_tokens(t_list *tkns)
-{
-	for (t_list *elem = tkns; elem; elem = elem->next)
-	{
-		t_token *tkn = elem->content;
-		printf("<%s> ", translate(tkn->type));
-		if (tkn->type == T_NEWLINE)
-			printf("\n");
-	}
-}
-
 bool	parser(t_minirt *minirt, char *filename)
 {
 	t_list	*lex_file;
@@ -116,7 +103,6 @@ bool	parser(t_minirt *minirt, char *filename)
 	if (lex_file == NULL)
 		bad_exit_msg(minirt, "lexing fail");
 	minirt->start_lexer = lex_file;
-	print_tokens(lex_file);
 	if (!feed_scene(minirt, &lex_file))
 		bad_exit_msg(minirt, "Sommething bad arrive");
 	return (true);

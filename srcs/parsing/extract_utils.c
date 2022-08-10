@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:04:59 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 15:32:24 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 22:29:04 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 
 bool	extract_double_pos(t_list **lexer, double *dbl)
 {
-	if (!(*lexer) || D_LEX_CONTENT->type != T_VALUE)
+	if (!(*lexer) || D_LEX_CONTENT->type != T_VALUE
+		|| !ft_isdouble(D_LEX_CONTENT->value))
 		return (false);
 	*dbl = ft_atof(D_LEX_CONTENT->value);
 	*lexer = (*lexer)->next;
@@ -33,7 +34,8 @@ bool	extract_double_pos(t_list **lexer, double *dbl)
 bool	extract_double_range(t_list **lexer, double *dbl, double min,
 								double max)
 {
-	if (!(*lexer) || D_LEX_CONTENT->type != T_VALUE)
+	if (!(*lexer) || D_LEX_CONTENT->type != T_VALUE
+		|| !ft_isdouble(D_LEX_CONTENT->value))
 		return (false);
 	*dbl = ft_atof(D_LEX_CONTENT->value);
 	*lexer = (*lexer)->next;
