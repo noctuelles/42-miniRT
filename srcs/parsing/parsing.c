@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:43:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/09 17:09:23 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 09:08:02 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ bool feed_scene(t_minirt *minirt, t_list **lexer)
 	int		line;
 
 	line = 1;
-	while (D_LEX_CONTENT->type == T_NULL)
+	while (D_LEX_CONTENT->type != T_NULL)
 	{
 		new_line = false;
 		if (D_LEX_CONTENT->type == T_SPHERE)
@@ -63,13 +63,10 @@ bool feed_scene(t_minirt *minirt, t_list **lexer)
 			extract_light(minirt, lexer, line);
 		else if (D_LEX_CONTENT->type == T_AMBIANT_LIGHT)
 			extract_ambiante_light(minirt, lexer, line);
-		while (D_LEX_CONTENT->type == T_NEWLINE || D_LEX_CONTENT->type == T_BREAK)
+		while (D_LEX_CONTENT->type == T_NEWLINE)
 		{
-			if (D_LEX_CONTENT->type == T_NEWLINE)
-			{
-				line++;
-				new_line = true;
-			}
+			line++;
+			new_line = true;
 			*lexer = (*lexer)->next;
 		}
 		if (new_line == false && lexer) //! reste information qui ne peuvent etre traite

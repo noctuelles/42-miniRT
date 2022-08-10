@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:04:48 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/09 16:09:15 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/10 09:07:35 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,9 @@ void	extract_sphere(t_minirt *minirt, t_list **lexer, int line)
 	uint32_t	color;
 	
 	*lexer = (*lexer)->next;
-	if (!skip_break(lexer))
-		bad_exit_msg(minirt, lexer, "Bad format for sphere line: ", line);
 	if (!extract_point(lexer, &centre))
 		bad_exit_msg(minirt, lexer, "Bad format for sphere line: ", line);
-	if (!skip_break(lexer))
-		bad_exit_msg(minirt, lexer, "Bad format for sphere line: ", line);
 	if (!extract_double_pos(lexer, &diametre))
-		bad_exit_msg(minirt, lexer, "Bad format for sphere line: ", line);
-	if (!skip_break(lexer))
 		bad_exit_msg(minirt, lexer, "Bad format for sphere line: ", line);
 	if (!extract_color(lexer, &color))
 		bad_exit_msg(minirt, lexer, "Bad format for sphere line: ", line);
@@ -47,15 +41,9 @@ void	extract_plan(t_minirt *minirt, t_list **lexer, int line)
 	uint32_t	color;
 	
 	*lexer = (*lexer)->next;
-	if (!skip_break(lexer))
-		bad_exit_msg(minirt, lexer, "Bad format for plan line: ", line);
 	if (!extract_point(lexer, &centre))
 		bad_exit_msg(minirt, lexer, "Bad format for plan line: ", line);
-	if (!skip_break(lexer))
-		bad_exit_msg(minirt, lexer, "Bad format for plan line: ", line);
 	if (!extract_vector(lexer, &vect))
-		bad_exit_msg(minirt, lexer, "Bad format for plan line: ", line);
-	if (!skip_break(lexer))
 		bad_exit_msg(minirt, lexer, "Bad format for plan line: ", line);
 	if (!extract_color(lexer, &color))
 		bad_exit_msg(minirt, lexer, "Bad format for plan line: ", line);
@@ -71,23 +59,13 @@ void	extract_cylinder(t_minirt *minirt, t_list **lexer, int line)
 	uint32_t	color;
 	
 	*lexer = (*lexer)->next;
-	if (!skip_break(lexer))
-		bad_exit_msg(minirt, lexer, "Bad format for cylinder line: ", line);
 	if (!extract_point(lexer, &centre))
-		bad_exit_msg(minirt, lexer, "Bad format for cylinder line: ", line);
-	if (!skip_break(lexer))
 		bad_exit_msg(minirt, lexer, "Bad format for cylinder line: ", line);
 	if (!extract_vector(lexer, &orien))
 		bad_exit_msg(minirt, lexer, "Bad format for cylinder line: ", line);
-	if (!skip_break(lexer))
-		bad_exit_msg(minirt, lexer, "Bad format for cylinder line: ", line);
 	if (!extract_double_pos(lexer, &diametre))
 		bad_exit_msg(minirt, lexer, "Bad format for cylinder line: ", line);
-	if (!skip_break(lexer))
-		bad_exit_msg(minirt, lexer, "Bad format for cylinder line: ", line);
 	if (!extract_double_pos(lexer, &hauteur))
-		bad_exit_msg(minirt, lexer, "Bad format for cylinder line: ", line);
-	if (!skip_break(lexer))
 		bad_exit_msg(minirt, lexer, "Bad format for cylinder line: ", line);
 	if (!extract_color(lexer, &color))
 		bad_exit_msg(minirt, lexer, "Bad format for cylinder line: ", line);
@@ -101,15 +79,9 @@ void	extract_camera(t_minirt *minirt, t_list **lexer, int line)
 	t_vec3		orien;
 	
 	*lexer = (*lexer)->next;
-	if (!skip_break(lexer))
-		bad_exit_msg(minirt, lexer, "Bad format for camera line: ", line);
 	if (!extract_point(lexer, &centre))
 		bad_exit_msg(minirt, lexer, "Bad format for camera line: ", line);
-	if (!skip_break(lexer))
-		bad_exit_msg(minirt, lexer, "Bad format for camera line: ", line);
 	if (!extract_double_range(lexer, &fov, 0, 180))
-		bad_exit_msg(minirt, lexer, "Bad format for camera line: ", line);
-	if (!skip_break(lexer))
 		bad_exit_msg(minirt, lexer, "Bad format for camera line: ", line);
 	if (!extract_vector_norm(lexer, &orien))
 		bad_exit_msg(minirt, lexer, "Bad format for camera line: ", line);
@@ -124,15 +96,9 @@ void	extract_light(t_minirt *minirt, t_list **lexer, int line)
 	uint32_t	color;
 	
 	*lexer = (*lexer)->next;
-	if (!skip_break(lexer))
-		bad_exit_msg(minirt, lexer, "Bad format for light line: ", line);
 	if (!extract_point(lexer, &centre))
 		bad_exit_msg(minirt, lexer, "Bad format for light line: ", line);
-	if (!skip_break(lexer))
-		bad_exit_msg(minirt, lexer, "Bad format for light line: ", line);
 	if (!extract_double_range(lexer, &ratio, 0, 1))
-		bad_exit_msg(minirt, lexer, "Bad format for light line: ", line);
-	if (!skip_break(lexer))
 		bad_exit_msg(minirt, lexer, "Bad format for light line: ", line);
 	if (!extract_color(lexer, &color))
 		bad_exit_msg(minirt, lexer, "Bad format for light line: ", line);
@@ -145,11 +111,7 @@ void	extract_ambiante_light(t_minirt *minirt, t_list **lexer, int line)
 	uint32_t	color;
 	
 	*lexer = (*lexer)->next;
-	if (!skip_break(lexer))
-		bad_exit_msg(minirt, lexer, "Bad format for ambiante light line: ", line);
 	if (!extract_double_range(lexer, &ratio, 0, 1))
-		bad_exit_msg(minirt, lexer, "Bad format for ambiante light line: ", line);
-	if (!skip_break(lexer))
 		bad_exit_msg(minirt, lexer, "Bad format for ambiante light line: ", line);
 	if (!extract_color(lexer, &color))
 		bad_exit_msg(minirt, lexer, "Bad format for ambiante light line: ", line);
