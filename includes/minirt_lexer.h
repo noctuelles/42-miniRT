@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:12:27 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 22:08:09 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 11:14:11 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@
 # define STR_ERROR                  "Error\n"
 # define STR_INVALID_FILE_EXTENSION "invalid file extension"
 # define STR_ERROR_FILE_READ        "an error occured during file reading"
-# define STR_EMPTY_FILE             "empty file"
+# define STR_EMPTY_FILE             "empty or invalid file, every line must be\
+terminated by a newline."
 
 # define STR_TOO_MUCH_AMLIGHT       "minirt: line %u: ambiant light cannot be \
 declared more than once.\n"

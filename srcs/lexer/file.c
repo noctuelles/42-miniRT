@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:29:32 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 22:06:10 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 13:17:50 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,18 @@ static bool	check_file_extension(const char *filename)
 
 static char	*readline(int fd, char **line)
 {
+	size_t	line_len;
+
 	*line = get_next_line(fd);
+	if (*line)
+	{
+		line_len = ft_strlen(*line);
+		if ((*line)[line_len - 1] != '\n')
+		{
+			free(*line);
+			*line = NULL;
+		}
+	}
 	return (*line);
 }
 
@@ -48,7 +59,6 @@ static char	**fill_file(int fd, size_t nbr_lines)
 	size_t	n;
 
 	i = 0;
-	errno = 0;
 	file = malloc((nbr_lines + 1) * sizeof(char *));
 	if (!file)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:54:50 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 22:07:39 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 13:17:46 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,16 @@ t_list	*lex_from_file(const char *filename)
 
 	ft_memset(&lexer, 0, sizeof(lexer));
 	lexer.file_content = read_file(filename);
-	if (!lexer.file_content)
-		return (NULL);
-	lexer.line = *lexer.file_content;
-	lexer.list_tkns = lex_file(&lexer);
-	i = 0;
-	while (lexer.file_content[i] != NULL)
-		free(lexer.file_content[i++]);
+	if (lexer.file_content && *lexer.file_content != NULL)
+	{
+		lexer.line = *lexer.file_content;
+		lexer.list_tkns = lex_file(&lexer);
+		i = 0;
+		while (lexer.file_content[i] != NULL)
+			free(lexer.file_content[i++]);
+	}
+	else
+		print_error(STR_ERROR_FILE_READ);
 	free(lexer.file_content);
 	return (lexer.list_tkns);
 }
