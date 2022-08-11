@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/11 18:02:32 by bsavinel         ###   ########.fr        #
+#    Updated: 2022/08/11 21:50:36 by bsavinel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,6 @@ NAME = miniRT
 
 CC = cc 
 CFLAGS = -g3 -O3 -Wall -Wextra -Werror -fsanitize=address
-
-
-ARGUMENT_RUN = 
-ARGUMENT_RUN_TEST =
 
 ################################################################################
 ########							Sources 							########
@@ -92,9 +88,7 @@ LIBS =	libft/libft.a			\
 OBJS_PATH =	objs/
 
 OBJS =	$(addprefix $(OBJS_PATH), $(SRCS:.c=.o))
-OBJS_TEST = $(addprefix $(OBJS_PATH), $(SRCS_TEST:.c=.o))
 DEPS =	$(addprefix $(OBJS_PATH), $(SRCS:.c=.d))
-DEPS_TEST =	$(addprefix $(OBJS_PATH), $(SRCS_TEST:.c=.d))
 
 ################################################################################
 ########							Others								########
@@ -132,7 +126,7 @@ header:
 		@echo "                                                  by The ULTIMATE TEAM"
 		@echo "${NO_COLOR}"
 
-$(NAME) : $(OBJS) $(LIBS)
+$(NAME) : $(LIBS) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -lm -lbsd -lX11 -lXext -lpthread -o $(NAME) $(INCS)
 	echo "$(BLUE)$(NAME): $(GREEN)Success $(NO_COLOR)"
 
@@ -166,3 +160,5 @@ minilibx/libmlx_Linux.a:
 -include $(DEPS)
 
 .PHONY: all clean fclean re bonus
+
+.SILENT:

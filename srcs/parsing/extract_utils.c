@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:04:59 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 17:23:30 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/11 21:43:31 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	extract_double_pos(t_list **lexer, double *dbl)
 		return (false);
 	*dbl = ft_atof(((t_token *)(*lexer)->content)->value);
 	*lexer = (*lexer)->next;
-	if (*dbl < 0)
+	if (*dbl <= 0)
 		return (false);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:04:48 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 18:14:56 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 21:46:53 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	extract_plan(t_minirt *minirt, t_list **lexer)
 	if (!obj)
 		bad_exit_msg(minirt, "plane creation failed.", NULL);
 	obj->texture.type = TX_NONE;
+	if (D_BONUS && !(extract_texture(minirt, lexer, obj, O_PLAN)))
+		bad_exit_msg(minirt, "invalid plan texture.", NULL);
 }
 
 void	extract_cylinder(t_minirt *minirt, t_list **lexer)

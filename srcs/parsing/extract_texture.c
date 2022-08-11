@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 13:43:37 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 17:27:26 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/11 21:47:54 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,11 @@ bool	extract_texture(t_minirt *minirt, t_list **lexer, t_object *obj,
 {
 	if (((t_token *)(*lexer)->content)->type == T_NEWLINE)
 		return (true);
-	if (ft_strcmp(((t_token *)(*lexer)->content)->value, "texture") == 0)
+	if (ft_strcmp(((t_token *)(*lexer)->content)->value, "texture") == 0
+		&& type != O_PLAN)
 		take_texture(minirt, lexer, obj);
 	else if (ft_strcmp(((t_token *)(*lexer)->content)->value,
-		"texture_normal") == 0)
+		"texture_normal") == 0 && type != O_PLAN)
 		take_texture_normal(minirt, lexer, obj);
 	else if (ft_strcmp(((t_token *)(*lexer)->content)->value, "checker") == 0)
 		take_checker(minirt, lexer, obj, type);
