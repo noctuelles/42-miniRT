@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/11 15:17:40 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 16:51:43 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,31 +48,31 @@ typedef struct s_tuple
 	double	w;
 }				t_tuple;
 
-typedef struct	s_uv
+typedef struct s_uv
 {
 	double	u;
 	double	v;
 }				t_uv;
 
-typedef t_tuple	t_vec3;
-typedef t_tuple	t_point2;
-typedef t_tuple	t_point3;
-typedef t_tuple	t_color;
-typedef t_tuple	t_albedo;
+typedef t_tuple			t_vec3;
+typedef t_tuple			t_point2;
+typedef t_tuple			t_point3;
+typedef t_tuple			t_color;
+typedef t_tuple			t_albedo;
 
 /* ################################# Matrix ################################# */
 
-typedef struct	s_matrix4
+typedef struct s_matrix4
 {
 	double	m[4][4];
 }				t_matrix4;
 
-typedef struct	s_matrix3
+typedef struct s_matrix3
 {
 	double	m[3][3];
 }				t_matrix3;
 
-typedef struct	s_matrix2
+typedef struct s_matrix2
 {
 	double	m[2][2];
 }				t_matrix2;
@@ -94,15 +94,15 @@ typedef struct s_plan
 typedef struct s_cylinder
 {
 	t_point3	pos;
-	double height;
-	double diameter;
+	double		height;
+	double		diameter;
 }				t_cylinder;
 
 typedef struct s_cone
 {
 	t_point3	pos;
-	double height;
-	double diameter;
+	double		height;
+	double		diameter;
 }				t_cone;
 
 typedef struct s_light
@@ -137,7 +137,7 @@ typedef struct s_mlx
 	void		*win;
 }				t_mlx;
 
-typedef struct s_minirt t_minirt;
+typedef struct s_minirt	t_minirt;
 
 typedef struct s_worker
 {
@@ -150,7 +150,7 @@ typedef struct s_worker
 
 /* ################################ Program ################################# */
 
-typedef struct	s_camera
+typedef struct s_camera
 {
 	t_matrix4	transform;
 	size_t		screen_width;
@@ -194,8 +194,8 @@ typedef struct s_rayhit
 
 typedef struct s_object	t_object;
 
-typedef bool (*t_intersect_fnct)(t_object *, t_ray *, t_rayhit *);
-typedef t_uv (*t_uvmap_fnct)(t_point3);
+typedef bool			(*t_intersect_fnct)(t_object *, t_ray *, t_rayhit *);
+typedef t_uv			(*t_uvmap_fnct)(t_point3);
 
 typedef struct s_texture
 {
