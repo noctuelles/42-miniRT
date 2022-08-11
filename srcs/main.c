@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 17:04:08 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:06:49 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ int	main(int ac, char **av)
 	}
 	if (!init_mlx_struct(&minirt.mlx))
 		return (1);
+	printf("minirt: loading file '%s'...\n", av[1]);
 	parser(&minirt, av[1]);
+	printf("minirt: successfully loaded.\n");
 	if (!init_mlx_window(&minirt))
 		return (1);
 	setup_workers(&minirt);

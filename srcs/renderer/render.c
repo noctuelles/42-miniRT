@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 16:36:28 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:08:18 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ static inline uint32_t	get_color(t_color color)
 	g = min(255., min(1, color.y) * 255.99);
 	b = min(255., min(1, color.z) * 255.99);
 	return (r << 16 | g << 8 | b);
+}
+
+static inline uint64_t	get_mlsec_time(struct timeval t)
+{
+	return (t.tv_sec * 1000 + t.tv_usec / 1000);
 }
 
 void	*render(void *pwrkrs)
@@ -58,11 +63,6 @@ void	*render(void *pwrkrs)
 	return (NULL);
 }
 
-static inline uint64_t	get_mlsec_time(struct timeval t)
-{
-	return (t.tv_sec * 1000 + t.tv_usec / 1000);
-}
-
 void	render_img(t_minirt *minirt)
 {
 	struct timeval	t;
@@ -71,7 +71,8 @@ void	render_img(t_minirt *minirt)
 	gettimeofday(&t, NULL);
 	launch_workers(minirt);
 	gettimeofday(&t1, NULL);
-	printf("Rendered in %lu mlsec.\n", get_mlsec_time(t1) - get_mlsec_time(t));
+	printf("minirt: rendered in %lu mlsec.\n",
+		get_mlsec_time(t1) - get_mlsec_time(t));
 	mlx_put_image_to_window(minirt->mlx.ptr, minirt->mlx.win,
 		minirt->mlx.img.img, 0, 0);
 }
