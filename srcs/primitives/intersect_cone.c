@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cone.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:37:47 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 13:23:41 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:14:59 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static inline t_vec3	compute_normal(t_object *obj, t_point3 t)
 		obj_normal = vector(0, -1, 0);
 	else
 		obj_normal = vector(t.x, sqrt(radius), t.z);
-	world_normal = vec_norm(matrix4_tmul(obj->M_inv_trans, obj_normal));
+	world_normal = vec_norm(matrix4_tmul(obj->m_inv_trans, obj_normal));
 	world_normal.w = 0;
 	return (world_normal);
 }
@@ -96,7 +96,7 @@ bool	intersect_cone(t_object *obj, t_ray *ray, t_rayhit *rayhit)
 
 	cone_t[0] = INFINITY;
 	cone_t[1] = INFINITY;
-	lray = ray_transform(*ray, obj->M_inv);
+	lray = ray_transform(*ray, obj->m_inv);
 	intersect_cone_body(lray, &cone_t[0]);
 	intersect_cone_endcap(lray, &cone_t[1]);
 	rayhit->t = min(cone_t[0], cone_t[1]);

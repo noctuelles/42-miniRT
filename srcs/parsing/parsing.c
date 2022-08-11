@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:43:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 16:48:09 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:25:59 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,19 @@ void	bad_exit_msg(t_minirt *minirt, char *str, char *tok)
 
 void	select_object(t_minirt *minirt, t_list **lexer)
 {
-	if (D_LEX_CONTENT->type == T_SPHERE)
+	if (((t_token *)(*lexer)->content)->type == T_SPHERE)
 		extract_sphere(minirt, lexer);
-	else if (D_LEX_CONTENT->type == T_PLAN)
+	else if (((t_token *)(*lexer)->content)->type == T_PLAN)
 		extract_plan(minirt, lexer);
-	else if (D_LEX_CONTENT->type == T_CYLINDER)
+	else if (((t_token *)(*lexer)->content)->type == T_CYLINDER)
 		extract_cylinder(minirt, lexer);
-	else if (D_LEX_CONTENT->type == T_CAMERA)
+	else if (((t_token *)(*lexer)->content)->type == T_CAMERA)
 		extract_camera(minirt, lexer);
-	else if (D_LEX_CONTENT->type == T_LIGHT)
+	else if (((t_token *)(*lexer)->content)->type == T_LIGHT)
 		extract_light(minirt, lexer);
-	else if (D_LEX_CONTENT->type == T_AMBIANT_LIGHT)
+	else if (((t_token *)(*lexer)->content)->type == T_AMBIANT_LIGHT)
 		extract_ambiante_light(minirt, lexer);
-	else if (D_BONUS && D_LEX_CONTENT->type == T_CONE)
+	else if (D_BONUS && ((t_token *)(*lexer)->content)->type == T_CONE)
 		extract_cone(minirt, lexer);
 }
 
@@ -84,18 +84,19 @@ bool	feed_scene(t_minirt *minirt, t_list **lexer)
 	bool	new_line;
 	t_list	*save_lexer;
 
-	while (*lexer && D_LEX_CONTENT->type != T_NULL)
+	while (*lexer && ((t_token *)(*lexer)->content)->type != T_NULL)
 	{
 		new_line = false;
 		save_lexer = *lexer;
 		select_object(minirt, lexer);
-		if (*lexer && D_LEX_CONTENT->type == T_NEWLINE)
+		if (*lexer && ((t_token *)(*lexer)->content)->type == T_NEWLINE)
 		{
 			new_line = true;
 			*lexer = (*lexer)->next;
 		}
-		if (*lexer && ((new_line == false && D_LEX_CONTENT->type != T_NULL)
-				|| save_lexer == *lexer))
+		if (*lexer && ((new_line == false
+					&& ((t_token *)(*lexer)->content)->type != T_NULL)
+			|| save_lexer == *lexer))
 			bad_exit_msg(minirt, "incorrect identifier.", NULL);
 	}
 	return (true);

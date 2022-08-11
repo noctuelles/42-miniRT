@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:41:15 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 17:21:38 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:14:30 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static inline t_vec3	compute_normal(t_object *obj, t_point3 t)
 		obj_normal = vector(0, -1, 0);
 	else
 		obj_normal = vector(t.x, 0, t.z);
-	world_normal = vec_norm(matrix4_tmul(obj->M_inv_trans, obj_normal));
+	world_normal = vec_norm(matrix4_tmul(obj->m_inv_trans, obj_normal));
 	world_normal.w = 0;
 	return (world_normal);
 }
@@ -109,7 +109,7 @@ bool	intersect_cylinder(t_object *obj, t_ray *ray, t_rayhit *rayhit)
 
 	cyl_t[0] = INFINITY;
 	cyl_t[1] = INFINITY;
-	lray = ray_transform(*ray, obj->M_inv);
+	lray = ray_transform(*ray, obj->m_inv);
 	intersect_cylinder_body(lray, &cyl_t[0]);
 	intersect_cylinder_endcap(lray, &cyl_t[1]);
 	rayhit->t = min(cyl_t[0], cyl_t[1]);

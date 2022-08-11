@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 17:59:43 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 17:21:38 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:14:30 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static inline t_vec3	compute_normal(t_object *obj, t_point3 t)
 {
 	t_vec3	world_normal;
 
-	world_normal = vec_norm(matrix4_tmul(obj->M_inv_trans, t));
+	world_normal = vec_norm(matrix4_tmul(obj->m_inv_trans, t));
 	world_normal.w = 0;
 	return (world_normal);
 }
@@ -38,7 +38,7 @@ bool	intersect_sphere(t_object *obj, t_ray *ray, t_rayhit *rayhit)
 	t_ray	local_ray;
 	double	t[2];
 
-	local_ray = ray_transform(*ray, obj->M_inv);
+	local_ray = ray_transform(*ray, obj->m_inv);
 	sphere_to_ray = tsub(local_ray.org, point(0., 0., 0.));
 	if (solve_quadratic(
 			vec_dot(local_ray.dir, local_ray.dir),

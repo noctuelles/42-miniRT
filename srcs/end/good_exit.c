@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 13:55:48 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 16:57:22 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:47:31 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ void	free_object(t_minirt *minirt)
 
 	while (minirt->scene.objs)
 	{
-		if (D_OBJ_SC_CONTENT->texture.type == TX_IMAGE
-			|| D_OBJ_SC_CONTENT->texture.type == TX_IMAGEW_NMAP)
+		if (((t_object *)minirt->scene.objs->content)->texture.type == TX_IMAGE
+			|| ((t_object *)minirt->scene.objs->content)->texture.type
+			== TX_IMAGEW_NMAP)
 			mlx_destroy_image(minirt->mlx.ptr,
-				D_OBJ_SC_CONTENT->texture.texel.img);
-		if (D_OBJ_SC_CONTENT->texture.type == TX_IMAGEW_NMAP)
+				((t_object *)minirt->scene.objs->content)->texture.texel.img);
+		if (((t_object *)minirt->scene.objs->content)->texture.type
+			== TX_IMAGEW_NMAP)
 			mlx_destroy_image(minirt->mlx.ptr,
-				D_OBJ_SC_CONTENT->texture.nmap.img);
+				((t_object *)minirt->scene.objs->content)->texture.nmap.img);
 		tmp = minirt->scene.objs;
 		minirt->scene.objs = minirt->scene.objs->next;
 		ft_lstdelone(tmp, &free);

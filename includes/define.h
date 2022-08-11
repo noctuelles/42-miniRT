@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:10:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 17:42:06 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:46:22 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include <stddef.h> // -> NULL
 
-#ifndef D_BONUS
-# define D_BONUS 1
-#endif
+# ifndef D_BONUS
+#  define D_BONUS 1
+# endif
 
 # define STR_PRG_NAME "minirt"
 
@@ -32,10 +32,6 @@
 
 # define EPSILON 0.0001
 # define L_POWER 6.0e1
-
-#define D_LEX_CONTENT      ((t_token *)(*lexer)->content)
-#define D_LEX_NEXT_CONTENT ((t_token *)(*lexer)->next->content)
-#define D_OBJ_SC_CONTENT   ((t_object *)minirt->scene.objs->content)
 
 /*
  *	Define hook

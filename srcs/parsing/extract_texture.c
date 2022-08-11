@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 13:43:37 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 16:43:33 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:27:26 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,31 @@
 
 void	take_texture(t_minirt *minirt, t_list **lexer, t_object *obj)
 {
-	if (D_LEX_CONTENT->type != T_VALUE)
+	if (((t_token *)(*lexer)->content)->type != T_VALUE)
 		bad_exit_msg(minirt, "invalid texture format.", NULL);
 	*lexer = (*lexer)->next;
 	if (!create_image_texture(minirt->mlx.ptr, &obj->texture,
-			D_LEX_CONTENT->value))
-		bad_exit_msg(minirt, "texture creation failed.", D_LEX_CONTENT->value);
+			((t_token *)(*lexer)->content)->value))
+		bad_exit_msg(minirt, "texture creation failed.",
+			((t_token *)(*lexer)->content)->value);
 	*lexer = (*lexer)->next;
 }
 
 void	take_texture_normal(t_minirt *minirt, t_list **lexer, t_object *obj)
 {
-	if (D_LEX_CONTENT->type != T_VALUE
-		|| D_LEX_NEXT_CONTENT->type != T_VALUE)
+	if (((t_token *)(*lexer)->content)->type != T_VALUE
+		|| ((t_token *)(*lexer)->next->content)->type != T_VALUE)
 		bad_exit_msg(minirt, "invalid texture normal format.", NULL);
 	*lexer = (*lexer)->next;
 	if (!create_image_texture(minirt->mlx.ptr,
-			&obj->texture, D_LEX_CONTENT->value))
-		bad_exit_msg(minirt, "texture creation failed.", D_LEX_CONTENT->value);
+			&obj->texture, ((t_token *)(*lexer)->content)->value))
+		bad_exit_msg(minirt, "texture creation failed.",
+			((t_token *)(*lexer)->content)->value);
 	*lexer = (*lexer)->next;
 	if (!apply_normal_map_to_texture(minirt->mlx.ptr,
-			&obj->texture, D_LEX_CONTENT->value))
+			&obj->texture, ((t_token *)(*lexer)->content)->value))
 		bad_exit_msg(minirt, "texture normal creation failed.",
-			D_LEX_CONTENT->value);
+			((t_token *)(*lexer)->content)->value);
 	*lexer = (*lexer)->next;
 }
 
@@ -71,13 +73,14 @@ void	take_checker(t_minirt *minirt, t_list **lexer, t_object *obj,
 bool	extract_texture(t_minirt *minirt, t_list **lexer, t_object *obj,
 			t_object_type type)
 {
-	if (D_LEX_CONTENT->type == T_NEWLINE)
+	if (((t_token *)(*lexer)->content)->type == T_NEWLINE)
 		return (true);
-	if (ft_strcmp(D_LEX_CONTENT->value, "texture") == 0)
+	if (ft_strcmp(((t_token *)(*lexer)->content)->value, "texture") == 0)
 		take_texture(minirt, lexer, obj);
-	else if (ft_strcmp(D_LEX_CONTENT->value, "texture_normal") == 0)
+	else if (ft_strcmp(((t_token *)(*lexer)->content)->value,
+		"texture_normal") == 0)
 		take_texture_normal(minirt, lexer, obj);
-	else if (ft_strcmp(D_LEX_CONTENT->value, "checker") == 0)
+	else if (ft_strcmp(((t_token *)(*lexer)->content)->value, "checker") == 0)
 		take_checker(minirt, lexer, obj, type);
 	return (true);
 }
