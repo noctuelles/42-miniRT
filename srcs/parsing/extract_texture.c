@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 13:43:37 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 15:35:09 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/11 16:43:33 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 void	take_texture(t_minirt *minirt, t_list **lexer, t_object *obj)
 {
 	if (D_LEX_CONTENT->type != T_VALUE)
-		bad_exit_msg(minirt, "Bad format for texture", NULL);
+		bad_exit_msg(minirt, "invalid texture format.", NULL);
 	*lexer = (*lexer)->next;
 	if (!create_image_texture(minirt->mlx.ptr, &obj->texture,
 			D_LEX_CONTENT->value))
-		bad_exit_msg(minirt, "Texture failed", D_LEX_CONTENT->value);
+		bad_exit_msg(minirt, "texture creation failed.", D_LEX_CONTENT->value);
 	*lexer = (*lexer)->next;
 }
 
@@ -34,15 +34,16 @@ void	take_texture_normal(t_minirt *minirt, t_list **lexer, t_object *obj)
 {
 	if (D_LEX_CONTENT->type != T_VALUE
 		|| D_LEX_NEXT_CONTENT->type != T_VALUE)
-		bad_exit_msg(minirt, "Bad format for texture normal", NULL);
+		bad_exit_msg(minirt, "invalid texture normal format.", NULL);
 	*lexer = (*lexer)->next;
 	if (!create_image_texture(minirt->mlx.ptr,
 			&obj->texture, D_LEX_CONTENT->value))
-		bad_exit_msg(minirt, "Texture normal failed", D_LEX_CONTENT->value);
+		bad_exit_msg(minirt, "texture creation failed.", D_LEX_CONTENT->value);
 	*lexer = (*lexer)->next;
 	if (!apply_normal_map_to_texture(minirt->mlx.ptr,
 			&obj->texture, D_LEX_CONTENT->value))
-		bad_exit_msg(minirt, "Texture normal failed", D_LEX_CONTENT->value);
+		bad_exit_msg(minirt, "texture normal creation failed.",
+			D_LEX_CONTENT->value);
 	*lexer = (*lexer)->next;
 }
 
@@ -54,9 +55,9 @@ void	take_checker(t_minirt *minirt, t_list **lexer, t_object *obj,
 
 	*lexer = (*lexer)->next;
 	if (!extract_color(lexer, &color1))
-		bad_exit_msg(minirt, "Bad format for checker texture", NULL);
+		bad_exit_msg(minirt, "invalid checker color.", NULL);
 	if (!extract_color(lexer, &color2))
-		bad_exit_msg(minirt, "Bad format for checker texture", NULL);
+		bad_exit_msg(minirt, "invalid checker color.", NULL);
 	if (type == O_SPHERE)
 		obj->texture = create_checkered_texture(8, 8, color1, color2);
 	else if (type == O_PLAN)

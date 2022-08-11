@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:43:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 15:37:03 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/11 16:48:09 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	bad_exit_msg(t_minirt *minirt, char *str, char *tok)
 	if (str)
 		ft_dprintf(STDERR_FILENO, "Error\nminirt: %s\n", str);
 	if (tok)
-		ft_dprintf(STDERR_FILENO, "Probably %s is bad", tok);
+		ft_dprintf(STDERR_FILENO, "invalid '%s' token.", tok);
 	exit(1);
 }
 
@@ -96,7 +96,7 @@ bool	feed_scene(t_minirt *minirt, t_list **lexer)
 		}
 		if (*lexer && ((new_line == false && D_LEX_CONTENT->type != T_NULL)
 				|| save_lexer == *lexer))
-			bad_exit_msg(minirt, "Probaly incorect identifier", NULL);
+			bad_exit_msg(minirt, "incorrect identifier.", NULL);
 	}
 	return (true);
 }
@@ -110,6 +110,6 @@ bool	parser(t_minirt *minirt, char *filename)
 		bad_exit_msg(minirt, NULL, NULL);
 	minirt->start_lexer = lex_file;
 	if (!feed_scene(minirt, &lex_file))
-		bad_exit_msg(minirt, "Sommething bad arrive", NULL);
+		bad_exit_msg(minirt, "fatal error.", NULL);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 15:17:37 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 16:53:06 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 #include <unistd.h>
 #include <math.h>
 #include <stdio.h>
+#include "mlx.h"
 
 int	main(int ac, char **av)
 {
@@ -46,6 +47,7 @@ int	main(int ac, char **av)
 	if (!init_mlx_struct(&minirt.mlx))
 		return (1);
 	parser(&minirt, av[1]);
+	minirt.mlx.win = mlx_new_window(minirt.mlx.ptr, WIDTH, HEIGHT, "miniRT");
 	setup_workers(&minirt);
 	render_img(&minirt);
 	launch_loop(&minirt);
