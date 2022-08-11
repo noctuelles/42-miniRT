@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:44:54 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/24 18:22:58 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 16:59:43 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATRIX_H
 # define MATRIX_H
 
-#include "minirt_struct.h"
+# include "minirt_struct.h"
 
 /* matrix.c */
 
@@ -39,6 +39,6 @@ t_matrix4	matrix4_inv(t_matrix4 const A);
 
 /* matrix_invert_utils.c */
 
-double	matrix3_determinant(t_matrix3 const A);
+double		matrix3_determinant(t_matrix3 const A);
 
 #endif

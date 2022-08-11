@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:43:00 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 17:21:39 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:14:30 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ t_object	*new_cylinder(t_point3 pos, double diameter, double height, t_vec3 orie
 	obj->albedo = get_norm_color(color);
 	obj->fnct = &intersect_cylinder;
 	obj->uvmap_fnct = &get_cylinder_map;
-	obj->M = matrix4_scale(diameter, height, diameter);
-	obj->M = matrix4_mul(build_rotation_matrix(vec_norm(orient)), obj->M);
-	obj->M = matrix4_mul(matrix4_translate(pos.x, pos.y, pos.z), obj->M);
-	obj->M_inv = matrix4_inv(obj->M);
-	obj->M_inv_trans = matrix4_trans(obj->M_inv);
+	obj->m = matrix4_scale(diameter, height, diameter);
+	obj->m = matrix4_mul(build_rotation_matrix(vec_norm(orient)), obj->m);
+	obj->m = matrix4_mul(matrix4_translate(pos.x, pos.y, pos.z), obj->m);
+	obj->m_inv = matrix4_inv(obj->m);
+	obj->m_inv_trans = matrix4_trans(obj->m_inv);
 	return (obj);
 }
 
@@ -66,10 +66,10 @@ t_object	*new_sphere(t_point3 pos, double radius, uint32_t color)
 	obj->fnct = &intersect_sphere;
 	obj->uvmap_fnct = &get_spherical_map;
 	obj->albedo = get_norm_color(color);
-	obj->M = matrix4_scale(radius, radius, radius);
-	obj->M = matrix4_mul(matrix4_translate(pos.x, pos.y, pos.z), obj->M);
-	obj->M_inv = matrix4_inv(obj->M);
-	obj->M_inv_trans = matrix4_trans(obj->M_inv);
+	obj->m = matrix4_scale(radius, radius, radius);
+	obj->m = matrix4_mul(matrix4_translate(pos.x, pos.y, pos.z), obj->m);
+	obj->m_inv = matrix4_inv(obj->m);
+	obj->m_inv_trans = matrix4_trans(obj->m_inv);
 	return (obj);
 }
 
@@ -95,10 +95,10 @@ t_object	*new_plan(t_point3 pos, t_vec3 normal, uint32_t color)
 	obj->uvmap_fnct = &get_planar_map;
 	obj->type = O_PLAN;
 	obj->albedo = get_norm_color(color);
-	obj->M = build_rotation_matrix(vec_norm(normal));
-	obj->M = matrix4_mul(matrix4_translate(pos.x, pos.y, pos.z), obj->M);
-	obj->M_inv = matrix4_inv(obj->M);
-	obj->M_inv_trans = matrix4_trans(obj->M_inv);
+	obj->m = build_rotation_matrix(vec_norm(normal));
+	obj->m = matrix4_mul(matrix4_translate(pos.x, pos.y, pos.z), obj->m);
+	obj->m_inv = matrix4_inv(obj->m);
+	obj->m_inv_trans = matrix4_trans(obj->m_inv);
 	return (obj);
 }
 
@@ -114,16 +114,16 @@ t_object	*new_cone(t_point3 pos, double diameter, double height, t_vec3 orient,
 	obj->albedo = get_norm_color(color);
 	obj->fnct = &intersect_cone;
 	obj->uvmap_fnct = &get_cone_map;
-	obj->M = matrix4_scale(diameter, height, diameter);
-	obj->M = matrix4_mul(build_rotation_matrix(vec_norm(orient)), obj->M);
-	obj->M = matrix4_mul(matrix4_translate(pos.x, pos.y, pos.z), obj->M);
-	obj->M_inv = matrix4_inv(obj->M);
-	obj->M_inv_trans = matrix4_trans(obj->M_inv);
+	obj->m = matrix4_scale(diameter, height, diameter);
+	obj->m = matrix4_mul(build_rotation_matrix(vec_norm(orient)), obj->m);
+	obj->m = matrix4_mul(matrix4_translate(pos.x, pos.y, pos.z), obj->m);
+	obj->m_inv = matrix4_inv(obj->m);
+	obj->m_inv_trans = matrix4_trans(obj->m_inv);
 	return (obj);
 }
 
 void	apply_obj_transform(t_object *obj, t_matrix4 const M)
 {
-	obj->M = M;
-	obj->M_inv = matrix4_inv(M);
+	obj->m = M;
+	obj->m_inv = matrix4_inv(M);
 }

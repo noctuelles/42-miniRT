@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:12:27 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/11 15:17:40 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 16:59:32 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	free_token(void *token);
 void	*add_known_token_to_list(t_lexer *lexer);
 t_token	search_known_token(const char *str);
 t_token	*add_token_to_list(t_lexer *lexer, char *value, size_t len,
-		t_token_type type);
+			t_token_type type);
 bool	analysis_syntax(t_list	*tkns);
 void	remove_break_tokens(t_list **tkns);
 
@@ -138,6 +138,6 @@ void	remove_break_tokens(t_list **tkns);
 
 bool	check_valid_lexing(t_lexer *lexer);
 
-t_list		*lex_from_file(const char *filename);
+t_list	*lex_from_file(const char *filename);
 
 #endif

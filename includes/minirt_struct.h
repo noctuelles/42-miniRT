@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/11 16:51:43 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/11 17:12:52 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,9 +212,9 @@ typedef struct s_texture
 struct s_object
 {
 	t_rayhit			rayhit;
-	t_matrix4			M;
-	t_matrix4			M_inv;
-	t_matrix4			M_inv_trans;
+	t_matrix4			m;
+	t_matrix4			m_inv;
+	t_matrix4			m_inv_trans;
 	t_albedo			albedo;
 	t_texture			texture;
 	t_object_type		type;
