@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:06:14 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 22:26:14 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/11 15:40:09 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
  */
 
 bool	extract_double_pos(t_list **lexer, double *dbl);
-bool	extract_double_range(t_list **lexer, double *dbl, double min, double max);
-bool	extract_texture(t_minirt *minirt, t_list **lexer, t_object *obj, double with, double height);
+bool	extract_double_range(t_list **lexer, double *dbl, double min,
+			double max);
+bool	extract_texture(t_minirt *minirt, t_list **lexer, t_object *obj,
+			t_object_type type);
 
 /*
  *	extract_utils2.c
@@ -53,7 +55,7 @@ void	extract_ambiante_light(t_minirt *minirt, t_list **lexer);
  *	parsing.c
  */
 
-void	bad_exit_msg(t_minirt *minirt, char *str);
+void	bad_exit_msg(t_minirt *minirt, char *str, char *tok);
 bool	parser(t_minirt *minirt, char *filename);
 bool	ft_isdouble(char *str);
 

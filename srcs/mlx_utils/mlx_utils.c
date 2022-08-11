@@ -6,17 +6,12 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 15:10:50 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 15:16:52 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/11 16:49:24 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_struct.h"
 #include "define.h"
-
-unsigned int	set_color(unsigned char r, unsigned char g, unsigned char b)
-{
-	return (r << 16 | g << 8 | b);
-}
 
 t_color	get_norm_color(uint32_t color)
 {
