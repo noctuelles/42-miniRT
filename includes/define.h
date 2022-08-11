@@ -6,7 +6,11 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:10:25 by bsavinel          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/08/11 15:17:38 by plouvel          ###   ########.fr       */
+=======
+/*   Updated: 2022/08/11 14:10:42 by bsavinel         ###   ########.fr       */
+>>>>>>> origin/parsing
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +37,9 @@
 # define EPSILON 0.0001
 # define L_POWER 6.0e1
 
-#define D_LEX_CONTENT ((t_token *)(*lexer)->content)
+#define D_LEX_CONTENT      ((t_token *)(*lexer)->content)
 #define D_LEX_NEXT_CONTENT ((t_token *)(*lexer)->next->content)
+#define D_OBJ_SC_CONTENT   ((t_object *)minirt->scene.objs->content)
 
 /*
  *	Define hook
