@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/11 17:08:18 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:14:37 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	render_img(t_minirt *minirt)
 	struct timeval	t;
 	struct timeval	t1;
 
+	printf("minirt: rendering scene...\n");
 	gettimeofday(&t, NULL);
 	launch_workers(minirt);
 	gettimeofday(&t1, NULL);

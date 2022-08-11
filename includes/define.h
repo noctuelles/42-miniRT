@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:10:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 16:25:51 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:42:06 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
  *	Program related define 
  */
 
-# define WIDTH  1440 
+# define WIDTH  900 
 # define HEIGHT 900
 
 # define THREAD_NBR 8
