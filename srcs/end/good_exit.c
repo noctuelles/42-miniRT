@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 13:55:48 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 17:24:10 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/11 17:30:11 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ void	free_object(t_minirt *minirt)
 	while (minirt->scene.objs)
 	{
 		if (((t_object *)minirt->scene.objs->content)->texture.type == TX_IMAGE
-			|| ((t_object *)minirt->scene.objs->content)->texture.type == TX_IMAGEW_NMAP)
+			|| ((t_object *)minirt->scene.objs->content)->texture.type
+			== TX_IMAGEW_NMAP)
 			mlx_destroy_image(minirt->mlx.ptr,
 				((t_object *)minirt->scene.objs->content)->texture.texel.img);
-		if (((t_object *)minirt->scene.objs->content)->texture.type == TX_IMAGEW_NMAP)
+		if (((t_object *)minirt->scene.objs->content)->texture.type
+			== TX_IMAGEW_NMAP)
 			mlx_destroy_image(minirt->mlx.ptr,
 				((t_object *)minirt->scene.objs->content)->texture.nmap.img);
 		tmp = minirt->scene.objs;
