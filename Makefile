@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/11 17:14:57 by plouvel          ###   ########.fr        #
+#    Updated: 2022/08/11 18:02:32 by bsavinel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SRCS =	end/good_exit.c						\
 		parsing/extract_texture.c			\
 		parsing/extract_utils2.c			\
 		scene/object.c						\
+		scene/object2.c						\
 		scene/scene.c						\
 		scene/camera.c						\
 		shading/shading.c					\
