@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:10:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 22:35:57 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 14:10:42 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 #define D_LEX_CONTENT ((t_token *)(*lexer)->content)
 #define D_LEX_NEXT_CONTENT ((t_token *)(*lexer)->next->content)
+#define D_OBJ_SC_CONTENT ((t_object *)minirt->scene.objs->content)
 
 #ifndef D_BONUS
 # define D_BONUS 1

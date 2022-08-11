@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:43:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 14:12:32 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/11 15:37:03 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 #include "libft.h"
 #include "end.h"
 #include "tuple.h"
+#include "ft_dprintf.h"
 #include "parsing.h"
 #include "define.h"
 #include <stdlib.h>
+#include <unistd.h>
 
 bool	ft_isdouble(char *str)
 {
@@ -46,14 +48,16 @@ bool	ft_isdouble(char *str)
 	return (true);
 }
 
-void	bad_exit_msg(t_minirt *minirt, char *str)
+void	bad_exit_msg(t_minirt *minirt, char *str, char *tok)
 {
 	ft_lstclear(&minirt->start_lexer, free_token);
 	ft_lstclear(&minirt->scene.light, &free);
 	free_object(minirt);
 	destruct_mlx(&minirt->mlx);
 	if (str)
-		printf("Error\n%s\n", str);
+		ft_dprintf(STDERR_FILENO, "Error\nminirt: %s\n", str);
+	if (tok)
+		ft_dprintf(STDERR_FILENO, "Probably %s is bad", tok);
 	exit(1);
 }
 
@@ -92,7 +96,7 @@ bool	feed_scene(t_minirt *minirt, t_list **lexer)
 		}
 		if (*lexer && ((new_line == false && D_LEX_CONTENT->type != T_NULL)
 				|| save_lexer == *lexer))
-			bad_exit_msg(minirt, "Patern not identify");
+			bad_exit_msg(minirt, "Probaly incorect identifier", NULL);
 	}
 	return (true);
 }
@@ -103,9 +107,9 @@ bool	parser(t_minirt *minirt, char *filename)
 
 	lex_file = lex_from_file(filename);
 	if (lex_file == NULL)
-		bad_exit_msg(minirt, NULL);
+		bad_exit_msg(minirt, NULL, NULL);
 	minirt->start_lexer = lex_file;
 	if (!feed_scene(minirt, &lex_file))
-		bad_exit_msg(minirt, "Sommething bad arrive");
+		bad_exit_msg(minirt, "Sommething bad arrive", NULL);
 	return (true);
 }

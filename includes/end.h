@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:20:30 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/14 14:27:13 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/11 13:23:17 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
  *	good_exit.c
  */
 
-int	good_exit(t_minirt *backpack);
+void	free_object(t_minirt *minirt);
+int		good_exit(t_minirt *backpack);
 
 #endif
