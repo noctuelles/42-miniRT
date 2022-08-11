@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:56:35 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/11 15:17:35 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:51:26 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ bool	analysis_syntax(t_list	*tkns)
 					&& tkn->type != T_NULL))
 				return (false);
 			else if ((prev_tkn->type >= T_AMBIANT_LIGHT && prev_tkn->type
-					<= T_PLAN) && tkn->type != T_BREAK) 
+					<= T_PLAN) && tkn->type != T_BREAK)
 				return (false);
 		}
 		prev_tkn = tkn;
