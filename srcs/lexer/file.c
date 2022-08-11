@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:29:32 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 22:34:42 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/10 22:42:23 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static char	**fill_file(int fd, size_t nbr_lines)
 	size_t	n;
 
 	i = 0;
+	errno = 0;
 	file = malloc((nbr_lines + 1) * sizeof(char *));
 	if (!file)
 		return (NULL);

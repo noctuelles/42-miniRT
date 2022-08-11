@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:56:35 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 22:37:00 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 13:59:08 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,14 @@ t_token	*add_token_to_list(t_lexer *lexer, char *value, size_t len,
 	return (tkn);
 }
 
-ssize_t	analysis_syntax(t_list	*tkns)
+bool	analysis_syntax(t_list	*tkns)
 {
 	t_list	*elem;
 	t_token	*tkn;
 	t_token	*prev_tkn;
-	size_t	i;
 
 	elem = tkns;
 	prev_tkn = NULL;
-	i = 0;
 	while (elem)
 	{
 		tkn = elem->content;
@@ -109,15 +107,15 @@ ssize_t	analysis_syntax(t_list	*tkns)
 			if ((prev_tkn->type == T_VALUE) && (tkn->type != T_NEWLINE
 					&& tkn->type != T_COMMA && tkn->type != T_BREAK
 					&& tkn->type != T_NULL))
-				return (i);
+				return (false);
 			else if ((prev_tkn->type >= T_AMBIANT_LIGHT && prev_tkn->type
-					<= T_LIGHT) && tkn->type != T_BREAK) 
-				return (i);
+					<= T_PLAN) && tkn->type != T_BREAK) 
+				return (false);
 		}
 		prev_tkn = tkn;
 		elem = elem->next;
 	}
-	return (ANALYSIS_OK);
+	return (true);
 }
 
 void	remove_break_tokens(t_list **tkns)

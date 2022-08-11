@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:12:27 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 22:36:43 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 13:58:53 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define STR_INVALID_FILE_EXTENSION "invalid file extension"
 # define STR_ERROR_FILE_READ        "an error occured during file reading"
 # define STR_EMPTY_FILE             "empty or invalid file."
-# define STR_INVALID_SYNTAX         "minirt: line %u: invalid syntax.\n"
+# define STR_INVALID_SYNTAX         "minirt: invalid syntax"
 
 # define STR_TOO_MUCH_AMLIGHT       "minirt: line %u: ambiant light cannot be \
 declared more than once.\n"
@@ -50,22 +50,20 @@ declared more than once.\n"
 # define STR_FUNCTION_OPEN          "open"
 # define STR_FUNCTION_MALLOC        "malloc"
 
-# define ANALYSIS_OK                -1
-
 typedef enum e_token_type
 {
 	T_AMBIANT_LIGHT,
 	T_CAMERA,
 	T_LIGHT,
 	T_SPHERE,
-	T_PLAN,
 	T_CYLINDER,
-	T_VALUE,
+	T_CONE,
+	T_PLAN,
 	T_NEWLINE,
+	T_VALUE,
 	T_COMMA,
 	T_BREAK,
-	T_NULL,
-	T_CONE
+	T_NULL
 }				t_token_type;
 
 typedef struct e_token
@@ -130,7 +128,7 @@ void	*add_known_token_to_list(t_lexer *lexer);
 t_token	search_known_token(const char *str);
 t_token	*add_token_to_list(t_lexer *lexer, char *value, size_t len,
 		t_token_type type);
-ssize_t	analysis_syntax(t_list	*tkns);
+bool	analysis_syntax(t_list	*tkns);
 void	remove_break_tokens(t_list **tkns);
 
 t_list		*lex_from_file(const char *filename);

@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/10 15:10:20 by bsavinel         ###   ########.fr        #
+#    Updated: 2022/08/10 23:36:46 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 NAME = miniRT
 
 CC = cc 
-CFLAGS = -g3 -O3 -Wall -Wextra -Werror
+CFLAGS = -g3 -O3 -Wall -Wextra -Werror -fsanitize=address
 
 
 ARGUMENT_RUN = 
