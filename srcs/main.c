@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 16:53:06 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:04:08 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	main(int ac, char **av)
 	if (!init_mlx_struct(&minirt.mlx))
 		return (1);
 	parser(&minirt, av[1]);
-	minirt.mlx.win = mlx_new_window(minirt.mlx.ptr, WIDTH, HEIGHT, "miniRT");
+	if (!init_mlx_window(&minirt))
+		return (1);
 	setup_workers(&minirt);
 	render_img(&minirt);
 	launch_loop(&minirt);

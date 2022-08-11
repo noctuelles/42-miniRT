@@ -6,13 +6,16 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:29:36 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 16:51:26 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:01:45 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "define.h"
+#include "end.h"
+#include "ft_dprintf.h"
 #include "minirt_struct.h"
+#include "minirt_lexer.h"
 #include <stdlib.h>
 #include "mlx_utils.h"
 
@@ -23,15 +26,35 @@ int	init_mlx_struct(t_mlx *mlx)
 	mlx->img.img = NULL;
 	mlx->ptr = mlx_init();
 	if (!mlx->ptr)
+	{
+		print_error("cannot create mlx instance");
 		return (0);
-	mlx->win = mlx_new_window(mlx->ptr, WIDTH, HEIGHT, "miniRT");
+	}
 	mlx->img.img = mlx_new_image(mlx->ptr, WIDTH, HEIGHT);
 	if (!mlx->img.img)
+	{
+		print_error("cannot create mlx window image");
 		return (destruct_mlx(mlx));
+	}
 	mlx->img.addr = mlx_get_data_addr(mlx->img.img,
 			&mlx->img.bits_per_pixel,
 			&mlx->img.line_length, &mlx->img.endian);
 	return (1);
+}
+
+bool	init_mlx_window(t_minirt *minirt)
+{
+	minirt->mlx.win = mlx_new_window(minirt->mlx.ptr, WIDTH, HEIGHT, "miniRT");
+	if (!minirt->mlx.win)
+	{
+		ft_lstclear(&minirt->start_lexer, free_token);
+		ft_lstclear(&minirt->scene.light, &free);
+		free_object(minirt);
+		destruct_mlx(&minirt->mlx);
+		print_error("cannot create mlx window");
+		return (false);
+	}
+	return (true);
 }
 
 int	destruct_mlx(t_mlx *mlx)
