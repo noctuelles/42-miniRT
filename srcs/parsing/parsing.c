@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:43:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 22:33:20 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/11 14:12:32 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 #include "mlx_utils.h"
 #include "scene.h"
 #include "libft.h"
+#include "end.h"
 #include "tuple.h"
 #include "parsing.h"
 #include "define.h"
 #include <stdlib.h>
 
-bool ft_isdouble(char *str)
+bool	ft_isdouble(char *str)
 {
 	int	i;
 	int	point;
-	
+
 	i = 0;
 	point = 0;
 	if (str[0] == '-')
@@ -34,11 +35,11 @@ bool ft_isdouble(char *str)
 		if (!ft_isdigit(str[i]))
 		{
 			if (point == 1)
-				return false;
+				return (false);
 			if (str[i] == '.')
 				point++;
 			else
-				return false;
+				return (false);
 		}
 		i++;
 	}
@@ -49,9 +50,10 @@ void	bad_exit_msg(t_minirt *minirt, char *str)
 {
 	ft_lstclear(&minirt->start_lexer, free_token);
 	ft_lstclear(&minirt->scene.light, &free);
-	ft_lstclear(&minirt->scene.objs, &free);
+	free_object(minirt);
 	destruct_mlx(&minirt->mlx);
-	printf("Error\n%s\n", str);
+	if (str)
+		printf("Error\n%s\n", str);
 	exit(1);
 }
 
@@ -101,7 +103,7 @@ bool	parser(t_minirt *minirt, char *filename)
 
 	lex_file = lex_from_file(filename);
 	if (lex_file == NULL)
-		bad_exit_msg(minirt, "lexing fail");
+		bad_exit_msg(minirt, NULL);
 	minirt->start_lexer = lex_file;
 	if (!feed_scene(minirt, &lex_file))
 		bad_exit_msg(minirt, "Sommething bad arrive");
