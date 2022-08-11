@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:04:48 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 16:37:10 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 18:03:37 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	extract_plan(t_minirt *minirt, t_list **lexer)
 	if (!obj)
 		bad_exit_msg(minirt, "plane creation failed.", NULL);
 	obj->texture.type = TX_NONE;
-	if (D_BONUS && !(extract_texture(minirt, lexer, obj, O_PLAN)))
-		bad_exit_msg(minirt, "invalid plane texture.", NULL);
 }
 
 void	extract_cylinder(t_minirt *minirt, t_list **lexer)
@@ -81,8 +79,8 @@ void	extract_cylinder(t_minirt *minirt, t_list **lexer)
 		bad_exit_msg(minirt, "invalid cylinder height.", NULL);
 	if (!extract_color(lexer, &color))
 		bad_exit_msg(minirt, "invalid cylinder color.", NULL);
-	obj = add_obj_to_scene(&minirt->scene, new_cylinder(centre, diam_haut[0],
-				diam_haut[1], orien, color));
+	obj = add_obj_to_scene(&minirt->scene, new_cylinder(centre, diam_haut,
+				orien, color));
 	if (!obj)
 		bad_exit_msg(minirt, "cone creation failed.", NULL);
 	obj->texture.type = TX_NONE;
@@ -109,8 +107,8 @@ void	extract_cone(t_minirt *minirt, t_list **lexer)
 		bad_exit_msg(minirt, "invalid cone height.", NULL);
 	if (!extract_color(lexer, &color))
 		bad_exit_msg(minirt, "invalid cone color.", NULL);
-	obj = add_obj_to_scene(&minirt->scene, new_cone(centre, diam_haut[0],
-				diam_haut[1], orien, color));
+	obj = add_obj_to_scene(&minirt->scene, new_cone(centre, diam_haut,
+				orien, color));
 	if (!obj)
 		bad_exit_msg(minirt, "cone creation failed.", NULL);
 	obj->texture.type = TX_NONE;
