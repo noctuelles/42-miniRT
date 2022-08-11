@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:04:59 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 13:51:04 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/11 17:23:30 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 
 bool	extract_double_pos(t_list **lexer, double *dbl)
 {
-	if (!(*lexer) || D_LEX_CONTENT->type != T_VALUE
-		|| !ft_isdouble(D_LEX_CONTENT->value))
+	if (!(*lexer) || ((t_token *)(*lexer)->content)->type != T_VALUE
+		|| !ft_isdouble(((t_token *)(*lexer)->content)->value))
 		return (false);
-	*dbl = ft_atof(D_LEX_CONTENT->value);
+	*dbl = ft_atof(((t_token *)(*lexer)->content)->value);
 	*lexer = (*lexer)->next;
 	if (*dbl < 0)
 		return (false);
@@ -34,10 +34,10 @@ bool	extract_double_pos(t_list **lexer, double *dbl)
 bool	extract_double_range(t_list **lexer, double *dbl, double min,
 								double max)
 {
-	if (!(*lexer) || D_LEX_CONTENT->type != T_VALUE
-		|| !ft_isdouble(D_LEX_CONTENT->value))
+	if (!(*lexer) || ((t_token *)(*lexer)->content)->type != T_VALUE
+		|| !ft_isdouble(((t_token *)(*lexer)->content)->value))
 		return (false);
-	*dbl = ft_atof(D_LEX_CONTENT->value);
+	*dbl = ft_atof(((t_token *)(*lexer)->content)->value);
 	*lexer = (*lexer)->next;
 	if (*dbl < min || *dbl > max)
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 15:08:19 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 16:44:07 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:26:46 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ bool	extract_point(t_list **lexer, t_point3 *place)
 	{
 		if (!(*lexer) || (i != 2 && !((*lexer)->next)))
 			return (false);
-		if ((D_LEX_CONTENT->type != T_VALUE
-			&& (D_LEX_NEXT_CONTENT->type != T_COMMA || i == 2))
-			|| !ft_isdouble(D_LEX_CONTENT->value))
+		if ((((t_token *)(*lexer)->content)->type != T_VALUE
+			&& (((t_token *)(*lexer)->next->content)->type != T_COMMA
+			|| i == 2))
+			|| !ft_isdouble(((t_token *)(*lexer)->content)->value))
 			return (false);
-		cor[i] = ft_atof(D_LEX_CONTENT->value);
+		cor[i] = ft_atof(((t_token *)(*lexer)->content)->value);
 		*lexer = (*lexer)->next;
 		if (i != 2)
 			*lexer = (*lexer)->next;
@@ -55,11 +56,12 @@ bool	extract_vector(t_list **lexer, t_vec3 *vect)
 	{
 		if (!(*lexer) || (i != 2 && !((*lexer)->next)))
 			return (false);
-		if ((D_LEX_CONTENT->type != T_VALUE
-			&& (D_LEX_NEXT_CONTENT->type != T_COMMA || i == 2))
-			|| !ft_isdouble(D_LEX_CONTENT->value))
+		if ((((t_token *)(*lexer)->content)->type != T_VALUE
+			&& (((t_token *)(*lexer)->next->content)->type != T_COMMA
+			|| i == 2))
+			|| !ft_isdouble(((t_token *)(*lexer)->content)->value))
 			return (false);
-		cor[i] = ft_atof(D_LEX_CONTENT->value);
+		cor[i] = ft_atof(((t_token *)(*lexer)->content)->value);
 		*lexer = (*lexer)->next;
 		if (i != 2)
 			*lexer = (*lexer)->next;
@@ -81,11 +83,12 @@ bool	extract_vector_norm(t_list **lexer, t_vec3 *vect)
 	{
 		if (!(*lexer) || (i != 2 && !((*lexer)->next)))
 			return (false);
-		if ((D_LEX_CONTENT->type != T_VALUE
-			&& (D_LEX_NEXT_CONTENT->type != T_COMMA || i == 2))
-			|| !ft_isdouble(D_LEX_CONTENT->value))
+		if ((((t_token *)(*lexer)->content)->type != T_VALUE
+			&& (((t_token *)(*lexer)->next->content)->type != T_COMMA
+			|| i == 2))
+			|| !ft_isdouble(((t_token *)(*lexer)->content)->value))
 			return (false);
-		cor[i] = ft_atof(D_LEX_CONTENT->value);
+		cor[i] = ft_atof(((t_token *)(*lexer)->content)->value);
 		if (cor[i] > 1 || cor[i] < -1)
 			return (false);
 		*lexer = (*lexer)->next;
@@ -109,11 +112,12 @@ bool	extract_color(t_list **lexer, uint32_t *color)
 	{
 		if (!(*lexer) || (i != 2 && !((*lexer)->next)))
 			return (false);
-		if ((D_LEX_CONTENT->type != T_VALUE
-			&& (D_LEX_NEXT_CONTENT->type != T_COMMA || i == 2))
-			|| !ft_stronly_digits(D_LEX_CONTENT->value))
+		if ((((t_token *)(*lexer)->content)->type != T_VALUE
+			&& (((t_token *)(*lexer)->next->content)->type != T_COMMA
+			|| i == 2))
+			|| !ft_stronly_digits(((t_token *)(*lexer)->content)->value))
 			return (false);
-		cor[i] = ft_atoi(D_LEX_CONTENT->value);
+		cor[i] = ft_atoi(((t_token *)(*lexer)->content)->value);
 		if (cor[i] > 255 || cor[i] < 0)
 			return (false);
 		*lexer = (*lexer)->next;
