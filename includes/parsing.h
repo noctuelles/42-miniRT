@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:06:14 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 15:40:09 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/11 18:12:03 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ bool	extract_texture(t_minirt *minirt, t_list **lexer, t_object *obj,
  */
 
 bool	extract_point(t_list **lexer, t_point3 *place);
-bool	extract_vector(t_list **lexer, t_vec3 *vect);
 bool	extract_vector_norm(t_list **lexer, t_vec3 *vect);
 bool	extract_color(t_list **lexer, uint32_t *color);
 

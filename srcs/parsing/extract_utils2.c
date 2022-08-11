@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 15:08:19 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 17:26:46 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/11 18:12:11 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,33 +43,6 @@ bool	extract_point(t_list **lexer, t_point3 *place)
 	if (i != 3)
 		return (false);
 	*place = point(cor[0], cor[1], cor[2]);
-	return (true);
-}
-
-bool	extract_vector(t_list **lexer, t_vec3 *vect)
-{
-	double	cor[3];
-	int		i;
-
-	i = 0;
-	while (i < 3)
-	{
-		if (!(*lexer) || (i != 2 && !((*lexer)->next)))
-			return (false);
-		if ((((t_token *)(*lexer)->content)->type != T_VALUE
-			&& (((t_token *)(*lexer)->next->content)->type != T_COMMA
-			|| i == 2))
-			|| !ft_isdouble(((t_token *)(*lexer)->content)->value))
-			return (false);
-		cor[i] = ft_atof(((t_token *)(*lexer)->content)->value);
-		*lexer = (*lexer)->next;
-		if (i != 2)
-			*lexer = (*lexer)->next;
-		i++;
-	}
-	if (i != 3)
-		return (false);
-	*vect = vector(cor[0], cor[1], cor[2]);
 	return (true);
 }
 

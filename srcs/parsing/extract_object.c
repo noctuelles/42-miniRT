@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:04:48 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 16:37:10 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 18:11:21 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	extract_plan(t_minirt *minirt, t_list **lexer)
 	*lexer = (*lexer)->next;
 	if (!extract_point(lexer, &centre))
 		bad_exit_msg(minirt, "invalid plane position.", NULL);
-	if (!extract_vector(lexer, &vect))
+	if (!extract_vector_norm(lexer, &vect))
 		bad_exit_msg(minirt, "invalid plane orientation.", NULL);
 	if (!extract_color(lexer, &color))
 		bad_exit_msg(minirt, "invalid plane color.", NULL);
@@ -73,7 +73,7 @@ void	extract_cylinder(t_minirt *minirt, t_list **lexer)
 	*lexer = (*lexer)->next;
 	if (!extract_point(lexer, &centre))
 		bad_exit_msg(minirt, "invalid cylinder center.", NULL);
-	if (!extract_vector(lexer, &orien))
+	if (!extract_vector_norm(lexer, &orien))
 		bad_exit_msg(minirt, "invalid cylinder orientation.", NULL);
 	if (!extract_double_pos(lexer, &diam_haut[0]))
 		bad_exit_msg(minirt, "invalid cylinder radius.", NULL);
@@ -101,7 +101,7 @@ void	extract_cone(t_minirt *minirt, t_list **lexer)
 	*lexer = (*lexer)->next;
 	if (!extract_point(lexer, &centre))
 		bad_exit_msg(minirt, "invalid cone center.", NULL);
-	if (!extract_vector(lexer, &orien))
+	if (!extract_vector_norm(lexer, &orien))
 		bad_exit_msg(minirt, "invalid cone orientation.", NULL);
 	if (!extract_double_pos(lexer, &diam_haut[0]))
 		bad_exit_msg(minirt, "invalid cone radius.", NULL);
