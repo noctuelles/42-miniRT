@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:12:27 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/11 13:58:53 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 15:17:40 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define STR_INVALID_FILE_EXTENSION "invalid file extension"
 # define STR_ERROR_FILE_READ        "an error occured during file reading"
 # define STR_EMPTY_FILE             "empty or invalid file."
-# define STR_INVALID_SYNTAX         "minirt: invalid syntax"
+# define STR_INVALID_SYNTAX         "invalid syntax"
 
 # define STR_TOO_MUCH_AMLIGHT       "minirt: line %u: ambiant light cannot be \
 declared more than once.\n"
@@ -43,6 +43,8 @@ declared more than once.\n"
 declared more than once.\n"
 # define STR_TOO_MUCH_LIGHT         "minirt: line %u: light cannot be \
 declared more than once.\n"
+# define STR_NO_CAMERA              "no camera declared in the scene"
+# define STR_NO_AMBIANT_LIGHT       "no ambient light declared"
 
 # define STR_FILE_EXTENSION         ".rt"
 
@@ -52,8 +54,8 @@ declared more than once.\n"
 
 typedef enum e_token_type
 {
-	T_AMBIANT_LIGHT,
 	T_CAMERA,
+	T_AMBIANT_LIGHT,
 	T_LIGHT,
 	T_SPHERE,
 	T_CYLINDER,
@@ -115,6 +117,7 @@ char	*readline(int fd, char **line);
 void	*print_error(const char *error_msg);
 void	*print_error_function(const char *function);
 void	*print_error_line_nbr(const char *error_msg, size_t line_nbr);
+void	print_warning(const char *message);
 
 /* tokens.c */
 
@@ -130,6 +133,10 @@ t_token	*add_token_to_list(t_lexer *lexer, char *value, size_t len,
 		t_token_type type);
 bool	analysis_syntax(t_list	*tkns);
 void	remove_break_tokens(t_list **tkns);
+
+/* lexer_utils2.c */
+
+bool	check_valid_lexing(t_lexer *lexer);
 
 t_list		*lex_from_file(const char *filename);
 

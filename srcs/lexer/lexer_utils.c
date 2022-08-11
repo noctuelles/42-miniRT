@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:56:35 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/11 13:59:08 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 15:17:35 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,20 +75,19 @@ t_token	*add_token_to_list(t_lexer *lexer, char *value, size_t len,
 			return (NULL);
 	}
 	tkn = new_token(str, len, type);
-	if (!tkn)
+	if (tkn)
 	{
-		if (str != value)
-			free(str);
-		return (NULL);
-	}
-	elem = ft_lstnew(tkn);
-	if (!elem)
-	{
+		elem = ft_lstnew(tkn);
+		if (elem)
+		{
+			ft_lstadd_back(&lexer->list_tkns, elem);
+			return (tkn);
+		}
 		free_token(tkn);
-		return (NULL);
 	}
-	ft_lstadd_back(&lexer->list_tkns, elem);
-	return (tkn);
+	else if (type == T_VALUE)
+		free(str);
+	return (NULL);
 }
 
 bool	analysis_syntax(t_list	*tkns)

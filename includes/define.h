@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:10:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 22:35:57 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 15:17:38 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,26 @@
 
 # include <stddef.h> // -> NULL
 
-# define THREAD_NBR 8
-#define L_POWER 6.0e1
-
-#define D_LEX_CONTENT ((t_token *)(*lexer)->content)
-#define D_LEX_NEXT_CONTENT ((t_token *)(*lexer)->next->content)
-
 #ifndef D_BONUS
 # define D_BONUS 1
 #endif
 
+# define STR_PRG_NAME "minirt"
+
 /*
- *	Define windows
+ *	Program related define 
  */
 
 # define WIDTH  1440 
 # define HEIGHT 900
 
+# define THREAD_NBR 8
+
 # define EPSILON 0.0001
+# define L_POWER 6.0e1
 
-/*
- *	Temporary define
- */
-
-# define FOV_ANGLE 100.0
-# define FOV       (FOV_ANGLE * M_PI) / 180
-
-# define ANGLE(x) (x * M_PI) / 180
-/*
- *	Macros
- */
-
-# define DG_RAD(a) ((a * M_PI) / 180)
+#define D_LEX_CONTENT ((t_token *)(*lexer)->content)
+#define D_LEX_NEXT_CONTENT ((t_token *)(*lexer)->next->content)
 
 /*
  *	Define hook
@@ -54,15 +42,16 @@
 
 # define D_ESCAPE 65307
 
-# define D_W 0x77
+/*# define D_W 0x77
 # define D_A 0x61
 # define D_S 0x73
-# define D_D 0x64
+# define D_D 0x64*/
 
 /*
  *	Error message
  */
 
-# define BAD_NB_ARG "Bad number of argument\nUse like this ./miniRT <file>\n"
+# define STR_BAD_NB_ARG "Error\nminirt: incorrect number of arguments.\n\
+usage: %s <file_name>.rt\n"
 
 #endif

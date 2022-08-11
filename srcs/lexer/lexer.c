@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:54:50 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/11 13:59:11 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 15:17:34 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	*finish_lexing(t_lexer *lexer)
 	return (lexer->list_tkns);
 }
 
-t_list	*lex_file(t_lexer *lexer)
+static t_list	*lex_file(t_lexer *lexer)
 {
 	while (lexer->file_content[lexer->line_nbr] != NULL)
 	{
@@ -79,6 +79,46 @@ t_list	*lex_file(t_lexer *lexer)
 	return (finish_lexing(lexer));
 }
 
+/*char *translate(t_token_type type)
+{
+	if (type == 0)
+		return ("T_CAMERA");
+	if (type == 1)
+		return ("T_AMBIANT_LIGHT");
+	if (type == 2)
+		return ("T_LIGHT");
+	if (type == 3)
+		return ("T_SPHERE");
+	if (type == 4)
+		return ("T_CYLINDER");
+	if (type == 5)
+		return ("T_CONE");
+	if (type == 6)
+		return ("T_PLAN");
+	if (type == 7)
+		return ("T_NEWLINE");
+	if (type == 8)
+		return ("T_VALUE");
+	if (type == 9)
+		return ("T_COMMA");
+	if (type == 10)
+		return ("T_BREAK");
+	if (type == 11)
+		return ("T_NULL");
+
+	return ("NULL");
+}
+void	print_tokens(t_list *tkns)
+{
+	for (t_list *elem = tkns; elem; elem = elem->next)
+	{
+		t_token *tkn = elem->content;
+		printf("<%s> ", translate(tkn->type));
+		if (tkn->type == T_NEWLINE)
+			printf("\n");
+	}
+}*/
+
 t_list	*lex_from_file(const char *filename)
 {
 	t_lexer	lexer;
@@ -93,13 +133,10 @@ t_list	*lex_from_file(const char *filename)
 		lexer.list_tkns = lex_file(&lexer);
 		while (lexer.file_content[i] != NULL)
 			free(lexer.file_content[i++]);
-		if (analysis_syntax(lexer.list_tkns))
-			remove_break_tokens(&lexer.list_tkns);
-		else
-		{
-			print_error_line_nbr(STR_INVALID_SYNTAX, i);
+		if (!check_valid_lexing(&lexer))
 			ft_lstclear(&lexer.list_tkns, free_token);
-		}
+		else
+			remove_break_tokens(&lexer.list_tkns);
 	}
 	free(lexer.file_content);
 	return (lexer.list_tkns);

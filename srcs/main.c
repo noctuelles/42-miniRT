@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/10 22:49:05 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 15:17:37 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "renderer.h"
 #include "multithreading.h"
 #include "minirt_lexer.h"
+#include "ft_dprintf.h"
 #include "minirt_lexer.h"
 #include <pthread.h>
 #include <string.h>
@@ -25,6 +26,7 @@
 #include "scene.h"
 #include "tuple.h"
 #include "scene.h"
+#include <unistd.h>
 #include <math.h>
 #include <stdio.h>
 
@@ -32,10 +34,13 @@ int	main(int ac, char **av)
 {
 	t_minirt	minirt;
 
-	memset(&minirt, 0, sizeof(t_minirt));
+	ft_memset(&minirt, 0, sizeof(t_minirt));
 	if (ac != 2)
 	{
-		printf("Error\nBad numeber of argument\n");
+		if (*av)
+			ft_dprintf(STDERR_FILENO, STR_BAD_NB_ARG, *av);
+		else
+			ft_dprintf(STDERR_FILENO, STR_BAD_NB_ARG, STR_PRG_NAME);
 		return (1);
 	}
 	if (!init_mlx_struct(&minirt.mlx))

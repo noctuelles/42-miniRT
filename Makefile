@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/10 23:36:46 by plouvel          ###   ########.fr        #
+#    Updated: 2022/08/11 14:54:27 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRCS =	end/good_exit.c						\
 		lexer/io_utils.c					\
 		lexer/lexer.c						\
 		lexer/lexer_utils.c					\
+		lexer/lexer_utils2.c				\
 		lexer/tokens.c						\
 		texture/texture.c					\
 		texture/texture_utils.c				\
