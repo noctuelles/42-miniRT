@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:54:50 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/12 14:57:08 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/12 15:47:10 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	*finish_line(t_lexer *lexer)
 		return (quit(lexer, E_LEX_TOO_MUCH_LIGHT));
 	if (lexer->prev != lexer->line)
 	{
-		if (add_token_to_list(lexer, (char *) lexer->line,
+		if (add_token_to_list(lexer, (char *) lexer->prev,
 				lexer->line - lexer->prev, T_VALUE) == NULL)
 			return (quit(lexer, E_LEX_MALLOC));
 	}
