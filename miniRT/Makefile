@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/12 14:52:57 by plouvel          ###   ########.fr        #
+#    Updated: 2022/08/12 15:50:53 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,9 @@
 ################################################################################
 
 NAME = miniRT
-NAME_BONUS = miniRT_bonus
 
-CC = cc 
-CFLAGS = -g3 -O3 -Wall -Wextra -Werror -fsanitize=address
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -O3 -g3 -fsanitize=address
 
 ################################################################################
 ########							Sources 							########
@@ -87,7 +86,6 @@ LIBS =	libft/libft.a			\
 OBJS_PATH =	objs/
 
 OBJS		=	$(addprefix $(OBJS_PATH), $(SRCS:.c=.o))
-OBJS_BONUS	=	$(addprefix $(OBJS_PATH), $(SRCS:.c=_bonus.o))
 DEPS		=	$(addprefix $(OBJS_PATH), $(SRCS:.c=.d))
 
 ################################################################################
@@ -125,20 +123,12 @@ header:
 		@echo "${NO_COLOR}"
 
 $(NAME) : $(LIBS) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -lm -lbsd -lX11 -lXext -lpthread -o $(NAME) $(INCS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -lm -lbsd -lX11 -lXext -o $(NAME) $(INCS)
 	echo "$(BLUE)$(NAME): $(GREEN)Success $(NO_COLOR)"
-
-$(NAME_BONUS) : $(LIBS) $(OBJS_BONUS)
-	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBS) -lm -lbsd -lX11 -lXext -lpthread -o $(NAME_BONUS) $(INCS)
-	echo "$(BLUE)$(NAME_BONUS): $(GREEN)Success $(NO_COLOR)"
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c Makefile
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -MMD -c $< -o $@ $(INCS) -D D_BONUS=0
-
-$(OBJS_PATH)%_bonus.o: $(SRCS_PATH)%.c Makefile
-	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -MMD -c $< -o $@ $(INCS) -D D_BONUS=1
 
 clean :
 	$(RM) $(OBJS_PATH)
@@ -165,4 +155,6 @@ minilibx/libmlx_Linux.a:
 
 -include $(DEPS)
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
+
+#.SILENT:

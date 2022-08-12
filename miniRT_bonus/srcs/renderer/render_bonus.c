@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/11 17:14:37 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/12 16:05:05 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_struct_bonus.h"
+#include "end_bonus.h"
 #include "mlx.h"
 #include "mlx_utils_bonus.h"
 #include "scene_bonus.h"
 #include "math_utils_bonus.h"
 #include "multithreading_bonus.h"
+#include "ft_dprintf.h"
+#include <unistd.h>
 #include <stdio.h>
 #include <sys/time.h>
 
@@ -63,17 +66,23 @@ void	*render(void *pwrkrs)
 	return (NULL);
 }
 
-void	render_img(t_minirt *minirt)
+bool	render_img(t_minirt *minirt)
 {
 	struct timeval	t;
 	struct timeval	t1;
 
 	printf("minirt: rendering scene...\n");
 	gettimeofday(&t, NULL);
-	launch_workers(minirt);
+	if (!launch_workers(minirt))
+	{
+		ft_dprintf(STDERR_FILENO, STR_BAD_THREAD);
+		free_program(minirt);
+		return (false);
+	}
 	gettimeofday(&t1, NULL);
 	printf("minirt: rendered in %lu mlsec.\n",
 		get_mlsec_time(t1) - get_mlsec_time(t));
 	mlx_put_image_to_window(minirt->mlx.ptr, minirt->mlx.win,
 		minirt->mlx.img.img, 0, 0);
+	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/12 14:57:06 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/12 15:52:04 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "libft.h"
 # include "define.h"
-# include <pthread.h>
 # include <stdbool.h>
 
 /* ############################## Enumerations ############################## */
@@ -139,15 +138,6 @@ typedef struct s_mlx
 
 typedef struct s_minirt	t_minirt;
 
-typedef struct s_worker
-{
-	t_minirt		*minirt;
-	pthread_t		pthread;
-	unsigned int	id;
-	unsigned int	assigned_start;
-	unsigned int	assigned_end;
-}				t_worker;
-
 /* ################################ Program ################################# */
 
 typedef struct s_camera
@@ -166,7 +156,6 @@ struct s_minirt
 	t_mlx		mlx;
 	t_scene		scene;
 	t_camera	camera;
-	t_worker	workers[THREAD_NBR];
 	t_list		*start_lexer;
 };
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   multithreading.c                                   :+:      :+:    :+:   */
+/*   multithreading_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:57:05 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 16:33:43 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/12 16:05:12 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	*launch_workers(t_minirt *minirt)
 	while (i < THREAD_NBR)
 	{
 		if (pthread_create(&minirt->workers[i].pthread, NULL, &render,
-				&minirt->workers[i]))
+				&minirt->workers[i]) != 0)
 			return (NULL);
 		i++;
 	}

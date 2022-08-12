@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   good_exit.c                                        :+:      :+:    :+:   */
+/*   good_exit_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 13:55:48 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 17:47:31 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/12 16:05:11 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,17 @@ void	free_object(t_minirt *minirt)
 	}
 }
 
-int	good_exit(t_minirt *minirt)
+void	free_program(t_minirt *minirt)
 {
 	ft_lstclear(&minirt->start_lexer, free_token);
 	ft_lstclear(&minirt->scene.light, &free);
 	free_object(minirt);
 	destruct_mlx(&minirt->mlx);
+}
+
+int	good_exit(t_minirt *minirt)
+{
+	free_program(minirt);
 	exit(0);
 	return (0);
 }

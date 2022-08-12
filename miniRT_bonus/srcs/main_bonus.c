@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/12 14:58:21 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/12 16:05:12 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	main(int ac, char **av)
 	if (!init_mlx_window(&minirt))
 		return (1);
 	setup_workers(&minirt);
-	render_img(&minirt);
+	if (!render_img(&minirt))
+		return (1);
 	launch_loop(&minirt);
 	return (0);
 }
