@@ -6,30 +6,17 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 17:06:49 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/12 11:57:49 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_utils.h"
-#include "define.h"
 #include "parsing.h"
-#include "end.h"
 #include "renderer.h"
 #include "multithreading.h"
-#include "minirt_lexer.h"
 #include "ft_dprintf.h"
 #include "minirt_lexer.h"
-#include <pthread.h>
-#include <string.h>
-#include "matrix.h"
-#include "texture.h"
-#include "scene.h"
-#include "tuple.h"
-#include "scene.h"
 #include <unistd.h>
-#include <math.h>
-#include <stdio.h>
-#include "mlx.h"
 
 int	main(int ac, char **av)
 {

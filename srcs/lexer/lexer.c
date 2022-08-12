@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:54:50 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/11 15:17:34 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/12 11:57:42 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,10 +133,13 @@ t_list	*lex_from_file(const char *filename)
 		lexer.list_tkns = lex_file(&lexer);
 		while (lexer.file_content[i] != NULL)
 			free(lexer.file_content[i++]);
-		if (!check_valid_lexing(&lexer))
-			ft_lstclear(&lexer.list_tkns, free_token);
-		else
-			remove_break_tokens(&lexer.list_tkns);
+		if (lexer.list_tkns)
+		{
+			if (!check_valid_lexing(&lexer))
+				ft_lstclear(&lexer.list_tkns, free_token);
+			else
+				remove_break_tokens(&lexer.list_tkns);
+		}
 	}
 	free(lexer.file_content);
 	return (lexer.list_tkns);
