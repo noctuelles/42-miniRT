@@ -1,3 +1,6 @@
 [submodule "libft"]
 	path = miniRT_bonus/libft
 	url = https://github.com/noctuelles/42-libft.git
+[submodule "miniRT/libft"]
+	path = miniRT/libft
+	url = git@github.com:noctuelles/42-libft.git
