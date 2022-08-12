@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/12 16:23:58 by plouvel          ###   ########.fr        #
+#    Updated: 2022/08/12 16:28:12 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,7 +132,7 @@ $(NAME) : $(LIBS) $(OBJS)
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c Makefile
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -MMD -c $< -o $@ $(INCS) -D=D_BONUS=1
+	$(CC) $(CFLAGS) -MMD -c $< -o $@ $(INCS) -D D_BONUS=1
 
 clean :
 	$(RM) $(OBJS_PATH)
