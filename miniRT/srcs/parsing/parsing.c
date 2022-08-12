@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:43:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 17:25:59 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/12 15:04:54 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ bool	ft_isdouble(char *str)
 
 void	bad_exit_msg(t_minirt *minirt, char *str, char *tok)
 {
-	ft_lstclear(&minirt->start_lexer, free_token);
-	ft_lstclear(&minirt->scene.light, &free);
-	free_object(minirt);
-	destruct_mlx(&minirt->mlx);
 	if (str)
 		ft_dprintf(STDERR_FILENO, "Error\nminirt: %s\n", str);
 	if (tok)
 		ft_dprintf(STDERR_FILENO, "invalid '%s' token.", tok);
+	ft_lstclear(&minirt->start_lexer, free_token);
+	ft_lstclear(&minirt->scene.light, &free);
+	free_object(minirt);
+	destruct_mlx(&minirt->mlx);
 	exit(1);
 }
 

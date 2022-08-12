@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_texture.c                                  :+:      :+:    :+:   */
+/*   extract_texture_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 13:43:37 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 21:47:54 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/12 15:04:22 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct_bonus.h"
-#include "minirt_lexer_bonus.h"
-#include "texture_bonus.h"
-#include "scene_bonus.h"
+#include "minirt_struct.h"
+#include "minirt_lexer.h"
+#include "texture.h"
+#include "scene.h"
 #include "libft.h"
-#include "tuple_bonus.h"
-#include "parsing_bonus.h"
-#include "define_bonus.h"
+#include "tuple.h"
+#include "parsing.h"
+#include "define.h"
 
 void	take_texture(t_minirt *minirt, t_list **lexer, t_object *obj)
 {
@@ -73,7 +73,8 @@ void	take_checker(t_minirt *minirt, t_list **lexer, t_object *obj,
 bool	extract_texture(t_minirt *minirt, t_list **lexer, t_object *obj,
 			t_object_type type)
 {
-	if (((t_token *)(*lexer)->content)->type == T_NEWLINE)
+	if (!(*lexer) || ((t_token *)(*lexer)->content)->type == T_NEWLINE 
+		|| ((t_token *)(*lexer)->content)->type == T_NULL)
 		return (true);
 	if (ft_strcmp(((t_token *)(*lexer)->content)->value, "texture") == 0
 		&& type != O_PLAN)
