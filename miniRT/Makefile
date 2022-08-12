@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/12 14:39:13 by plouvel          ###   ########.fr        #
+#    Updated: 2022/08/12 14:52:57 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ SRCS =	end/good_exit.c						\
 		mlx_utils/launch_loop.c				\
 		mlx_utils/mlx_utils.c				\
 		renderer/render.c					\
-		renderer/multithreading.c			\
 		math/vector.c						\
 		math/tuple.c						\
 		math/tuple2.c						\

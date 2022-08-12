@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/12 14:47:29 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/12 14:56:07 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "mlx_utils.h"
 #include "scene.h"
 #include "math_utils.h"
-#include "multithreading.h"
 #include <stdio.h>
 #include <sys/time.h>
 

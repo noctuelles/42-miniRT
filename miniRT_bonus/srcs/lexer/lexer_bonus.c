@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   lexer_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:54:50 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/12 11:57:42 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/12 14:58:51 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,46 +78,6 @@ static t_list	*lex_file(t_lexer *lexer)
 	}
 	return (finish_lexing(lexer));
 }
-
-/*char *translate(t_token_type type)
-{
-	if (type == 0)
-		return ("T_CAMERA");
-	if (type == 1)
-		return ("T_AMBIANT_LIGHT");
-	if (type == 2)
-		return ("T_LIGHT");
-	if (type == 3)
-		return ("T_SPHERE");
-	if (type == 4)
-		return ("T_CYLINDER");
-	if (type == 5)
-		return ("T_CONE");
-	if (type == 6)
-		return ("T_PLAN");
-	if (type == 7)
-		return ("T_NEWLINE");
-	if (type == 8)
-		return ("T_VALUE");
-	if (type == 9)
-		return ("T_COMMA");
-	if (type == 10)
-		return ("T_BREAK");
-	if (type == 11)
-		return ("T_NULL");
-
-	return ("NULL");
-}
-void	print_tokens(t_list *tkns)
-{
-	for (t_list *elem = tkns; elem; elem = elem->next)
-	{
-		t_token *tkn = elem->content;
-		printf("<%s> ", translate(tkn->type));
-		if (tkn->type == T_NEWLINE)
-			printf("\n");
-	}
-}*/
 
 t_list	*lex_from_file(const char *filename)
 {

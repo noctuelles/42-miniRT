@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:12:27 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/12 14:42:15 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/12 14:56:07 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define STR_SPACE            " "
 # define STR_SPHERE           "sp"
 # define STR_PLAN             "pl"
+# define STR_CONE             "cn"
 # define STR_CYLINDER         "cl"
 
 # define STR_ERROR                  "Error\n"
@@ -58,6 +59,7 @@ typedef enum e_token_type
 	T_LIGHT,
 	T_SPHERE,
 	T_CYLINDER,
+	T_CONE,
 	T_PLAN,
 	T_NEWLINE,
 	T_VALUE,

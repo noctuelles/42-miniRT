@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:29:32 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/12 13:30:41 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/12 14:59:19 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ char	**read_file(const char *filename)
 	size_t	nbr_lines;
 	int		fd;
 
+	errno = 0;
 	if (check_file_extension(filename) == false)
 		return (print_error(STR_INVALID_FILE_EXTENSION));
 	fd = open(filename, O_RDONLY);
@@ -86,7 +87,6 @@ char	**read_file(const char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (print_error_function(STR_FUNCTION_OPEN));
-	errno = 0;
 	file = fill_file(fd, nbr_lines);
 	if (!file)
 		return (print_error_function(STR_ERROR_FILE_READ));
