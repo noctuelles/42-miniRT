@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/12 12:54:27 by plouvel          ###   ########.fr        #
+#    Updated: 2022/08/12 13:19:40 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,49 +30,49 @@ INCS =	$(addprefix -I ,	\
 		libft/includes		\
 		minilibx			)
 		
-SRCS =	end/good_exit.c						\
-		mlx_utils/mlx_struct_manage.c		\
-		mlx_utils/launch_loop.c				\
-		mlx_utils/mlx_utils.c				\
-		renderer/render.c					\
-		renderer/multithreading.c			\
-		math/vector.c						\
-		math/tuple.c						\
-		math/tuple2.c						\
-		math/math_utils.c					\
-		math/math_utils2.c					\
-		math/matrix/matrix.c				\
-		math/matrix/matrix_utils.c			\
-		math/matrix/matrix_invert.c			\
-		math/matrix/matrix_invert_utils.c	\
-		math/matrix/matrix_transform.c		\
-		lexer/file.c						\
-		lexer/file_utils.c					\
-		lexer/io_utils.c					\
-		lexer/lexer.c						\
-		lexer/lexer_utils.c					\
-		lexer/lexer_utils2.c				\
-		lexer/tokens.c						\
-		texture/texture.c					\
-		texture/texture_utils.c				\
-		texture/uv_mapping.c				\
-		primitives/intersect_plane.c		\
-		primitives/intersect_sphere.c		\
-		primitives/intersect_cone.c			\
-		primitives/intersect_cylinder.c		\
-		parsing/parsing.c					\
-		parsing/extract_object.c			\
-		parsing/extract_utils.c				\
-		parsing/extract_object2.c			\
-		parsing/extract_texture.c			\
-		parsing/extract_utils2.c			\
-		scene/object.c						\
-		scene/object2.c						\
-		scene/scene.c						\
-		scene/camera.c						\
-		shading/shading.c					\
-		shading/shading_utils.c				\
-		main.c								\
+SRCS =	end/good_exit_bonus.c					\
+		mlx_utils/mlx_struct_manage_bonus.c		\
+		mlx_utils/launch_loop_bonus.c			\
+		mlx_utils/mlx_utils_bonus.c				\
+		renderer/render_bonus.c					\
+		renderer/multithreading_bonus.c			\
+		math/vector_bonus.c						\
+		math/tuple_bonus.c						\
+		math/tuple2_bonus.c						\
+		math/math_utils_bonus.c					\
+		math/math_utils2_bonus.c				\
+		math/matrix/matrix_bonus.c				\
+		math/matrix/matrix_utils_bonus.c		\
+		math/matrix/matrix_invert_bonus.c		\
+		math/matrix/matrix_invert_utils_bonus.c	\
+		math/matrix/matrix_transform_bonus.c	\
+		lexer/file_bonus.c						\
+		lexer/file_utils_bonus.c				\
+		lexer/io_utils_bonus.c					\
+		lexer/lexer_bonus.c						\
+		lexer/lexer_utils_bonus.c				\
+		lexer/lexer_utils2_bonus.c				\
+		lexer/tokens_bonus.c					\
+		texture/texture_bonus.c					\
+		texture/texture_utils_bonus.c			\
+		texture/uv_mapping_bonus.c				\
+		primitives/intersect_plane_bonus.c		\
+		primitives/intersect_sphere_bonus.c		\
+		primitives/intersect_cone_bonus.c		\
+		primitives/intersect_cylinder_bonus.c	\
+		parsing/parsing_bonus.c					\
+		parsing/extract_object_bonus.c			\
+		parsing/extract_utils_bonus.c			\
+		parsing/extract_object2_bonus.c			\
+		parsing/extract_texture_bonus.c			\
+		parsing/extract_utils2_bonus.c			\
+		scene/object_bonus.c					\
+		scene/object2_bonus.c					\
+		scene/scene_bonus.c						\
+		scene/camera_bonus.c					\
+		shading/shading_bonus.c					\
+		shading/shading_utils_bonus.c			\
+		main_bonus.c							\
 
 ################################################################################
 ########							Libraries							########
