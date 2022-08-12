@@ -13,7 +13,7 @@
 #ifndef MULTITHREADING_BONUS_H
 # define MULTITHREADING_BONUS_H
 
-# include "minirt_struct.h"
+# include "minirt_struct_bonus.h"
 
 void	setup_workers(t_minirt *minirt);
 void	*launch_workers(t_minirt *minirt);

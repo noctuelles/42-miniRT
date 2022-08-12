@@ -13,7 +13,7 @@
 #ifndef RAY_INTERSECTION_BONUS_H
 # define RAY_INTERSECTION_BONUS_H
 
-# include "minirt_struct.h"
+# include "minirt_struct_bonus.h"
 
 /*
  *	intersect_sphere.c

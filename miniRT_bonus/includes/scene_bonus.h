@@ -13,7 +13,7 @@
 #ifndef SCENE_BONUS_H
 # define SCENE_BONUS_H
 
-# include "minirt_struct.h"
+# include "minirt_struct_bonus.h"
 
 /* object.c */
 

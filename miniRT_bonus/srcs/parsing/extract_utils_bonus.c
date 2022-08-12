@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
-#include "minirt_lexer.h"
-#include "texture.h"
-#include "scene.h"
+#include "minirt_struct_bonus.h"
+#include "minirt_lexer_bonus.h"
+#include "texture_bonus.h"
+#include "scene_bonus.h"
 #include "libft.h"
-#include "tuple.h"
-#include "parsing.h"
-#include "define.h"
+#include "tuple_bonus.h"
+#include "parsing_bonus.h"
+#include "define_bonus.h"
 
 bool	extract_double_pos(t_list **lexer, double *dbl)
 {

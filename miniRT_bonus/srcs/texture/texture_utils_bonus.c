@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_utils.c                                    :+:      :+:    :+:   */
+/*   texture_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:02:36 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 17:03:17 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/12 13:52:38 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
-#include "mlx_utils.h"
+#include "minirt_struct_bonus.h"
+#include "mlx_utils_bonus.h"
 #include "math.h"
 #include <math.h>
-#include "tuple.h"
+#include "tuple_bonus.h"
 #include "mlx.h"
 
 t_color	get_image_color(t_texture texture, t_uv uv)

@@ -13,7 +13,7 @@
 #ifndef TUPLE_BONUS_H
 # define TUPLE_BONUS_H
 
-# include "minirt_struct.h"
+# include "minirt_struct_bonus.h"
 
 t_tuple		tuple(double x, double y, double z, double w);
 t_vec3		vector(double x, double y, double z);

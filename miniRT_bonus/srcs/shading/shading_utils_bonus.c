@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
+#include "minirt_struct_bonus.h"
 #include "math.h"
-#include "matrix.h"
-#include "texture.h"
-#include "tuple.h"
+#include "matrix_bonus.h"
+#include "texture_bonus.h"
+#include "tuple_bonus.h"
 
 static inline t_matrix4	build_tbn_matrix(t_vec3 world_normal)
 {

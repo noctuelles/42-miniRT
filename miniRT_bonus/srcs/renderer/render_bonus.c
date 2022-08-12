@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
+#include "minirt_struct_bonus.h"
 #include "mlx.h"
-#include "mlx_utils.h"
-#include "scene.h"
-#include "math_utils.h"
-#include "multithreading.h"
+#include "mlx_utils_bonus.h"
+#include "scene_bonus.h"
+#include "math_utils_bonus.h"
+#include "multithreading_bonus.h"
 #include <stdio.h>
 #include <sys/time.h>
 

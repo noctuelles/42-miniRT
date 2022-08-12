@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
-#include "tuple.h" 
+#include "minirt_struct_bonus.h"
+#include "tuple_bonus.h" 
 #include <math.h>
-#include "define.h"
+#include "define_bonus.h"
 
 t_uv	get_planar_map(t_point3 intersect_p)
 {

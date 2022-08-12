@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
-#include "matrix.h"
-#include "tuple.h"
-#include "define.h"
-#include "math_utils.h"
+#include "minirt_struct_bonus.h"
+#include "matrix_bonus.h"
+#include "tuple_bonus.h"
+#include "define_bonus.h"
+#include "math_utils_bonus.h"
 #include <stdbool.h>
 #include <math.h>
 

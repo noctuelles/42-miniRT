@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
-#include "parsing.h"
-#include "renderer.h"
-#include "multithreading.h"
+#include "mlx_utils_bonus.h"
+#include "parsing_bonus.h"
+#include "renderer_bonus.h"
+#include "multithreading_bonus.h"
 #include "ft_dprintf.h"
-#include "minirt_lexer.h"
+#include "minirt_lexer_bonus.h"
 #include <unistd.h>
 
 int	main(int ac, char **av)

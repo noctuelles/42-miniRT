@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "define.h"
-#include "minirt_struct.h"
-#include "scene.h"
-#include "mlx_utils.h"
-#include "math_utils.h"
-#include "tuple.h"
-#include "renderer.h"
+#include "define_bonus.h"
+#include "minirt_struct_bonus.h"
+#include "scene_bonus.h"
+#include "mlx_utils_bonus.h"
+#include "math_utils_bonus.h"
+#include "tuple_bonus.h"
+#include "renderer_bonus.h"
 #include <stdio.h>
-#include "matrix.h"
+#include "matrix_bonus.h"
 #include <math.h>
 
 /* setup_workers() setup each worker's job.

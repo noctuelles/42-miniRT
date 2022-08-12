@@ -14,7 +14,7 @@
 # define MINIRT_STRUCT_BONUS_H
 
 # include "libft.h"
-# include "define.h"
+# include "define_bonus.h"
 # include <pthread.h>
 # include <stdbool.h>
 

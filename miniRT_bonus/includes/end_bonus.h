@@ -13,7 +13,7 @@
 #ifndef END_BONUS_H
 # define END_BONUS_H
 
-# include "minirt_struct.h"
+# include "minirt_struct_bonus.h"
 
 /*
  *	good_exit.c

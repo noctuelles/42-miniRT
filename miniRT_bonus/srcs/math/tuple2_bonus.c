@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
-#include "tuple.h"
+#include "minirt_struct_bonus.h"
+#include "tuple_bonus.h"
 #include <stdio.h>
 
 t_tuple	tnegate(t_tuple a)

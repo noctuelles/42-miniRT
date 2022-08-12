@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture.c                                          :+:      :+:    :+:   */
+/*   texture_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 23:21:31 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/10 22:18:45 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/12 13:52:13 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
-#include "mlx_utils.h"
+#include "minirt_struct_bonus.h"
+#include "mlx_utils_bonus.h"
 #include "math.h"
 #include <math.h>
-#include "tuple.h"
+#include "tuple_bonus.h"
 #include "mlx.h"
 
 t_texture	create_checkered_texture(int width, int height, uint32_t a,

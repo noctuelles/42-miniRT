@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
+#include "minirt_struct_bonus.h"
 #include <stdio.h>
 
 /* Display a 4x4 matrix. */

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix.h"
+#include "matrix_bonus.h"
 #include "libft.h"
 #include <math.h>
 #include <string.h>

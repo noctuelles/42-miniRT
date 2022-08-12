@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_lexer.h"
+#include "minirt_lexer_bonus.h"
 #include "libft.h"
 #include <stdlib.h>
 

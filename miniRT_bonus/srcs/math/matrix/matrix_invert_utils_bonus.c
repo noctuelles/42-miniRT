@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix.h"
+#include "matrix_bonus.h"
 #include <stdint.h>
 
 static t_matrix2	matrix3_submatrix(t_matrix3 const A, uint8_t row,

@@ -11,13 +11,13 @@
 /* ************************************************************************** */
 
 #include "mlx.h"
-#include "define.h"
-#include "end.h"
+#include "define_bonus.h"
+#include "end_bonus.h"
 #include "ft_dprintf.h"
-#include "minirt_struct.h"
-#include "minirt_lexer.h"
+#include "minirt_struct_bonus.h"
+#include "minirt_lexer_bonus.h"
 #include <stdlib.h>
-#include "mlx_utils.h"
+#include "mlx_utils_bonus.h"
 
 int	init_mlx_struct(t_mlx *mlx)
 {

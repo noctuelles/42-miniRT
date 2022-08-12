@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
-#include "minirt_struct.h"
-#include "end.h"
-#include "define.h"
+#include "mlx_utils_bonus.h"
+#include "minirt_struct_bonus.h"
+#include "end_bonus.h"
+#include "define_bonus.h"
 #include "mlx.h"
 
 static int	select_hook(int hook, t_minirt *backpack)

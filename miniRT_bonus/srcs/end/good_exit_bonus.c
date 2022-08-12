@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
-#include "mlx_utils.h"
+#include "minirt_struct_bonus.h"
+#include "mlx_utils_bonus.h"
 #include "mlx.h"
 #include "libft.h"
-#include "define.h"
-#include "minirt_lexer.h"
+#include "define_bonus.h"
+#include "minirt_lexer_bonus.h"
 #include <stdlib.h>
 #include <stdio.h>
 

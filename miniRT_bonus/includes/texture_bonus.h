@@ -13,7 +13,7 @@
 #ifndef TEXTURE_BONUS_H
 # define TEXTURE_BONUS_H
 
-# include "minirt_struct.h"
+# include "minirt_struct_bonus.h"
 
 /* uv_mapping.c */
 

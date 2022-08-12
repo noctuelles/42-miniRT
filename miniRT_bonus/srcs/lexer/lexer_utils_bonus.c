@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "minirt_lexer.h"
+#include "minirt_lexer_bonus.h"
 #include <stdlib.h>
 
 t_token	search_known_token(const char *str)

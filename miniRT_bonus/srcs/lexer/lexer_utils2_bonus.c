@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_lexer.h"
+#include "minirt_lexer_bonus.h"
 
 bool	check_valid_lexing(t_lexer *lexer)
 {

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
-#include "tuple.h"
+#include "minirt_struct_bonus.h"
+#include "tuple_bonus.h"
 #include <math.h>
 
 double	vec_dot(t_vec3 a, t_vec3 b)

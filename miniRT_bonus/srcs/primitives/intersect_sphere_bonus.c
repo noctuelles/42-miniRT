@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
-#include "math_utils.h"
-#include "tuple.h"
+#include "minirt_struct_bonus.h"
+#include "math_utils_bonus.h"
+#include "tuple_bonus.h"
 #include <math.h>
 #include <stdio.h>
-#include "matrix.h"
+#include "matrix_bonus.h"
 
 /* Edge cases :
  *

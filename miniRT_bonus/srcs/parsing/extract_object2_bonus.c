@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
-#include "minirt_lexer.h"
-#include "scene.h"
+#include "minirt_struct_bonus.h"
+#include "minirt_lexer_bonus.h"
+#include "scene_bonus.h"
 #include "libft.h"
-#include "tuple.h"
-#include "parsing.h"
-#include "define.h"
+#include "tuple_bonus.h"
+#include "parsing_bonus.h"
+#include "define_bonus.h"
 
 void	extract_camera(t_minirt *minirt, t_list **lexer)
 {

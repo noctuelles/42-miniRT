@@ -12,7 +12,7 @@
 
 #include "libft.h"
 #include "get_next_line.h"
-#include "minirt_lexer.h"
+#include "minirt_lexer_bonus.h"
 #include <stdbool.h>
 #include <unistd.h>
 #include <fcntl.h>

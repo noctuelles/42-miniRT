@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
-#include "define.h"
+#include "minirt_struct_bonus.h"
+#include "define_bonus.h"
 
 t_color	get_norm_color(uint32_t color)
 {

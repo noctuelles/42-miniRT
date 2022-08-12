@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
-#include "ray_intersection.h"
-#include "mlx_utils.h"
-#include "texture.h"
-#include "define.h"
-#include "matrix.h"
-#include "tuple.h"
+#include "minirt_struct_bonus.h"
+#include "ray_intersection_bonus.h"
+#include "mlx_utils_bonus.h"
+#include "texture_bonus.h"
+#include "define_bonus.h"
+#include "matrix_bonus.h"
+#include "tuple_bonus.h"
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>

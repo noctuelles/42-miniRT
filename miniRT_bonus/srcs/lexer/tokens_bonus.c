@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_lexer.h"
+#include "minirt_lexer_bonus.h"
 #include <stdlib.h>
 
 t_token	set_token(char *str, t_token_type type)

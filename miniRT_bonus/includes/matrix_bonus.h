@@ -13,7 +13,7 @@
 #ifndef MATRIX_BONUS_H
 # define MATRIX_BONUS_H
 
-# include "minirt_struct.h"
+# include "minirt_struct_bonus.h"
 
 /* matrix.c */
 

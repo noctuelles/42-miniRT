@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
+#include "minirt_struct_bonus.h"
 
 t_tuple	tuple(double x, double y, double z, double w)
 {

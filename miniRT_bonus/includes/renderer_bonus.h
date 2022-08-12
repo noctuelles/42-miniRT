@@ -13,7 +13,7 @@
 #ifndef RENDERER_BONUS_H
 # define RENDERER_BONUS_H
 
-# include "minirt_struct.h"
+# include "minirt_struct_bonus.h"
 
 void	render_img(t_minirt *minirt);
 void	*render(void *pwrkrs);

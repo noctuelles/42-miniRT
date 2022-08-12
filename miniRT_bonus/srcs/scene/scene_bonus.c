@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
-#include "mlx_utils.h"
-#include "tuple.h"
+#include "minirt_struct_bonus.h"
+#include "mlx_utils_bonus.h"
+#include "tuple_bonus.h"
 #include <stdlib.h>
 
 t_object	*add_obj_to_scene(t_scene *scene, t_object *obj)

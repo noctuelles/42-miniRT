@@ -13,7 +13,7 @@
 #ifndef MATH_UTILS_BONUS_H
 # define MATH_UTILS_BONUS_H
 
-# include "minirt_struct.h"
+# include "minirt_struct_bonus.h"
 
 double		min(double a, double b);
 double		max(double a, double b);

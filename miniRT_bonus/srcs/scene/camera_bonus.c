@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix.h"
-#include "tuple.h"
+#include "matrix_bonus.h"
+#include "tuple_bonus.h"
 #include <math.h>
 
 /* build_view_matrix build the view matrix with a given origine and a
