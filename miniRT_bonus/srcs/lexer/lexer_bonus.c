@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:54:50 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/12 14:58:51 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/12 15:44:33 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ static void	*finish_line(t_lexer *lexer)
 		return (quit(lexer, E_LEX_TOO_MUCH_AMLIGHT));
 	else if (lexer->declared_camera > 1)
 		return (quit(lexer, E_LEX_TOO_MUCH_CAMERA));
+	if (lexer->line_nbr == 7)
+		;
 	if (lexer->prev != lexer->line)
 	{
-		if (add_token_to_list(lexer, (char *) lexer->line,
+		if (add_token_to_list(lexer, (char *) lexer->prev,
 				lexer->line - lexer->prev, T_VALUE) == NULL)
 			return (quit(lexer, E_LEX_MALLOC));
 	}
@@ -49,6 +51,45 @@ static void	*finish_lexing(t_lexer *lexer)
 	if (add_token_to_list(lexer, NULL, 0, T_NULL) == NULL)
 		return (quit(lexer, E_LEX_MALLOC));
 	return (lexer->list_tkns);
+}
+
+char *translate(t_token_type type)
+{
+	if (type == 0)
+		return ("T_CAMERA");
+	if (type == 1)
+		return ("T_AMBIANT_LIGHT");
+	if (type == 2)
+		return ("T_LIGHT");
+	if (type == 3)
+		return ("T_SPHERE");
+	if (type == 4)
+		return ("T_CYLINDER");
+	if (type == 5)
+		return ("T_CONE");
+	if (type == 6)
+		return ("T_PLAN");
+	if (type == 7)
+		return ("T_NEWLINE");
+	if (type == 8)
+		return ("T_VALUE");
+	if (type == 9)
+		return ("T_COMMA");
+	if (type == 10)
+		return ("T_BREAK");
+	if (type == 11)
+		return ("T_NULL");
+	return ("NULL");
+}
+void	print_tokens(t_list *tkns)
+{
+	for (t_list *elem = tkns; elem; elem = elem->next)
+	{
+		t_token *tkn = elem->content;
+		printf("<%s> ", translate(tkn->type));
+		if (tkn->type == T_NEWLINE)
+			printf("\n");
+	}
 }
 
 static t_list	*lex_file(t_lexer *lexer)
@@ -99,6 +140,7 @@ t_list	*lex_from_file(const char *filename)
 				ft_lstclear(&lexer.list_tkns, free_token);
 			else
 				remove_break_tokens(&lexer.list_tkns);
+			print_tokens(lexer.list_tkns);
 		}
 	}
 	free(lexer.file_content);

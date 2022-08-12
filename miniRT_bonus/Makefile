@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/12 13:54:34 by plouvel          ###   ########.fr        #
+#    Updated: 2022/08/12 15:27:15 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 NAME = miniRT_bonus
 
 CC = cc 
-CFLAGS = -g3 -O3 -Wall -Wextra -Werror
+CFLAGS = -g3 -Wall -Wextra -Werror
 
 ################################################################################
 ########							Sources 							########

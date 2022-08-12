@@ -6,20 +6,20 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:43:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/12 15:05:05 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/12 15:14:02 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_struct.h"
-#include "minirt_lexer.h"
-#include "mlx_utils.h"
-#include "scene.h"
+#include "minirt_struct_bonus.h"
+#include "minirt_lexer_bonus.h"
+#include "mlx_utils_bonus.h"
+#include "scene_bonus.h"
+#include "end_bonus.h"
+#include "tuple_bonus.h"
+#include "parsing_bonus.h"
+#include "define_bonus.h"
 #include "libft.h"
-#include "end.h"
-#include "tuple.h"
 #include "ft_dprintf.h"
-#include "parsing.h"
-#include "define.h"
 #include <stdlib.h>
 #include <unistd.h>
 
