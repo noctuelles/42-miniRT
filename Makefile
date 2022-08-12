@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/11 21:50:36 by bsavinel         ###   ########.fr        #
+#    Updated: 2022/08/12 12:56:12 by bsavinel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@
 ################################################################################
 
 NAME = miniRT
+NAME_BONUS = miniRT_bonus
 
 CC = cc 
 CFLAGS = -g3 -O3 -Wall -Wextra -Werror -fsanitize=address
@@ -87,8 +88,9 @@ LIBS =	libft/libft.a			\
 
 OBJS_PATH =	objs/
 
-OBJS =	$(addprefix $(OBJS_PATH), $(SRCS:.c=.o))
-DEPS =	$(addprefix $(OBJS_PATH), $(SRCS:.c=.d))
+OBJS		=	$(addprefix $(OBJS_PATH), $(SRCS:.c=.o))
+OBJS_BONUS	=	$(addprefix $(OBJS_PATH), $(SRCS:.c=_bonus.o))
+DEPS		=	$(addprefix $(OBJS_PATH), $(SRCS:.c=.d))
 
 ################################################################################
 ########							Others								########
@@ -111,7 +113,7 @@ NO_COLOR	=	\033[m
 
 all: header $(NAME)
 
-bonus: header all
+bonus: header $(NAME_BONUS)
 
 header:
 		@echo "${BLUE}"                                                       
@@ -130,9 +132,17 @@ $(NAME) : $(LIBS) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -lm -lbsd -lX11 -lXext -lpthread -o $(NAME) $(INCS)
 	echo "$(BLUE)$(NAME): $(GREEN)Success $(NO_COLOR)"
 
+$(NAME_BONUS) : $(LIBS) $(OBJS_BONUS)
+	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBS) -lm -lbsd -lX11 -lXext -lpthread -o $(NAME_BONUS) $(INCS)
+	echo "$(BLUE)$(NAME_BONUS): $(GREEN)Success $(NO_COLOR)"
+
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c Makefile
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -MMD -c $< -o $@ $(INCS)
+	$(CC) $(CFLAGS) -MMD -c $< -o $@ $(INCS) -D D_BONUS=0
+
+$(OBJS_PATH)%_bonus.o: $(SRCS_PATH)%.c Makefile
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -MMD -c $< -o $@ $(INCS) -D D_BONUS=1
 
 clean :
 	$(RM) $(OBJS_PATH)
@@ -140,7 +150,7 @@ clean :
 	$(MAKE) -C libft clean
 
 fclean : clean
-	$(RM) $(NAME) 
+	$(RM) $(NAME) $(NAME_BONUS)
 	$(RM) libft/libft.a
 
 re : fclean 
@@ -160,5 +170,3 @@ minilibx/libmlx_Linux.a:
 -include $(DEPS)
 
 .PHONY: all clean fclean re bonus
-
-.SILENT:
