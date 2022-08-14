@@ -1,5 +1,11 @@
 # 42-miniRT
 
+Welcome to the world of raytracing ! Discover our miniRT, showcasing this wonderful project.
+
+<img src="screenshot/primitives.png" width=900 align=middle />
+<img src="screenshot/chamber.png" width=900 align=middle />
+<img src="screenshot/moon_bump_map.png" width=900 align=middle />
+
 ## Before reading
 
 Note that we use a right-hand coordinate system, using the y-axis as the up vector and z-axis as the forward vector of our coordinate system.
