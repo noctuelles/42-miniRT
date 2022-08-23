@@ -1,9 +1,8 @@
 # 42-miniRT
 
-Welcome to the world of raytracing ! Discover our miniRT, showcasing this wonderful project.
+Welcome to the world of raytracing ! Discover our miniRT, a CPU-based raytracer, showcasing this wonderful project.
 
 <img src="screenshot/primitives.png" width=900 align=middle />
-<img src="screenshot/chamber.png" width=900 align=middle />
 <img src="screenshot/moon_bump_map.png" width=900 align=middle />
 
 ## Before reading
@@ -12,30 +11,128 @@ Note that we use a right-hand coordinate system, using the y-axis as the up vect
 
 Matrices are used in column-major order.
 
-## The orientation vector
+## How to use ?
 
-The subject gives room for interpretation : what should this "orientation vector" do ?
-It could be interpreted as this : imagine a cylinder aligned along the up vector, with a vector on his top ; this vector is pointing where the cylinder should be oriented.
+Clone the repository using the `--recurse-submodules`, you can use the alias `gcl` if you're using oh-my-zsh.
 
-Given $\vec{d}(0, 1, 0)$, the cylinder should be aligned with the y axis, no rotation is applied.
+For full experience compile the bonus version using `make`.
+Each file must be terminated with the `.rt` extension.
 
-Given $\vec{d}(1, 0, 0)$, the cylinder should be aligned with the x axis, the cylinder is rotated $-\frac{\pi}{2}$ along the z axis.
+```
+git clone --recurse-submodules https://github.com/Exio666/42-miniRT
+cd miniRT_bonus
+make
+./miniRT_bonus path_to_file.rt
+```
 
-Given $\vec{d}(0, 0, 1)$, the cylinder should be aligned with the z axis, the cylinder is rotated $-\frac{\pi}{2}$ along the z axis, and $-\frac{\pi}{2}$ along the y axis.
+## Creating a scene
+:exclamation: Each component of the *orientation vector* is normalized beetween `[-1;1]`.
 
-In space, any orientation can be describe using two angles, just like in the plan, it can be describe with one angle.
+<details>
+<summary> A scene can only have a single camera, defined by : </summary>
 
-The technique used here to rotate primitives is to compute $\alpha$ and $\beta$ angle, these angle are then used in rotation matrices to build the transformation matrix.
+```
+C xPos,yPos,zPos xDir,yDir,zDir   FOV
+```
+`Pos` is a point describing the camera position.
 
-Given $\vec{u}$, the angle between the up axis and the vector can be compute with : 
+`Dir` is a vector orienting the camera.
 
-$$
-\alpha = -\arctan2(\frac
-{
-\sqrt{{x_{\vec{u}}}^2 + {z_{\vec{u}}}^2}
-}
-{
-{y_{\vec{u}}}^2
-}
-)
-$$
+`FOV` is the field of view.
+</details>
+
+***
+
+<details>
+<summary> And an ambient light, used to <i>simulate</i> indirect illumination : </summary>
+
+```
+A   Ratio   R,G,B
+```
+
+`Ratio` is the intensity of the light, between range `[0;1]`.
+
+`R,G,B` is the color of the ambiant light, each component is between range `[0;255]`. 
+</details>
+
+***
+
+<details>
+<summary>Each scene can have an infinite number of lights :</summary>
+
+```
+L   xPos,yPos,zPos   Ratio   R,G,B
+```
+
+`Pos` is a point describing the light position.
+
+`Ratio` is the intensity of the light, between range `[0;1]`.
+
+`R,G,B` is the color of the ambiant light, each component is between range `[0;255]`. 
+</details>
+
+***
+
+**Each line starts with an identifier, describing a shape.**
+
+Our miniRT supports a couple of basic shapes :
+
+* Finite closed cylinder : `cy`
+* Finite closed cone : `cn`
+* Sphere : `sp`
+* Infinite plane : `pl`
+
+***
+
+<details>
+<summary>The cylinder :</summary>
+
+```
+cy    xPos,yPos,zPos    xDir,yDir,zDir    Lenght    Diameter    R,G,B
+```
+
+`Pos` is a point describing the cylinder position.
+
+`Dir` is a vector orienting the cylinder.
+
+`R,G,B` is the color of the cylinder, each component is between range `[0;255]`. 
+
+`Lenght` and `Diameter` cannot be negative.
+</details>
+
+***
+
+The **cone** shares the exact same description as the cylinder.
+
+***
+
+<details>
+<summary>The sphere :</summary>
+
+```
+sp    xPos,yPos,zPos    Radius    R,G,B
+```
+
+`Pos` is a point describing the sphere position.
+
+`R,G,B` is the color of the sphere, each component is between range `[0;255]`. 
+
+`Radius` is the radius of the sphere.
+</details>
+
+***
+
+<details>
+<summary>The plane:</summary>
+
+```
+pl    xPos,yPos,zPos    xDir,yDir,zDir    R,G,B
+```
+
+`Pos` is a point describing the plane position.
+
+`Dir` is a vector orienting the plane.
+
+`R,G,B` is the color of the plane, each component is between range `[0;255]`. 
+</details>
+
