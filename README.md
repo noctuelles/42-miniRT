@@ -11,18 +11,18 @@ Welcome to the world of raytracing ! Discover our miniRT, a CPU-based raytracer,
 <img src="screenshot/primitives.png" width=900 align=middle />
 <br>
 <details>
-	<summary><b style="font-size:25px">More images!</b></summary>
-	A chamber with multiple lights, checkered texture, cone and cylinder...
-	<img src="screenshot/chamber.png" width=900 />
-	Light synthesis example with a red, green, and blue light.
-	<img src="screenshot/light_synthesis.png" width=900 />
-	The raytracer also support bump mapping. Here's a moon with a normal map applied.
-	<img src="screenshot/moon_bump_map.png" width=900 />
-	With multiple planets...
-	<img src="screenshot/space.png" width=900 />
-	A little guy made out of multiple shapes...
-	<img src="screenshot/guy.png" width=900 />
-	
+<summary><b style="font-size:25px">More images!</b></summary>
+A chamber with multiple lights, checkered texture, cone and cylinder...
+<img src="screenshot/chamber.png" width=900 />
+Light synthesis example with a red, green, and blue light.
+<img src="screenshot/light_synthesis.png" width=900 />
+The raytracer also support bump mapping. Here's a moon with a normal map applied.
+<img src="screenshot/moon_bump_map.png" width=900 />
+With multiple planets...
+<img src="screenshot/space.png" width=900 />
+A little guy made out of multiple shapes...
+<img src="screenshot/guy.png" width=900 />
+
 </details>
 
 ## Before reading
