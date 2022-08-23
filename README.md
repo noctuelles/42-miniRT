@@ -1,9 +1,29 @@
 # 42-miniRT
 
+[![42](https://img.shields.io/badge/42-common_core-green.svg)](https://shields.io/)
+[![Vim](https://img.shields.io/badge/--019733?logo=vim)](https://www.vim.org/)
+[![42](https://img.shields.io/badge/Made%20in%20-C-blue.svg)](https://shields.io/)
+
 Welcome to the world of raytracing ! Discover our miniRT, a CPU-based raytracer, showcasing this wonderful project.
 
+<br>
+
 <img src="screenshot/primitives.png" width=900 align=middle />
-<img src="screenshot/moon_bump_map.png" width=900 align=middle />
+<br>
+<details>
+	<summary><b style="font-size:25px">More images!</b></summary>
+	A chamber with multiple lights, checkered texture, cone and cylinder...
+	<img src="screenshot/chamber.png" width=900 />
+	Light synthesis example with a red, green, and blue light.
+	<img src="screenshot/light_synthesis.png" width=900 />
+	The raytracer also support bump mapping. Here's a moon with a normal map applied.
+	<img src="screenshot/moon_bump_map.png" width=900 />
+	With multiple planets...
+	<img src="screenshot/space.png" width=900 />
+	A little guy made out of multiple shapes...
+	<img src="screenshot/guy.png" width=900 />
+	
+</details>
 
 ## Before reading
 
@@ -85,7 +105,7 @@ Our miniRT supports a couple of basic shapes :
 ***
 
 <details>
-<summary>The cylinder :</summary>
+	<summary>The cylinder :</summary>
 
 ```
 cy    xPos,yPos,zPos    xDir,yDir,zDir    Lenght    Diameter    R,G,B
@@ -123,7 +143,7 @@ sp    xPos,yPos,zPos    Radius    R,G,B
 ***
 
 <details>
-<summary>The plane:</summary>
+	<summary>The plane:</summary>
 
 ```
 pl    xPos,yPos,zPos    xDir,yDir,zDir    R,G,B
@@ -135,4 +155,47 @@ pl    xPos,yPos,zPos    xDir,yDir,zDir    R,G,B
 
 `R,G,B` is the color of the plane, each component is between range `[0;255]`. 
 </details>
+<br>
 
+You can apply a **checkered texture** on all shapes. After each object color declaration, add the following sentence :
+
+```
+checkered    R,G,B    R,G,B
+```
+
+Again, both colors must be in range of `[0;255]`. 
+
+You can apply a **texture**, with a **normal map** or without, on a sphere, cylinder or cone,  with the following sentence :
+
+
+```
+texture           path_to_texture
+```
+OR
+```
+texture_normal    path_to_texture    path_to_normal_map_texture
+```
+
+## Orientation vector
+
+Nothing better than images to explain our approch of this *orientation vector*.
+
+Given a cylinder with an orientation vector `(0, 1, 0)`, the result is the following cylinder :
+
+<details>
+	<img src="screenshot/up_cylinder.png" width=800/>
+</details>
+<br>
+
+Given a cylinder with an orientation vector `(1, 1, 1)`, the result is the following cylinder :
+<br>
+<details>
+	<img src="screenshot/diag_cylinder.png" width=800/>
+</details>
+<br>
+
+Given a cylinder with an orientation vector `(1, 1, 0)`, the result is the following cylinder :
+<br>
+<details>
+	<img src="screenshot/diag_cylinder_no_z.png" width=800/>
+</details>
