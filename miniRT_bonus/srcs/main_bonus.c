@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:59:46 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/12 16:05:12 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/12/13 15:16:30 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "multithreading_bonus.h"
 #include "ft_dprintf.h"
 #include "minirt_lexer_bonus.h"
+#include "mlx.h"
 #include <unistd.h>
 
 int	main(int ac, char **av)

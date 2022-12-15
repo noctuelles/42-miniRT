@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.c                                           :+:      :+:    :+:   */
+/*   camera_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 12:50:45 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 16:38:09 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/12/13 16:02:16 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,15 @@
 /* build_view_matrix build the view matrix with a given origine and a
  * "look" vector that describe the orientation of the camera. */
 
-static inline t_matrix4	build_view_matrix(t_point3 org, t_vec3 look)
+static inline t_matrix4	build_view_matrix(t_minirt* minirt, t_point3 org, t_vec3 look)
 {
 	t_matrix4	transform;
-	double		alpha;
-	double		beta;
 
 	look = vec_norm(look);
-	alpha = atan2(look.x, look.z);
-	beta = atan2(look.y, sqrt(look.x * look.x + look.z * look.z));
-	transform = matrix4_rotate_x(-beta);
-	transform = matrix4_mul(matrix4_rotate_y(alpha), transform);
+	minirt->camera.alpha = atan2(look.x, look.z);
+	minirt->camera.beta = atan2(look.y, sqrt(look.x * look.x + look.z * look.z));
+	transform = matrix4_rotate_x(-minirt->camera.beta);
+	transform = matrix4_mul(matrix4_rotate_y(minirt->camera.alpha), transform);
 	transform = matrix4_mul(matrix4_translate(org.x, org.y, org.z), transform);
 	return (transform);
 }
@@ -58,9 +56,20 @@ void	generate_ray(t_camera *camera, t_ray *ray, t_rayhit *rayhit,
 	rayhit->eyev = tnegate(ray->dir);
 }
 
-void	set_camera_view_matrix(t_camera *camera, t_point3 org, t_vec3 look)
+void	set_camera_view_matrix(t_minirt *minirt, t_point3 org, t_vec3 look)
 {
-	camera->from = org;
-	camera->look = look;
-	camera->transform = build_view_matrix(org, look);
+	minirt->camera.from = org;
+	minirt->camera.look = look;
+	minirt->camera.transform = build_view_matrix(minirt, org, look);
+}
+
+void	set_camera_view_matrix_angle(t_minirt *minirt, t_point3 org)
+{
+	t_matrix4	transform;
+
+	transform = matrix4_rotate_x(-minirt->camera.beta);
+	transform = matrix4_mul(matrix4_rotate_y(minirt->camera.alpha), transform);
+	transform = matrix4_mul(matrix4_translate(org.x, org.y, org.z), transform);
+	minirt->camera.from = org;
+	minirt->camera.transform = transform;
 }

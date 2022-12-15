@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:47:41 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/12 13:36:26 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/12/13 16:02:50 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ void		perturb_normal(t_texture texture, t_rayhit *rayhit);
 
 void		setup_camera(t_camera *camera, size_t width, size_t height,
 				double fov);
-void		set_camera_view_matrix(t_camera *camera, t_point3 from,
+void		set_camera_view_matrix(t_minirt *minirt, t_point3 from,
 				t_vec3 look);
+void	set_camera_view_matrix_angle(t_minirt *minirt, t_point3 org);
+
 void		generate_ray(t_camera *camera, t_ray *ray, t_rayhit *rayhit,
 				t_point2 *rp);
 

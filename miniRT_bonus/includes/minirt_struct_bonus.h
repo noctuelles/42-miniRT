@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/12 13:35:08 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/12/13 15:57:46 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,8 @@ typedef struct s_camera
 	double		scalar_fov;
 	t_vec3		look;
 	t_point3	from;
+	double		alpha;
+	double		beta;
 }	t_camera;
 
 struct s_minirt

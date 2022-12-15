@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_object2.c                                  :+:      :+:    :+:   */
+/*   extract_object2_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 15:08:22 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/11 16:37:09 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/12/13 16:00:38 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	extract_camera(t_minirt *minirt, t_list **lexer)
 	if (!extract_double_range(lexer, &fov, 0, 180))
 		bad_exit_msg(minirt, "invalid camera fov", NULL);
 	setup_camera(&minirt->camera, WIDTH, HEIGHT, fov);
-	set_camera_view_matrix(&minirt->camera, centre, orien);
+	set_camera_view_matrix(minirt, centre, orien);
 }
 
 void	extract_light(t_minirt *minirt, t_list **lexer)
